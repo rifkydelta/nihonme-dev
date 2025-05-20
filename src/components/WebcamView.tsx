@@ -20,7 +20,7 @@ const WebcamView: React.FC<WebcamViewProps> = ({
   const [webcamActive, setWebcamActive] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [detections, setDetections] = useState<ObjectDetection[]>([]);
-  const animationRef = useRef<number | null>(null);
+  const intervalRef = useRef<number | null>(null);
   
   // Start webcam
   const startWebcam = async () => {
@@ -60,10 +60,10 @@ const WebcamView: React.FC<WebcamViewProps> = ({
       videoRef.current.srcObject = null;
       setWebcamActive(false);
       
-      // Stop detection loop
-      if (animationRef.current !== null) {
-        cancelAnimationFrame(animationRef.current);
-        animationRef.current = null;
+      // Stop detection interval
+      if (intervalRef.current !== null) {
+        clearInterval(intervalRef.current);
+        intervalRef.current = null;
       }
       
       setIsDetecting(false);
@@ -80,16 +80,17 @@ const WebcamView: React.FC<WebcamViewProps> = ({
     }
     
     if (isDetecting) {
-      // Stop detection loop
-      if (animationRef.current !== null) {
-        cancelAnimationFrame(animationRef.current);
-        animationRef.current = null;
+      // Stop detection interval
+      if (intervalRef.current !== null) {
+        clearInterval(intervalRef.current);
+        intervalRef.current = null;
       }
       setIsDetecting(false);
     } else {
-      // Start detection loop
+      // Start detection interval
       setIsDetecting(true);
       detectFrame();
+      intervalRef.current = window.setInterval(detectFrame, 500);
     }
   };
   
@@ -122,11 +123,6 @@ const WebcamView: React.FC<WebcamViewProps> = ({
     } catch (err) {
       console.error('Detection error:', err);
     }
-    
-    // Continue detection loop
-    if (isDetecting) {
-      animationRef.current = requestAnimationFrame(detectFrame);
-    }
   };
   
   // Handle video metadata loaded
@@ -150,6 +146,9 @@ const WebcamView: React.FC<WebcamViewProps> = ({
   // Clean up on component unmount
   useEffect(() => {
     return () => {
+      if (intervalRef.current !== null) {
+        clearInterval(intervalRef.current);
+      }
       stopWebcam();
     };
   }, []);
