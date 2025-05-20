@@ -18,19 +18,8 @@
            disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-none;
   }
   
-  .neu-button-sm {
-    @apply rounded-xl bg-surface-50 shadow-neu-sm
-           hover:shadow-neu-xs active:shadow-neu-inner-sm
-           transition-all duration-200 ease-out
-           disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-none;
-  }
-  
   .neu-card {
     @apply bg-surface-50 rounded-2xl shadow-neu p-6;
-  }
-  
-  .neu-card-sm {
-    @apply bg-surface-50 rounded-xl shadow-neu-sm;
   }
   
   .glass-panel {

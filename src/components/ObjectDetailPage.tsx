@@ -1,33 +1,24 @@
 import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { ArrowLeft, Volume2, ExternalLink } from 'lucide-react';
+import { ArrowLeft, Volume2 } from 'lucide-react';
 import { getObjectDetails } from '../utils/objectDetails';
 
 const ObjectDetailPage: React.FC = () => {
   const { label } = useParams<{ label: string }>();
   const details = label ? getObjectDetails(label) : null;
   const [isPlaying, setIsPlaying] = useState(false);
-  const [activeAudioIndex, setActiveAudioIndex] = useState<number | null>(null);
 
-  const speak = (text: string, index?: number) => {
+  const speak = (text: string) => {
     if ('speechSynthesis' in window) {
+      // Cancel any ongoing speech
       window.speechSynthesis.cancel();
 
       const utterance = new SpeechSynthesisUtterance(text);
       utterance.lang = 'ja-JP';
-      utterance.onend = () => {
-        setIsPlaying(false);
-        setActiveAudioIndex(null);
-      };
-      utterance.onerror = () => {
-        setIsPlaying(false);
-        setActiveAudioIndex(null);
-      };
+      utterance.onend = () => setIsPlaying(false);
+      utterance.onerror = () => setIsPlaying(false);
       
       setIsPlaying(true);
-      if (typeof index === 'number') {
-        setActiveAudioIndex(index);
-      }
       window.speechSynthesis.speak(utterance);
     }
   };
@@ -36,10 +27,7 @@ const ObjectDetailPage: React.FC = () => {
     return (
       <div className="min-h-screen bg-surface-50 p-4">
         <div className="container mx-auto">
-          <Link 
-            to="/" 
-            className="inline-flex items-center text-primary-600 hover:text-primary-700 neu-button"
-          >
+          <Link to="/" className="inline-flex items-center text-primary-600 hover:text-primary-700">
             <ArrowLeft size={20} className="mr-2" />
             Back to Detection
           </Link>
@@ -52,112 +40,76 @@ const ObjectDetailPage: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-surface-50 p-4 pb-20">
-      <div className="container mx-auto max-w-3xl">
-        <Link 
-          to="/" 
-          className="inline-flex items-center text-primary-600 hover:text-primary-700 neu-button"
-        >
+    <div className="min-h-screen bg-surface-50 p-4">
+      <div className="container mx-auto max-w-2xl">
+        <Link to="/" className="inline-flex items-center text-primary-600 hover:text-primary-700">
           <ArrowLeft size={20} className="mr-2" />
           Back to Detection
         </Link>
 
-        <div className="mt-8 neu-card">
-          {/* Header Section */}
-          <div className="flex flex-col md:flex-row md:items-center gap-6 mb-8">
-            <div className="flex-1">
+        <div className="mt-8 bg-white rounded-2xl shadow-lg overflow-hidden">
+          <div className="p-6">
+            <div className="mb-6">
               <div className="flex items-center gap-3">
-                <h1 className="text-4xl font-bold text-surface-900">{details.japanese}</h1>
+                <h1 className="text-3xl font-bold text-surface-900">{details.japanese}</h1>
                 <button
                   onClick={() => speak(details.japanese)}
                   disabled={isPlaying}
-                  className={`p-2.5 rounded-full transition-all ${
+                  className={`p-2 rounded-full transition-colors ${
                     isPlaying 
-                      ? 'bg-primary-100 text-primary-600 shadow-inner' 
-                      : 'neu-button-sm text-surface-600 hover:text-primary-600'
+                      ? 'bg-primary-100 text-primary-600' 
+                      : 'hover:bg-surface-100 text-surface-600 hover:text-primary-600'
                   }`}
                   aria-label="Play pronunciation"
                 >
-                  <Volume2 size={22} className={isPlaying ? 'animate-pulse' : ''} />
+                  <Volume2 size={20} className={isPlaying ? 'animate-pulse' : ''} />
                 </button>
               </div>
-              <div className="mt-3 space-y-1">
-                <p className="text-xl text-primary-600 font-medium">{details.romaji}</p>
-                <p className="text-surface-600">{details.english}</p>
+              <div className="mt-2 flex items-baseline gap-4">
+                <p className="text-lg text-primary-600 font-medium">{details.romaji}</p>
+                <p className="text-surface-500 text-sm">Reading</p>
               </div>
             </div>
-          </div>
 
-          {/* Image Section */}
-          <div className="relative rounded-2xl overflow-hidden mb-8 shadow-lg">
-            <img 
-              src={details.imageUrl} 
-              alt={details.japanese}
-              className="w-full aspect-video object-cover"
-            />
-            <a 
-              href={details.imageUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="absolute bottom-4 right-4 bg-black/50 text-white px-3 py-1.5 rounded-full text-sm backdrop-blur-sm flex items-center gap-1.5 hover:bg-black/60 transition-colors"
-            >
-              View Image
-              <ExternalLink size={14} />
-            </a>
-          </div>
+            <div className="aspect-video bg-surface-100 rounded-lg mb-6 overflow-hidden">
+              <img 
+                src={details.imageUrl} 
+                alt={details.japanese}
+                className="w-full h-full object-cover"
+              />
+            </div>
 
-          <div className="grid md:grid-cols-2 gap-8">
-            {/* Example Sentences Section */}
-            <section>
-              <h2 className="text-xl font-semibold text-surface-900 mb-4">
-                Example Sentences
-              </h2>
-              <div className="space-y-4">
+            <div className="space-y-6">
+              <section>
+                <h2 className="text-lg font-semibold text-surface-900 mb-3">Example Sentences</h2>
                 {details.sentences.map((sentence, index) => (
-                  <div 
-                    key={index} 
-                    className="neu-card-sm p-4 hover:shadow-neu-sm transition-shadow"
-                  >
-                    <div className="flex items-start gap-3">
-                      <div className="flex-1">
-                        <p className="text-lg text-surface-900 mb-2 leading-relaxed">
-                          {sentence.japanese}
-                        </p>
-                        <p className="text-primary-600 text-sm mb-1.5">{sentence.romaji}</p>
-                        <p className="text-surface-600 text-sm">{sentence.english}</p>
-                      </div>
+                  <div key={index} className="mb-4 p-4 bg-surface-50 rounded-lg">
+                    <div className="flex items-center gap-2">
+                      <p className="text-surface-900 mb-1">{sentence.japanese}</p>
                       <button
-                        onClick={() => speak(sentence.japanese, index)}
+                        onClick={() => speak(sentence.japanese)}
                         disabled={isPlaying}
-                        className={`p-2 rounded-full transition-all flex-shrink-0 ${
-                          activeAudioIndex === index
-                            ? 'bg-primary-100 text-primary-600 shadow-inner' 
-                            : 'neu-button-sm text-surface-600 hover:text-primary-600'
+                        className={`p-1.5 rounded-full transition-colors ${
+                          isPlaying 
+                            ? 'bg-primary-100 text-primary-600' 
+                            : 'hover:bg-surface-100 text-surface-600 hover:text-primary-600'
                         }`}
                         aria-label="Play sentence pronunciation"
                       >
-                        <Volume2 
-                          size={18} 
-                          className={activeAudioIndex === index ? 'animate-pulse' : ''} 
-                        />
+                        <Volume2 size={16} className={isPlaying ? 'animate-pulse' : ''} />
                       </button>
                     </div>
+                    <p className="text-primary-600 text-sm mb-1">{sentence.romaji}</p>
+                    <p className="text-surface-600 text-sm">{sentence.english}</p>
                   </div>
                 ))}
-              </div>
-            </section>
+              </section>
 
-            {/* Additional Information Section */}
-            <section>
-              <h2 className="text-xl font-semibold text-surface-900 mb-4">
-                Additional Information
-              </h2>
-              <div className="neu-card-sm p-6">
-                <p className="text-surface-600 leading-relaxed">
-                  {details.description}
-                </p>
-              </div>
-            </section>
+              <section>
+                <h2 className="text-lg font-semibold text-surface-900 mb-3">Additional Information</h2>
+                <p className="text-surface-600">{details.description}</p>
+              </section>
+            </div>
           </div>
         </div>
       </div>
