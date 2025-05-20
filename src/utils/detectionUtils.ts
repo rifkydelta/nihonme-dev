@@ -1,6 +1,7 @@
 import * as cocoSsd from '@tensorflow-models/coco-ssd';
 import { ObjectDetection } from '../types';
 import { getModel } from './modelLoader';
+import { mapLabel } from './labelMapping';
 
 // Detect objects in an image/video frame
 export const detectObjects = async (
@@ -16,10 +17,10 @@ export const detectObjects = async (
     // Run detection
     const predictions = await model.detect(imageElement);
     
-    // Transform the predictions to our internal format
+    // Transform the predictions to our internal format and map labels
     return predictions.map(prediction => ({
       bbox: prediction.bbox as [number, number, number, number],
-      class: prediction.class,
+      class: mapLabel(prediction.class),
       score: prediction.score
     }));
   } catch (error) {
