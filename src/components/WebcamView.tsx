@@ -32,11 +32,16 @@ const WebcamView: React.FC<WebcamViewProps> = ({
     try {
       setError(null);
       const stream = await navigator.mediaDevices.getUserMedia({
-        video: { facingMode: 'environment' }
+        video: {
+          facingMode: 'environment',
+          width: { ideal: 1280 },
+          height: { ideal: 720 }
+        }
       });
       
       if (videoRef.current) {
         videoRef.current.srcObject = stream;
+        await videoRef.current.play(); // Ensure video starts playing
         setWebcamActive(true);
       }
     } catch (err) {
@@ -124,6 +129,14 @@ const WebcamView: React.FC<WebcamViewProps> = ({
     }
   };
   
+  // Handle video metadata loaded
+  const handleVideoMetadata = () => {
+    if (videoRef.current && canvasRef.current) {
+      canvasRef.current.width = videoRef.current.videoWidth;
+      canvasRef.current.height = videoRef.current.videoHeight;
+    }
+  };
+  
   // Update canvas when filtered class changes
   useEffect(() => {
     if (canvasRef.current && detections.length > 0) {
@@ -183,13 +196,14 @@ const WebcamView: React.FC<WebcamViewProps> = ({
         </div>
       )}
       
-      <div className="relative flex-1 flex items-center justify-center">
+      <div className="relative flex-1 flex items-center justify-center bg-black">
         <video
           ref={videoRef}
           className="max-h-full max-w-full"
           autoPlay
           playsInline
           muted
+          onLoadedMetadata={handleVideoMetadata}
         />
         <canvas
           ref={canvasRef}
