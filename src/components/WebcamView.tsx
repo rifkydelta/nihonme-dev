@@ -221,8 +221,8 @@ const WebcamView: React.FC<WebcamViewProps> = ({
       </div>
       
       {webcamActive && (
-        <div className="p-4 flex justify-between items-center bg-surface-50">
-          <div className="text-sm">
+        <div className="p-4 flex flex-col sm:flex-row sm:justify-between gap-4 bg-surface-50">
+          <div className="text-sm flex items-center justify-center sm:justify-start">
             {isDetecting ? (
               <span className="flex items-center text-primary-600">
                 <span className="inline-block w-2 h-2 bg-primary-500 rounded-full mr-2 animate-pulse"></span>
@@ -233,11 +233,11 @@ const WebcamView: React.FC<WebcamViewProps> = ({
             )}
           </div>
           
-          <div className="flex space-x-2">
+          <div className="grid grid-cols-2 sm:flex gap-2">
             <button
               onClick={toggleDetection}
               disabled={!modelLoaded}
-              className={`neu-button ${
+              className={`neu-button flex-1 sm:flex-initial min-w-[120px] ${
                 isDetecting ? 'text-surface-600' : 'text-primary-600'
               }`}
             >
@@ -246,7 +246,7 @@ const WebcamView: React.FC<WebcamViewProps> = ({
             
             <button
               onClick={stopWebcam}
-              className="neu-button text-accent-600"
+              className="neu-button flex-1 sm:flex-initial min-w-[120px] text-accent-600"
             >
               Stop Camera
             </button>
