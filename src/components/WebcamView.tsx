@@ -258,5 +258,3 @@ const WebcamView: React.FC<WebcamViewProps> = ({
 };
 
 export default WebcamView;
-
-export default WebcamView
