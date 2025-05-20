@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { ObjectDetection } from '../types';
 import { getConfidenceColor } from '../utils/detectionUtils';
 import { ChevronUp, ChevronDown } from 'lucide-react';
@@ -13,8 +14,14 @@ const MobileResultsView: React.FC<MobileResultsViewProps> = ({
   results
 }) => {
   const [isExpanded, setIsExpanded] = useState(false);
+  const navigate = useNavigate();
 
   if (results.length === 0) return null;
+
+  const handleObjectClick = (objectClass: string) => {
+    navigate(`/object/${objectClass}`);
+    setIsExpanded(false);
+  };
 
   return (
     <div className="fixed bottom-0 left-0 right-0 z-50 p-4">
@@ -55,9 +62,10 @@ const MobileResultsView: React.FC<MobileResultsViewProps> = ({
 
         <div className="divide-y divide-white/10">
           {results.map((result, index) => (
-            <div
+            <button
               key={index}
-              className="p-4 hover:bg-white/5 transition-colors"
+              onClick={() => handleObjectClick(result.class)}
+              className="w-full text-left p-4 hover:bg-white/5 transition-colors"
             >
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
@@ -82,7 +90,7 @@ const MobileResultsView: React.FC<MobileResultsViewProps> = ({
                   {Math.round(result.score * 100)}%
                 </div>
               </div>
-            </div>
+            </button>
           ))}
         </div>
       </div>
