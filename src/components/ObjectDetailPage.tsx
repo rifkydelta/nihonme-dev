@@ -1,11 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Volume2 } from 'lucide-react';
 import { getObjectDetails } from '../utils/objectDetails';
 
 const ObjectDetailPage: React.FC = () => {
   const { label } = useParams<{ label: string }>();
   const details = label ? getObjectDetails(label) : null;
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  const speak = (text: string) => {
+    if ('speechSynthesis' in window) {
+      // Cancel any ongoing speech
+      window.speechSynthesis.cancel();
+
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = 'ja-JP';
+      utterance.onend = () => setIsPlaying(false);
+      utterance.onerror = () => setIsPlaying(false);
+      
+      setIsPlaying(true);
+      window.speechSynthesis.speak(utterance);
+    }
+  };
 
   if (!details) {
     return (
@@ -34,7 +50,21 @@ const ObjectDetailPage: React.FC = () => {
         <div className="mt-8 bg-white rounded-2xl shadow-lg overflow-hidden">
           <div className="p-6">
             <div className="mb-6">
-              <h1 className="text-3xl font-bold text-surface-900">{details.japanese}</h1>
+              <div className="flex items-center gap-3">
+                <h1 className="text-3xl font-bold text-surface-900">{details.japanese}</h1>
+                <button
+                  onClick={() => speak(details.japanese)}
+                  disabled={isPlaying}
+                  className={`p-2 rounded-full transition-colors ${
+                    isPlaying 
+                      ? 'bg-primary-100 text-primary-600' 
+                      : 'hover:bg-surface-100 text-surface-600 hover:text-primary-600'
+                  }`}
+                  aria-label="Play pronunciation"
+                >
+                  <Volume2 size={20} className={isPlaying ? 'animate-pulse' : ''} />
+                </button>
+              </div>
               <div className="mt-2 flex items-baseline gap-4">
                 <p className="text-lg text-primary-600 font-medium">{details.romaji}</p>
                 <p className="text-surface-500 text-sm">Reading</p>
@@ -54,7 +84,21 @@ const ObjectDetailPage: React.FC = () => {
                 <h2 className="text-lg font-semibold text-surface-900 mb-3">Example Sentences</h2>
                 {details.sentences.map((sentence, index) => (
                   <div key={index} className="mb-4 p-4 bg-surface-50 rounded-lg">
-                    <p className="text-surface-900 mb-1">{sentence.japanese}</p>
+                    <div className="flex items-center gap-2">
+                      <p className="text-surface-900 mb-1">{sentence.japanese}</p>
+                      <button
+                        onClick={() => speak(sentence.japanese)}
+                        disabled={isPlaying}
+                        className={`p-1.5 rounded-full transition-colors ${
+                          isPlaying 
+                            ? 'bg-primary-100 text-primary-600' 
+                            : 'hover:bg-surface-100 text-surface-600 hover:text-primary-600'
+                        }`}
+                        aria-label="Play sentence pronunciation"
+                      >
+                        <Volume2 size={16} className={isPlaying ? 'animate-pulse' : ''} />
+                      </button>
+                    </div>
                     <p className="text-primary-600 text-sm mb-1">{sentence.romaji}</p>
                     <p className="text-surface-600 text-sm">{sentence.english}</p>
                   </div>
