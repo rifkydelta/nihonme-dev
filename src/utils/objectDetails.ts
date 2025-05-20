@@ -7,6 +7,7 @@ interface Sentence {
 interface ObjectDetails {
   japanese: string;
   romaji: string;
+  english: string;
   imageUrl: string;
   sentences: Sentence[];
   description: string;
@@ -16,6 +17,7 @@ const objectDetailsMap: Record<string, ObjectDetails> = {
   'ひと': {
     japanese: 'ひと',
     romaji: 'hito',
+    english: 'person',
     imageUrl: 'https://images.pexels.com/photos/2102416/pexels-photo-2102416.jpeg',
     sentences: [
       {
@@ -28,10 +30,10 @@ const objectDetailsMap: Record<string, ObjectDetails> = {
         romaji: 'Hitobito wa kouen wo aruite imasu.',
         english: 'People are walking in the park.',
       },
-       {
-        japanese: '人々は公園を歩いています。',
-        romaji: 'Hitobito wa kouen wo aruite imasu.',
-        english: 'People are walking in the park.',
+      {
+        japanese: '多くの人が駅で電車を待っています。',
+        romaji: 'Ooku no hito ga eki de densha wo matte imasu.',
+        english: 'Many people are waiting for the train at the station.',
       }
     ],
     description: 'The word "ひと" (hito) means "person" in Japanese. It\'s one of the most fundamental words in the Japanese language.',
@@ -39,6 +41,7 @@ const objectDetailsMap: Record<string, ObjectDetails> = {
   'いぬ': {
     japanese: 'いぬ',
     romaji: 'inu',
+    english: 'dog',
     imageUrl: 'https://images.pexels.com/photos/1805164/pexels-photo-1805164.jpeg',
     sentences: [
       {
