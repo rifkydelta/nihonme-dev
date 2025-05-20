@@ -90,7 +90,7 @@ const WebcamView: React.FC<WebcamViewProps> = ({
       // Start detection interval
       setIsDetecting(true);
       detectFrame();
-      intervalRef.current = window.setInterval(detectFrame, 500);
+      intervalRef.current = window.setInterval(detectFrame, 100); // Changed to 100ms (0.1 seconds)
     }
   };
   
