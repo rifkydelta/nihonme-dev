@@ -18,6 +18,7 @@ const ImageUploadView: React.FC<ImageUploadViewProps> = ({
   const [isProcessing, setIsProcessing] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [detections, setDetections] = useState<ObjectDetection[]>([]);
+  const [isMobile, setIsMobile] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const imageRef = useRef<HTMLImageElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -25,6 +26,16 @@ const ImageUploadView: React.FC<ImageUploadViewProps> = ({
   const dragCounter = useRef(0);
   const [isDragging, setIsDragging] = useState(false);
   
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   const handleImageUpload = (file: File) => {
     if (!file.type.startsWith('image/')) {
       setError('Please upload an image file (JPEG, PNG, etc.)');
@@ -151,21 +162,18 @@ const ImageUploadView: React.FC<ImageUploadViewProps> = ({
     }
   };
   
-  // Update canvas when filtered class changes
   useEffect(() => {
     if (canvasRef.current && detections.length > 0) {
       processImage();
     }
   }, [filteredClass]);
   
-  // Process image when it's loaded
   useEffect(() => {
     if (imageUrl && imageRef.current && imageRef.current.complete && modelLoaded) {
       processImage();
     }
   }, [imageUrl, modelLoaded]);
   
-  // Handle window resize
   useEffect(() => {
     const handleResize = () => {
       if (imageUrl) {
@@ -177,7 +185,6 @@ const ImageUploadView: React.FC<ImageUploadViewProps> = ({
     return () => window.removeEventListener('resize', handleResize);
   }, [imageUrl]);
   
-  // Download image with detections
   const downloadImage = () => {
     if (!canvasRef.current || !imageRef.current) return;
     
@@ -211,9 +218,11 @@ const ImageUploadView: React.FC<ImageUploadViewProps> = ({
       onDrop={handleDrop}
     >
       {!imageUrl ? (
-        <div className={`flex-1 flex flex-col items-center justify-center p-6 bg-surface-50 transition-colors ${
-          isDragging ? 'bg-primary-50' : ''
-        }`}>
+        <div 
+          className={`relative flex-1 flex flex-col items-center justify-center p-6 bg-surface-50 ${
+            isMobile ? 'aspect-[3/4]' : 'aspect-[16/9]'
+          } ${isDragging ? 'bg-primary-50' : ''}`}
+        >
           <input
             type="file"
             ref={fileInputRef}
@@ -239,7 +248,9 @@ const ImageUploadView: React.FC<ImageUploadViewProps> = ({
       ) : (
         <div 
           ref={containerRef}
-          className="relative flex-1 flex items-center justify-center bg-surface-50"
+          className={`relative flex-1 flex items-center justify-center bg-surface-50 ${
+            isMobile ? 'aspect-[3/4]' : 'aspect-[16/9]'
+          }`}
         >
           {error && (
             <div className="absolute inset-0 flex items-center justify-center z-10 bg-surface-50">
