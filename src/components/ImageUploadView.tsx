@@ -21,11 +21,11 @@ const ImageUploadView: React.FC<ImageUploadViewProps> = ({
   const fileInputRef = useRef<HTMLInputElement>(null);
   const imageRef = useRef<HTMLImageElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const dragCounter = useRef(0);
   const [isDragging, setIsDragging] = useState(false);
   
   const handleImageUpload = (file: File) => {
-    // Validate file type
     if (!file.type.startsWith('image/')) {
       setError('Please upload an image file (JPEG, PNG, etc.)');
       return;
@@ -108,21 +108,41 @@ const ImageUploadView: React.FC<ImageUploadViewProps> = ({
       
       const image = imageRef.current;
       const canvas = canvasRef.current;
+      
+      // Set canvas dimensions to match the displayed image size
+      const container = containerRef.current;
+      if (!container) return;
+      
+      const containerRect = container.getBoundingClientRect();
+      const scale = Math.min(
+        containerRect.width / image.naturalWidth,
+        containerRect.height / image.naturalHeight
+      );
+      
+      canvas.width = image.naturalWidth * scale;
+      canvas.height = image.naturalHeight * scale;
+      
       const ctx = canvas.getContext('2d');
-      
       if (!ctx) return;
-      
-      // Set canvas dimensions to match image
-      canvas.width = image.naturalWidth;
-      canvas.height = image.naturalHeight;
       
       // Run detection
       const results = await detectObjects(image);
       setDetections(results);
       onResults(results);
       
+      // Scale the detections to match the displayed size
+      const scaledResults = results.map(result => ({
+        ...result,
+        bbox: [
+          result.bbox[0] * scale,
+          result.bbox[1] * scale,
+          result.bbox[2] * scale,
+          result.bbox[3] * scale
+        ] as [number, number, number, number]
+      }));
+      
       // Draw detections on canvas
-      drawDetections(ctx, results, filteredClass);
+      drawDetections(ctx, scaledResults, filteredClass);
     } catch (err) {
       console.error('Detection error:', err);
       setError('Error detecting objects in the image');
@@ -134,12 +154,9 @@ const ImageUploadView: React.FC<ImageUploadViewProps> = ({
   // Update canvas when filtered class changes
   useEffect(() => {
     if (canvasRef.current && detections.length > 0) {
-      const ctx = canvasRef.current.getContext('2d');
-      if (ctx) {
-        drawDetections(ctx, detections, filteredClass);
-      }
+      processImage();
     }
-  }, [filteredClass, detections]);
+  }, [filteredClass]);
   
   // Process image when it's loaded
   useEffect(() => {
@@ -148,24 +165,34 @@ const ImageUploadView: React.FC<ImageUploadViewProps> = ({
     }
   }, [imageUrl, modelLoaded]);
   
+  // Handle window resize
+  useEffect(() => {
+    const handleResize = () => {
+      if (imageUrl) {
+        processImage();
+      }
+    };
+    
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [imageUrl]);
+  
   // Download image with detections
   const downloadImage = () => {
-    if (!canvasRef.current) return;
+    if (!canvasRef.current || !imageRef.current) return;
     
-    // Create a combined canvas with the original image and detections
     const canvas = document.createElement('canvas');
-    const ctx = canvas.getContext('2d');
-    
-    if (!ctx || !imageRef.current) return;
-    
     canvas.width = imageRef.current.naturalWidth;
     canvas.height = imageRef.current.naturalHeight;
+    
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
     
     // Draw the original image
     ctx.drawImage(imageRef.current, 0, 0);
     
-    // Draw the detections from our detection canvas
-    ctx.drawImage(canvasRef.current, 0, 0);
+    // Draw the detections at original scale
+    drawDetections(ctx, detections, filteredClass);
     
     // Convert to data URL and trigger download
     const dataUrl = canvas.toDataURL('image/png');
@@ -177,15 +204,15 @@ const ImageUploadView: React.FC<ImageUploadViewProps> = ({
   
   return (
     <div 
-      className="relative flex-1 flex flex-col bg-gray-100 dark:bg-gray-800 rounded-lg overflow-hidden"
+      className="relative flex-1 flex flex-col bg-black rounded-2xl overflow-hidden"
       onDragEnter={handleDragEnter}
       onDragLeave={handleDragLeave}
       onDragOver={handleDragOver}
       onDrop={handleDrop}
     >
       {!imageUrl ? (
-        <div className={`flex-1 flex flex-col items-center justify-center p-6 transition-colors ${
-          isDragging ? 'bg-blue-50 dark:bg-blue-900/20 border-2 border-dashed border-blue-300 dark:border-blue-700' : ''
+        <div className={`flex-1 flex flex-col items-center justify-center p-6 bg-surface-50 transition-colors ${
+          isDragging ? 'bg-primary-50' : ''
         }`}>
           <input
             type="file"
@@ -195,31 +222,32 @@ const ImageUploadView: React.FC<ImageUploadViewProps> = ({
             className="hidden"
           />
           
-          <ImageIcon size={48} className="text-gray-400 mb-4" />
-          <h3 className="text-lg font-medium mb-2">Upload an Image</h3>
-          <p className="text-gray-500 dark:text-gray-400 text-center mb-4">
+          <ImageIcon size={48} className="text-surface-400 mb-4" />
+          <h3 className="text-lg font-medium mb-2 text-surface-900">Upload an Image</h3>
+          <p className="text-surface-600 text-center mb-4">
             Drag & drop an image here, or click the button below to select one
           </p>
           <button
             onClick={() => fileInputRef.current?.click()}
             disabled={!modelLoaded}
-            className={`flex items-center gap-2 px-6 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors ${
-              !modelLoaded ? 'opacity-50 cursor-not-allowed' : ''
-            }`}
+            className="neu-button text-primary-600 font-medium"
           >
-            <Upload size={18} />
+            <Upload size={18} className="mr-2" />
             <span>Select Image</span>
           </button>
         </div>
       ) : (
-        <div className="relative flex-1 flex items-center justify-center">
+        <div 
+          ref={containerRef}
+          className="relative flex-1 flex items-center justify-center bg-surface-50"
+        >
           {error && (
-            <div className="absolute inset-0 flex items-center justify-center z-10 bg-red-50 dark:bg-red-900/20 p-6">
+            <div className="absolute inset-0 flex items-center justify-center z-10 bg-surface-50">
               <div className="text-center">
-                <p className="text-red-700 dark:text-red-300 mb-4">{error}</p>
+                <p className="text-accent-600 mb-4">{error}</p>
                 <button
                   onClick={clearImage}
-                  className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors"
+                  className="neu-button text-accent-600 font-medium"
                 >
                   Try Another Image
                 </button>
@@ -228,9 +256,9 @@ const ImageUploadView: React.FC<ImageUploadViewProps> = ({
           )}
           
           {isProcessing && (
-            <div className="absolute inset-0 flex items-center justify-center z-10 bg-gray-900/50">
+            <div className="absolute inset-0 flex items-center justify-center z-10 bg-surface-900/50">
               <div className="text-center text-white">
-                <div className="inline-block w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mb-4"></div>
+                <div className="inline-block w-12 h-12 border-4 border-primary-500 border-t-transparent rounded-full animate-spin mb-4"></div>
                 <p>Processing image...</p>
               </div>
             </div>
@@ -240,17 +268,17 @@ const ImageUploadView: React.FC<ImageUploadViewProps> = ({
             ref={imageRef}
             src={imageUrl}
             alt="Uploaded"
-            className="max-h-full max-w-full"
+            className="max-h-full max-w-full object-contain"
             onLoad={processImage}
           />
           <canvas
             ref={canvasRef}
-            className="absolute top-0 left-0 w-full h-full"
+            className="absolute top-0 left-0"
           />
           
           <button
             onClick={clearImage}
-            className="absolute top-4 right-4 p-2 bg-gray-800/70 text-white rounded-full hover:bg-gray-700 transition-colors"
+            className="absolute top-4 right-4 p-2 bg-surface-800/70 text-white rounded-full hover:bg-surface-700 transition-colors"
             aria-label="Remove image"
           >
             <X size={20} />
@@ -259,12 +287,12 @@ const ImageUploadView: React.FC<ImageUploadViewProps> = ({
       )}
       
       {imageUrl && detections.length > 0 && (
-        <div className="p-4 flex justify-end">
+        <div className="p-4 bg-surface-50">
           <button
             onClick={downloadImage}
-            className="flex items-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors"
+            className="neu-button text-primary-600 font-medium w-full sm:w-auto"
           >
-            <Download size={18} />
+            <Download size={18} className="mr-2" />
             <span>Download Result</span>
           </button>
         </div>
