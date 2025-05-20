@@ -33,8 +33,13 @@ const ObjectDetailPage: React.FC = () => {
 
         <div className="mt-8 bg-white rounded-2xl shadow-lg overflow-hidden">
           <div className="p-6">
-            <h1 className="text-2xl font-bold text-surface-900 mb-2">{details.japanese}</h1>
-            <p className="text-lg text-surface-600 mb-6">{details.romaji}</p>
+            <div className="mb-6">
+              <h1 className="text-3xl font-bold text-surface-900">{details.japanese}</h1>
+              <div className="mt-2 flex items-baseline gap-4">
+                <p className="text-lg text-primary-600 font-medium">{details.romaji}</p>
+                <p className="text-surface-500 text-sm">Reading</p>
+              </div>
+            </div>
 
             <div className="aspect-video bg-surface-100 rounded-lg mb-6 overflow-hidden">
               <img 
@@ -50,6 +55,7 @@ const ObjectDetailPage: React.FC = () => {
                 {details.sentences.map((sentence, index) => (
                   <div key={index} className="mb-4 p-4 bg-surface-50 rounded-lg">
                     <p className="text-surface-900 mb-1">{sentence.japanese}</p>
+                    <p className="text-primary-600 text-sm mb-1">{sentence.romaji}</p>
                     <p className="text-surface-600 text-sm">{sentence.english}</p>
                   </div>
                 ))}

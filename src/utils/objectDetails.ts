@@ -1,5 +1,6 @@
 interface Sentence {
   japanese: string;
+  romaji: string;
   english: string;
 }
 
@@ -19,10 +20,12 @@ const objectDetailsMap: Record<string, ObjectDetails> = {
     sentences: [
       {
         japanese: 'あの人は私の友達です。',
+        romaji: 'Ano hito wa watashi no tomodachi desu.',
         english: 'That person is my friend.',
       },
       {
         japanese: '人々は公園を歩いています。',
+        romaji: 'Hitobito wa kouen wo aruite imasu.',
         english: 'People are walking in the park.',
       }
     ],
@@ -35,11 +38,12 @@ const objectDetailsMap: Record<string, ObjectDetails> = {
     sentences: [
       {
         japanese: '犬は忠実な動物です。',
-        romanji: 'Inu wa chüjitsuna döbutsudesu',
+        romaji: 'Inu wa chuujitsuna doubutsu desu.',
         english: 'Dogs are loyal animals.',
       },
       {
         japanese: '私の家に犬がいます。',
+        romaji: 'Watashi no ie ni inu ga imasu.',
         english: 'I have a dog at home.',
       }
     ],
