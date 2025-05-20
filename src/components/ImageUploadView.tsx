@@ -230,10 +230,10 @@ const ImageUploadView: React.FC<ImageUploadViewProps> = ({
           <button
             onClick={() => fileInputRef.current?.click()}
             disabled={!modelLoaded}
-            className="neu-button text-primary-600 font-medium"
+            className="neu-button text-primary-600 font-medium inline-flex items-center"
           >
             <Upload size={18} className="mr-2" />
-            <span>Select Image</span>
+            Select Image
           </button>
         </div>
       ) : (
@@ -290,10 +290,10 @@ const ImageUploadView: React.FC<ImageUploadViewProps> = ({
         <div className="p-4 bg-surface-50">
           <button
             onClick={downloadImage}
-            className="neu-button text-primary-600 font-medium w-full sm:w-auto"
+            className="neu-button text-primary-600 font-medium w-full sm:w-auto inline-flex items-center justify-center"
           >
             <Download size={18} className="mr-2" />
-            <span>Download Result</span>
+            Download Result
           </button>
         </div>
       )}
