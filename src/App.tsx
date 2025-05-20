@@ -5,6 +5,7 @@ import DetectionControls from './components/DetectionControls';
 import WebcamView from './components/WebcamView';
 import ImageUploadView from './components/ImageUploadView';
 import ResultsList from './components/ResultsList';
+import MobileResultsView from './components/MobileResultsView';
 import { loadModel } from './utils/modelLoader';
 import { ObjectDetection } from './types';
 
@@ -15,6 +16,17 @@ function App() {
   const [modelError, setModelError] = useState<string | null>(null);
   const [detectionResults, setDetectionResults] = useState<ObjectDetection[]>([]);
   const [filteredClass, setFilteredClass] = useState<string | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   useEffect(() => {
     const loadModelAsync = async () => {
@@ -52,7 +64,7 @@ function App() {
       <Header />
       
       <main className="container mx-auto px-4 py-8 flex flex-col lg:flex-row gap-8">
-        <div className="lg:w-2/3 flex flex-col gap-6">
+        <div className={`${isMobile ? 'w-full' : 'lg:w-2/3'} flex flex-col gap-6`}>
           <div className="flex justify-between items-center">
             <DetectionControls 
               mode={mode} 
@@ -108,14 +120,24 @@ function App() {
           </div>
         </div>
 
-        <div className="lg:w-1/3">
-          <ResultsList 
-            results={detectionResults}
-            onFilterChange={handleFilterChange}
-            filteredClass={filteredClass}
-          />
-        </div>
+        {!isMobile && (
+          <div className="lg:w-1/3">
+            <ResultsList 
+              results={detectionResults}
+              onFilterChange={handleFilterChange}
+              filteredClass={filteredClass}
+            />
+          </div>
+        )}
       </main>
+
+      {isMobile && (
+        <MobileResultsView
+          results={detectionResults}
+          onFilterChange={handleFilterChange}
+          filteredClass={filteredClass}
+        />
+      )}
 
       <footer className="py-6 px-6">
         <div className="container mx-auto text-center">
