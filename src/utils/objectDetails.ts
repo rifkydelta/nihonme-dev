@@ -35,6 +35,7 @@ const objectDetailsMap: Record<string, ObjectDetails> = {
     sentences: [
       {
         japanese: '犬は忠実な動物です。',
+        romanji: 'Inu wa chüjitsuna döbutsudesu',
         english: 'Dogs are loyal animals.',
       },
       {
