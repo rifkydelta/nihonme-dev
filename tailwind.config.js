@@ -50,9 +50,11 @@ export default {
         sans: ['Inter var', 'sans-serif'],
       },
       boxShadow: {
+        'neu-xs': '2px 2px 4px #d1d9e6, -2px -2px 4px #ffffff',
         'neu-sm': '4px 4px 8px #d1d9e6, -4px -4px 8px #ffffff',
         'neu': '6px 6px 12px #d1d9e6, -6px -6px 12px #ffffff',
         'neu-lg': '10px 10px 20px #d1d9e6, -10px -10px 20px #ffffff',
+        'neu-inner-sm': 'inset 2px 2px 4px #d1d9e6, inset -2px -2px 4px #ffffff',
         'neu-inner': 'inset 4px 4px 8px #d1d9e6, inset -4px -4px 8px #ffffff',
       },
       backdropBlur: {
