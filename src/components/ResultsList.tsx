@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { getConfidenceColor } from '../utils/detectionUtils';
 import { ObjectDetection } from '../types';
 import { Filter, ArrowUpDown } from 'lucide-react';
@@ -14,6 +15,7 @@ const ResultsList: React.FC<ResultsListProps> = ({
   onFilterChange,
   filteredClass,
 }) => {
+  const navigate = useNavigate();
   const [sortBy, setSortBy] = useState<'confidence' | 'class'>('confidence');
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc');
   
@@ -50,6 +52,10 @@ const ResultsList: React.FC<ResultsListProps> = ({
     });
     return counts;
   }, [results]);
+
+  const handleObjectClick = (objectClass: string) => {
+    navigate(`/object/${objectClass}`);
+  };
   
   return (
     <div className="h-full flex flex-col bg-surface-50 rounded-2xl shadow-neu">
@@ -125,9 +131,10 @@ const ResultsList: React.FC<ResultsListProps> = ({
             {sortedResults
               .filter(result => filteredClass === null || result.class === filteredClass)
               .map((result, index) => (
-                <div
+                <button
                   key={index}
-                  className="p-3 border-b border-surface-200 last:border-0 hover:bg-surface-100 transition-colors"
+                  onClick={() => handleObjectClick(result.class)}
+                  className="w-full text-left p-3 border-b border-surface-200 last:border-0 hover:bg-surface-100 transition-colors"
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center">
@@ -141,7 +148,7 @@ const ResultsList: React.FC<ResultsListProps> = ({
                   <div className="mt-1 text-xs text-surface-600">
                     Position: x:{Math.round(result.bbox[0])}, y:{Math.round(result.bbox[1])}
                   </div>
-                </div>
+                </button>
               ))}
           </div>
         </>
