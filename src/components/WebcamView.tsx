@@ -7,12 +7,14 @@ interface WebcamViewProps {
   onResults: (results: ObjectDetection[]) => void;
   modelLoaded: boolean;
   filteredClass: string | null;
+  onWebcamStateChange?: (active: boolean) => void;
 }
 
-const WebcamView: React.FC<WebcamViewProps> = ({ 
-  onResults, 
+const WebcamView: React.FC<WebcamViewProps> = ({
+  onResults,
   modelLoaded,
-  filteredClass
+  filteredClass,
+  onWebcamStateChange
 }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -23,7 +25,7 @@ const WebcamView: React.FC<WebcamViewProps> = ({
   const intervalRef = useRef<number | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [isMobile, setIsMobile] = useState(false);
-  
+
   useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth <= 768);
@@ -33,7 +35,7 @@ const WebcamView: React.FC<WebcamViewProps> = ({
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
-  
+
   const startWebcam = async () => {
     if (!navigator.mediaDevices?.getUserMedia) {
       setError('Your browser does not support webcam access');
@@ -55,13 +57,14 @@ const WebcamView: React.FC<WebcamViewProps> = ({
         videoRef.current.srcObject = stream;
         await videoRef.current.play();
         setWebcamActive(true);
+        onWebcamStateChange?.(true);
       }
     } catch (err) {
       console.error('Error accessing webcam:', err);
       setError('Could not access camera. Please ensure you have granted camera permissions.');
     }
   };
-  
+
   const stopWebcam = () => {
     if (videoRef.current && videoRef.current.srcObject) {
       const stream = videoRef.current.srcObject as MediaStream;
@@ -70,6 +73,7 @@ const WebcamView: React.FC<WebcamViewProps> = ({
       tracks.forEach(track => track.stop());
       videoRef.current.srcObject = null;
       setWebcamActive(false);
+      onWebcamStateChange?.(false);
       
       if (intervalRef.current !== null) {
         clearInterval(intervalRef.current);
@@ -81,7 +85,7 @@ const WebcamView: React.FC<WebcamViewProps> = ({
       setDetections([]);
     }
   };
-  
+
   const detectFrame = async () => {
     if (!videoRef.current || !canvasRef.current || !modelLoaded) {
       return;
@@ -105,14 +109,14 @@ const WebcamView: React.FC<WebcamViewProps> = ({
       console.error('Detection error:', err);
     }
   };
-  
+
   const handleVideoMetadata = () => {
     if (videoRef.current && canvasRef.current) {
       canvasRef.current.width = videoRef.current.videoWidth;
       canvasRef.current.height = videoRef.current.videoHeight;
     }
   };
-  
+
   useEffect(() => {
     if (canvasRef.current && detections.length > 0) {
       const ctx = canvasRef.current.getContext('2d');
@@ -121,7 +125,7 @@ const WebcamView: React.FC<WebcamViewProps> = ({
       }
     }
   }, [filteredClass, detections]);
-  
+
   useEffect(() => {
     return () => {
       if (intervalRef.current !== null) {
@@ -130,7 +134,7 @@ const WebcamView: React.FC<WebcamViewProps> = ({
       stopWebcam();
     };
   }, []);
-  
+
   useEffect(() => {
     if (webcamActive && modelLoaded && !isDetecting) {
       setIsDetecting(true);
@@ -138,7 +142,7 @@ const WebcamView: React.FC<WebcamViewProps> = ({
       intervalRef.current = window.setInterval(detectFrame, 100);
     }
   }, [webcamActive, modelLoaded]);
-  
+
   return (
     <div className="relative flex-1 flex flex-col bg-black rounded-2xl overflow-hidden">
       {!webcamActive && !error && (

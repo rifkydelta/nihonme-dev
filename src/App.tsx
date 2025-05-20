@@ -17,6 +17,7 @@ function App() {
   const [detectionResults, setDetectionResults] = useState<ObjectDetection[]>([]);
   const [filteredClass, setFilteredClass] = useState<string | null>(null);
   const [isMobile, setIsMobile] = useState(false);
+  const [isWebcamActive, setIsWebcamActive] = useState(false);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -53,11 +54,18 @@ function App() {
   const handleModeChange = (newMode: 'webcam' | 'upload') => {
     setMode(newMode);
     setDetectionResults([]);
+    setIsWebcamActive(false);
   };
 
   const handleFilterChange = (className: string | null) => {
     setFilteredClass(className);
   };
+
+  const handleWebcamStateChange = (active: boolean) => {
+    setIsWebcamActive(active);
+  };
+
+  const shouldShowFooter = !isMobile || !isWebcamActive;
 
   return (
     <div className="min-h-screen bg-surface-50">
@@ -107,6 +115,7 @@ function App() {
                     onResults={handleResultsUpdate} 
                     modelLoaded={modelLoaded}
                     filteredClass={filteredClass}
+                    onWebcamStateChange={handleWebcamStateChange}
                   />
                 ) : (
                   <ImageUploadView 
@@ -139,14 +148,16 @@ function App() {
         />
       )}
 
-      <footer className="py-6 px-6">
-        <div className="container mx-auto text-center">
-          <p className="text-surface-600 font-medium">AI Vision - Browser-based Object Detection</p>
-          <p className="text-surface-500 text-sm mt-1">Powered by TensorFlow.js & COCO-SSD Model</p>
-        </div>
-      </footer>
+      {shouldShowFooter && (
+        <footer className="py-6 px-6">
+          <div className="container mx-auto text-center">
+            <p className="text-surface-600 font-medium">AI Vision - Browser-based Object Detection</p>
+            <p className="text-surface-500 text-sm mt-1">Powered by TensorFlow.js & COCO-SSD Model</p>
+          </div>
+        </footer>
+      )}
     </div>
   );
 }
 
-export default App
+export default App;
