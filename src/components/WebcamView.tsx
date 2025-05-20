@@ -21,6 +21,19 @@ const WebcamView: React.FC<WebcamViewProps> = ({
   const [error, setError] = useState<string | null>(null);
   const [detections, setDetections] = useState<ObjectDetection[]>([]);
   const intervalRef = useRef<number | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
+  
+  // Check if device is mobile
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
   
   // Start webcam
   const startWebcam = async () => {
@@ -31,17 +44,20 @@ const WebcamView: React.FC<WebcamViewProps> = ({
     
     try {
       setError(null);
-      const stream = await navigator.mediaDevices.getUserMedia({
+      const constraints = {
         video: {
           facingMode: 'environment',
-          width: { ideal: 1280 },
-          height: { ideal: 720 }
+          width: { ideal: isMobile ? 720 : 1280 },
+          height: { ideal: isMobile ? 1280 : 720 },
+          aspectRatio: isMobile ? 9/16 : 16/9
         }
-      });
+      };
+      
+      const stream = await navigator.mediaDevices.getUserMedia(constraints);
       
       if (videoRef.current) {
         videoRef.current.srcObject = stream;
-        await videoRef.current.play(); // Ensure video starts playing
+        await videoRef.current.play();
         setWebcamActive(true);
       }
     } catch (err) {
@@ -60,7 +76,6 @@ const WebcamView: React.FC<WebcamViewProps> = ({
       videoRef.current.srcObject = null;
       setWebcamActive(false);
       
-      // Stop detection interval
       if (intervalRef.current !== null) {
         clearInterval(intervalRef.current);
         intervalRef.current = null;
@@ -80,17 +95,15 @@ const WebcamView: React.FC<WebcamViewProps> = ({
     }
     
     if (isDetecting) {
-      // Stop detection interval
       if (intervalRef.current !== null) {
         clearInterval(intervalRef.current);
         intervalRef.current = null;
       }
       setIsDetecting(false);
     } else {
-      // Start detection interval
       setIsDetecting(true);
       detectFrame();
-      intervalRef.current = window.setInterval(detectFrame, 100); // Changed to 100ms (0.1 seconds)
+      intervalRef.current = window.setInterval(detectFrame, 100);
     }
   };
   
@@ -108,17 +121,11 @@ const WebcamView: React.FC<WebcamViewProps> = ({
       return;
     }
     
-    // Set canvas dimensions to match video
-    canvas.width = video.videoWidth;
-    canvas.height = video.videoHeight;
-    
     try {
-      // Run detection
       const results = await detectObjects(video);
       setDetections(results);
       onResults(results);
       
-      // Draw detections on canvas
       drawDetections(ctx, results, filteredClass);
     } catch (err) {
       console.error('Detection error:', err);
@@ -161,20 +168,18 @@ const WebcamView: React.FC<WebcamViewProps> = ({
   }, [webcamActive, modelLoaded]);
   
   return (
-    <div className="relative flex-1 flex flex-col bg-gray-100 dark:bg-gray-800 rounded-lg overflow-hidden">
+    <div className="relative flex-1 flex flex-col bg-black rounded-2xl overflow-hidden">
       {!webcamActive && !error && (
-        <div className="absolute inset-0 flex items-center justify-center flex-col p-6 z-10">
-          <Camera size={48} className="text-gray-400 mb-4" />
-          <h3 className="text-lg font-medium mb-2">Camera Access Required</h3>
-          <p className="text-gray-500 dark:text-gray-400 text-center mb-4">
+        <div className="absolute inset-0 flex items-center justify-center flex-col p-6 z-10 bg-surface-50">
+          <Camera size={48} className="text-surface-400 mb-4" />
+          <h3 className="text-lg font-medium mb-2 text-surface-900">Camera Access Required</h3>
+          <p className="text-surface-600 text-center mb-4">
             Click the button below to enable your camera for real-time object detection
           </p>
           <button
             onClick={startWebcam}
             disabled={!modelLoaded}
-            className={`px-6 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors ${
-              !modelLoaded ? 'opacity-50 cursor-not-allowed' : ''
-            }`}
+            className="neu-button text-primary-600 font-medium"
           >
             Enable Camera
           </button>
@@ -182,23 +187,28 @@ const WebcamView: React.FC<WebcamViewProps> = ({
       )}
       
       {error && (
-        <div className="absolute inset-0 flex items-center justify-center flex-col p-6 z-10 bg-red-50 dark:bg-red-900/20">
-          <AlertCircle size={48} className="text-red-500 mb-4" />
-          <h3 className="text-lg font-medium text-red-800 dark:text-red-200 mb-2">Camera Error</h3>
-          <p className="text-red-700 dark:text-red-300 text-center mb-4">{error}</p>
+        <div className="absolute inset-0 flex items-center justify-center flex-col p-6 z-10 bg-surface-50">
+          <AlertCircle size={48} className="text-accent-500 mb-4" />
+          <h3 className="text-lg font-medium text-surface-800 mb-2">Camera Error</h3>
+          <p className="text-surface-600 text-center mb-4">{error}</p>
           <button
             onClick={() => window.location.reload()}
-            className="px-6 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors"
+            className="neu-button text-primary-600 font-medium"
           >
             Retry
           </button>
         </div>
       )}
       
-      <div className="relative flex-1 flex items-center justify-center bg-black">
+      <div 
+        ref={containerRef}
+        className={`relative flex-1 flex items-center justify-center ${
+          isMobile ? 'aspect-[9/16]' : 'aspect-[16/9]'
+        }`}
+      >
         <video
           ref={videoRef}
-          className="max-h-full max-w-full"
+          className="w-full h-full object-cover"
           autoPlay
           playsInline
           muted
@@ -211,15 +221,15 @@ const WebcamView: React.FC<WebcamViewProps> = ({
       </div>
       
       {webcamActive && (
-        <div className="p-4 flex justify-between items-center">
+        <div className="p-4 flex justify-between items-center bg-surface-50">
           <div className="text-sm">
             {isDetecting ? (
-              <span className="flex items-center text-green-500 dark:text-green-400">
-                <span className="inline-block w-2 h-2 bg-green-500 dark:bg-green-400 rounded-full mr-2 animate-pulse"></span>
+              <span className="flex items-center text-primary-600">
+                <span className="inline-block w-2 h-2 bg-primary-500 rounded-full mr-2 animate-pulse"></span>
                 Detection active
               </span>
             ) : (
-              <span className="text-gray-500 dark:text-gray-400">Detection paused</span>
+              <span className="text-surface-600">Detection paused</span>
             )}
           </div>
           
@@ -227,18 +237,16 @@ const WebcamView: React.FC<WebcamViewProps> = ({
             <button
               onClick={toggleDetection}
               disabled={!modelLoaded}
-              className={`px-4 py-1 rounded-md transition-colors ${
-                isDetecting
-                  ? 'bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600'
-                  : 'bg-blue-500 text-white hover:bg-blue-600'
-              } ${!modelLoaded ? 'opacity-50 cursor-not-allowed' : ''}`}
+              className={`neu-button ${
+                isDetecting ? 'text-surface-600' : 'text-primary-600'
+              }`}
             >
               {isDetecting ? 'Pause' : 'Start'} Detection
             </button>
             
             <button
               onClick={stopWebcam}
-              className="px-4 py-1 bg-red-500 text-white rounded-md hover:bg-red-600 transition-colors"
+              className="neu-button text-accent-600"
             >
               Stop Camera
             </button>
