@@ -5,6 +5,18 @@ export default {
   theme: {
     extend: {
       colors: {
+        surface: {
+          50: '#f5f7fa',
+          100: '#eef1f5',
+          200: '#e9edf2',
+          300: '#dee3ea',
+          400: '#cbd2dc',
+          500: '#b0bac7',
+          600: '#8e99a8',
+          700: '#77818f',
+          800: '#666f7a',
+          900: '#4d5560',
+        },
         primary: {
           50: '#f0f7ff',
           100: '#e0f0ff',
@@ -29,18 +41,6 @@ export default {
           800: '#5a17bd',
           900: '#4a149a',
         },
-        surface: {
-          50: '#f5f7fa',
-          100: '#eef1f5',
-          200: '#e9edf2',
-          300: '#dee3ea',
-          400: '#cbd2dc',
-          500: '#b0bac7',
-          600: '#8e99a8',
-          700: '#77818f',
-          800: '#666f7a',
-          900: '#4d5560',
-        },
       },
       fontFamily: {
         sans: ['Inter var', 'sans-serif'],
@@ -57,4 +57,4 @@ export default {
     },
   },
   plugins: [],
-};
+}
