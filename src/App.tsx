@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Moon, Sun, AlertCircle } from 'lucide-react';
+import { AlertCircle } from 'lucide-react';
 import Header from './components/Header';
 import DetectionControls from './components/DetectionControls';
 import WebcamView from './components/WebcamView';
@@ -9,7 +9,6 @@ import { loadModel } from './utils/modelLoader';
 import { ObjectDetection } from './types';
 
 function App() {
-  const [darkMode, setDarkMode] = useState(false);
   const [mode, setMode] = useState<'webcam' | 'upload'>('webcam');
   const [modelLoaded, setModelLoaded] = useState(false);
   const [modelLoading, setModelLoading] = useState(true);
@@ -35,14 +34,6 @@ function App() {
     loadModelAsync();
   }, []);
 
-  useEffect(() => {
-    if (darkMode) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  }, [darkMode]);
-
   const handleResultsUpdate = (results: ObjectDetection[]) => {
     setDetectionResults(results);
   };
@@ -56,13 +47,9 @@ function App() {
     setFilteredClass(className);
   };
 
-  const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
-  };
-
   return (
     <div className="min-h-screen bg-surface-50">
-      <Header darkMode={darkMode} />
+      <Header />
       
       <main className="container mx-auto px-4 py-8 flex flex-col lg:flex-row gap-8">
         <div className="lg:w-2/3 flex flex-col gap-6">
@@ -72,13 +59,6 @@ function App() {
               onModeChange={handleModeChange} 
               modelLoaded={modelLoaded}
             />
-            <button 
-              onClick={toggleDarkMode}
-              className="neu-button p-3 rounded-full"
-              aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
-            >
-              {darkMode ? <Sun size={20} className="text-primary-600" /> : <Moon size={20} className="text-primary-600" />}
-            </button>
           </div>
 
           <div className="neu-card flex-1">
@@ -133,7 +113,6 @@ function App() {
             results={detectionResults}
             onFilterChange={handleFilterChange}
             filteredClass={filteredClass}
-            darkMode={darkMode}
           />
         </div>
       </main>
