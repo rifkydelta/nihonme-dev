@@ -64,41 +64,24 @@ const ObjectDetailPage: React.FC = () => {
 
         <div className="mt-8 neu-card">
           {/* Translation Section */}
-          <div className="flex flex-col gap-6 mb-12">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {/* Japanese */}
-              <div className="bg-surface-100 rounded-xl p-6">
-                <h3 className="text-sm font-medium text-surface-600 mb-2">Japanese</h3>
-                <div className="flex items-center gap-3">
-                  <p className="text-2xl font-bold text-surface-900">{details.japanese}</p>
-                  <button
-                    onClick={() => speak(details.japanese)}
-                    disabled={isPlaying}
-                    className={`p-2 rounded-full transition-all ${
-                      isPlaying 
-                        ? 'bg-primary-100 text-primary-600 shadow-inner' 
-                        : 'bg-surface-50 hover:bg-surface-200 text-surface-600 hover:text-primary-600'
-                    }`}
-                    aria-label="Play pronunciation"
-                  >
-                    <Volume2 size={18} className={isPlaying ? 'animate-pulse' : ''} />
-                  </button>
-                </div>
-              </div>
-
-              {/* Romaji */}
-              <div className="bg-surface-100 rounded-xl p-6">
-                <h3 className="text-sm font-medium text-surface-600 mb-2">Romaji</h3>
-                <p className="text-2xl font-bold text-primary-600">{details.romaji}</p>
-              </div>
-
-              {/* English */}
-              <div className="bg-surface-100 rounded-xl p-6">
-                <h3 className="text-sm font-medium text-surface-600 mb-2">English</h3>
-                <p className="text-2xl font-bold text-surface-900">{details.english}</p>
-              </div>
-            </div>
+          <div className="flex items-center gap-3 mb-8">
+            <h1 className="text-3xl font-bold text-surface-900">
+              {details.japanese} ({details.english})
+            </h1>
+            <button
+              onClick={() => speak(details.japanese)}
+              disabled={isPlaying}
+              className={`p-2 rounded-full transition-all ${
+                isPlaying 
+                  ? 'bg-primary-100 text-primary-600 shadow-inner' 
+                  : 'bg-surface-100 hover:bg-surface-200 text-surface-600 hover:text-primary-600'
+              }`}
+              aria-label="Play pronunciation"
+            >
+              <Volume2 size={18} className={isPlaying ? 'animate-pulse' : ''} />
+            </button>
           </div>
+          <p className="text-xl text-primary-600 font-medium mb-8">{details.romaji}</p>
 
           {/* Image Section */}
           <div className="relative rounded-2xl overflow-hidden mb-8 shadow-lg">
