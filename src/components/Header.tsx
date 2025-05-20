@@ -11,7 +11,7 @@ const Header: React.FC = () => {
         </div>
         
         <div className="text-sm text-surface-600">
-          Browser-Based Object Detection
+          Nihonme
         </div>
       </div>
     </header>
