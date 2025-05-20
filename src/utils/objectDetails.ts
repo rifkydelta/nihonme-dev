@@ -27,6 +27,11 @@ const objectDetailsMap: Record<string, ObjectDetails> = {
         japanese: '人々は公園を歩いています。',
         romaji: 'Hitobito wa kouen wo aruite imasu.',
         english: 'People are walking in the park.',
+      },
+       {
+        japanese: '人々は公園を歩いています。',
+        romaji: 'Hitobito wa kouen wo aruite imasu.',
+        english: 'People are walking in the park.',
       }
     ],
     description: 'The word "ひと" (hito) means "person" in Japanese. It\'s one of the most fundamental words in the Japanese language.',
