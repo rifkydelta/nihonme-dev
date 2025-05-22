@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { getConfidenceColor } from '../utils/detectionUtils';
 import { ObjectDetection } from '../types';
 import { Filter, ArrowUpDown } from 'lucide-react';
+import { objectDetailsMap } from '../utils/objectData';
 
 interface ResultsListProps {
   results: ObjectDetection[];
@@ -139,7 +140,12 @@ const ResultsList: React.FC<ResultsListProps> = ({
                   <div className="flex items-center justify-between">
                     <div className="flex items-center">
                       <div className="w-2 h-2 rounded-full bg-primary-500 mr-2"></div>
-                      <span className="font-medium capitalize text-surface-900">{result.class}</span>
+                      <span className="font-medium capitalize text-surface-900">
+                        {result.class}
+                        {objectDetailsMap[result.class] && 
+                          ` (${objectDetailsMap[result.class].english})`
+                        }
+                      </span>
                     </div>
                     <div className={`font-medium ${getConfidenceColor(result.score)}`}>
                       {Math.round(result.score * 100)}%
