@@ -3,7 +3,7 @@ import { ObjectDetection } from '../types';
 import { getModel } from './modelLoader';
 import { mapLabel } from './labelMapping';
 
-// Detect objects in an image/video frame
+// Simplified detection function - same for mobile and desktop
 export const detectObjects = async (
   imageElement: HTMLImageElement | HTMLVideoElement
 ): Promise<ObjectDetection[]> => {
@@ -14,10 +14,9 @@ export const detectObjects = async (
   }
   
   try {
-    // Run detection
+    // Use the same detection method for all devices
     const predictions = await model.detect(imageElement);
     
-    // Transform the predictions to our internal format and map labels
     return predictions.map(prediction => ({
       bbox: prediction.bbox as [number, number, number, number],
       class: mapLabel(prediction.class),
@@ -29,7 +28,7 @@ export const detectObjects = async (
   }
 };
 
-// Draw detected objects on a canvas
+// Simplified drawing function - same for mobile and desktop
 export const drawDetections = (
   ctx: CanvasRenderingContext2D,
   detections: ObjectDetection[],
@@ -56,18 +55,28 @@ export const drawDetections = (
     // Draw bounding box
     ctx.strokeStyle = boxColor;
     ctx.lineWidth = 2;
-    ctx.strokeRect(x, y, width, height);
+    
+    // Ensure the box isn't drawn outside the canvas boundaries
+    const safeX = Math.max(0, Math.min(x, ctx.canvas.width - 2));
+    const safeY = Math.max(0, Math.min(y, ctx.canvas.height - 2));
+    const safeWidth = Math.min(width, ctx.canvas.width - safeX - 2);
+    const safeHeight = Math.min(height, ctx.canvas.height - safeY - 2);
+    
+    // Standard rectangle for all devices
+    ctx.strokeRect(safeX, safeY, safeWidth, safeHeight);
     
     // Draw background for label
     ctx.fillStyle = `${boxColor}DD`;
+    ctx.font = '14px Arial';
     const textMetrics = ctx.measureText(`${detection.class} ${score}%`);
-    const textHeight = 20; // Approximate height
-    ctx.fillRect(x, y - textHeight, textMetrics.width + 10, textHeight);
+    const textHeight = 20;
+    const labelX = safeX;
+    const labelY = Math.max(textHeight, safeY);
+    ctx.fillRect(labelX, labelY - textHeight, textMetrics.width + 10, textHeight);
     
     // Draw label with class name and confidence
     ctx.fillStyle = '#FFFFFF';
-    ctx.font = '14px Arial';
-    ctx.fillText(`${detection.class} ${score}%`, x + 5, y - 5);
+    ctx.fillText(`${detection.class} ${score}%`, labelX + 5, labelY - 5);
   });
 };
 

@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ObjectDetection } from '../types';
 import { getConfidenceColor } from '../utils/detectionUtils';
 import { ChevronUp, ChevronDown } from 'lucide-react';
+import { objectDetailsMap } from '../utils/objectData';
 
 interface MobileResultsViewProps {
   results: ObjectDetection[];
@@ -11,10 +12,15 @@ interface MobileResultsViewProps {
 }
 
 const MobileResultsView: React.FC<MobileResultsViewProps> = ({
-  results
+  results,
+  filteredClass
 }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    console.log('MobileResultsView received results:', results);
+  }, [results]);
 
   if (results.length === 0) return null;
 
@@ -61,7 +67,9 @@ const MobileResultsView: React.FC<MobileResultsViewProps> = ({
         </button>
 
         <div className="divide-y divide-white/10">
-          {results.map((result, index) => (
+          {results
+              .filter(result => filteredClass === null || result.class === filteredClass)
+              .map((result, index) => (
             <button
               key={index}
               onClick={() => handleObjectClick(result.class)}
@@ -78,6 +86,9 @@ const MobileResultsView: React.FC<MobileResultsViewProps> = ({
                   }`} />
                   <span className="font-medium capitalize text-surface-800">
                     {result.class}
+                    {objectDetailsMap[result.class] && 
+                      ` (${objectDetailsMap[result.class].english})`
+                    }
                   </span>
                 </div>
                 <div className={`px-2 py-1 rounded-full text-sm font-semibold ${

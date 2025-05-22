@@ -100,10 +100,19 @@ const WebcamView: React.FC<WebcamViewProps> = ({
     }
     
     try {
+      // Ensure canvas dimensions match video dimensions
+      if (canvas.width !== video.videoWidth || canvas.height !== video.videoHeight) {
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+      }
+      
+      // Use the same detection method for all devices
       const results = await detectObjects(video);
+      
       setDetections(results);
       onResults(results);
       
+      // Draw detections
       drawDetections(ctx, results, filteredClass);
     } catch (err) {
       console.error('Detection error:', err);
@@ -139,9 +148,10 @@ const WebcamView: React.FC<WebcamViewProps> = ({
     if (webcamActive && modelLoaded && !isDetecting) {
       setIsDetecting(true);
       detectFrame();
-      intervalRef.current = window.setInterval(detectFrame, 100);
+      // Increase interval for mobile to reduce CPU usage
+      intervalRef.current = window.setInterval(detectFrame, isMobile ? 200 : 100);
     }
-  }, [webcamActive, modelLoaded]);
+  }, [webcamActive, modelLoaded, isMobile]);
 
   return (
     <div className="relative flex-1 flex flex-col bg-black rounded-2xl overflow-hidden">
