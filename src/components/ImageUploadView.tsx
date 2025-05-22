@@ -136,19 +136,19 @@ const ImageUploadView: React.FC<ImageUploadViewProps> = ({
       const container = containerRef.current;
 
       if (!container) {
-        console.warn("processImage: Container ref not found.");
+        console.warn("processImage: Referensi kontainer tidak ditemukan.");
         setIsProcessing(false);
         return;
       }
       if (image.naturalWidth === 0 || image.naturalHeight === 0) {
-        console.warn("processImage: Image natural dimensions are zero. Image might not be fully loaded or is broken.");
+        console.warn("processImage: Dimensi gambar alami adalah nol. Gambar mungkin tidak dimuat secara penuh atau rusak.");
         setIsProcessing(false);
         return;
       }
 
       const containerRect = container.getBoundingClientRect();
       if (containerRect.width === 0 || containerRect.height === 0) {
-        console.warn("processImage: Container dimensions are zero. Cannot scale image for canvas.");
+        console.warn("processImage: Dimensi kontainer adalah nol. Tidak dapat mengubah ukuran gambar untuk canvas.");
         setIsProcessing(false);
         return;
       }
@@ -162,14 +162,14 @@ const ImageUploadView: React.FC<ImageUploadViewProps> = ({
       canvas.height = image.naturalHeight * scale;
 
       if (canvas.width === 0 || canvas.height === 0) {
-          console.warn("processImage: Calculated canvas dimensions are zero. Skipping detection.");
+          console.warn("processImage: Dimensi canvas yang dihitung adalah nol. Melewati deteksi.");
           setIsProcessing(false);
           return;
       }
       
       const ctx = canvas.getContext('2d');
       if (!ctx) {
-        console.warn("processImage: Could not get 2D context from canvas.");
+        console.warn("processImage: Tidak dapat mendapatkan konteks 2D dari canvas.");
         setIsProcessing(false);
         return;
       }
@@ -192,26 +192,26 @@ const ImageUploadView: React.FC<ImageUploadViewProps> = ({
       
       drawDetections(ctx, scaledResults, filteredClass);
     } catch (err) {
-      console.error('Detection error in processImage:', err);
-      setError('Error detecting objects in the image');
+      console.error('Error deteksi dalam processImage:', err);
+      setError('Error deteksi objek dalam gambar');
     } finally {
       setIsProcessing(false);
-      console.log("processImage: Finished");
+      console.log("processImage: Selesai");
     }
   };
   
   useEffect(() => {
     if (imageUrl && isImageLoaded && modelLoaded) {
-      console.log("useEffect [imageUrl, isImageLoaded, modelLoaded]: All conditions met, calling processImage.");
+      console.log("useEffect [imageUrl, isImageLoaded, modelLoaded]: Semua kondisi terpenuhi, memanggil processImage.");
       processImage();
     } else {
-      console.log("useEffect [imageUrl, isImageLoaded, modelLoaded]: Conditions NOT met.", { imageUrl:!!imageUrl, isImageLoaded, modelLoaded });
+      console.log("useEffect [imageUrl, isImageLoaded, modelLoaded]: Kondisi tidak terpenuhi.", { imageUrl:!!imageUrl, isImageLoaded, modelLoaded });
     }
   }, [imageUrl, isImageLoaded, modelLoaded]);
   
   useEffect(() => {
     if (canvasRef.current && detections.length > 0 && imageUrl && isImageLoaded) {
-        console.log("useEffect [filteredClass, detections, imageUrl, isImageLoaded, isMobile]: Redrawing for filter change.");
+        console.log("useEffect [filteredClass, detections, imageUrl, isImageLoaded, isMobile]: Menggambar ulang untuk perubahan filter.");
         const image = imageRef.current;
         const canvas = canvasRef.current;
         const ctx = canvas.getContext('2d');
@@ -247,7 +247,7 @@ const ImageUploadView: React.FC<ImageUploadViewProps> = ({
   useEffect(() => {
     const handleResize = () => {
       if (imageUrl && isImageLoaded && modelLoaded) {
-        console.log("handleResize: Conditions met, calling processImage after delay.");
+        console.log("handleResize: Kondisi terpenuhi, memanggil processImage setelah delay.");
         setTimeout(() => processImage(), 100);
       }
     };
@@ -281,14 +281,14 @@ const ImageUploadView: React.FC<ImageUploadViewProps> = ({
           {isDragging ? (
             <div className="absolute inset-0 flex flex-col items-center justify-center bg-primary-50/70 backdrop-blur-sm animate-pulse">
               <Upload size={64} className="text-primary-600 mb-4 animate-bounce" />
-              <h3 className="text-xl font-medium text-primary-700">Drop image here</h3>
+              <h3 className="text-xl font-medium text-primary-700">Letakkan gambar di sini</h3>
             </div>
           ) : (
             <>
               <ImageIcon size={48} className="text-surface-400 mb-4" />
-              <h3 className="text-lg font-medium mb-2 text-surface-900">Upload an Image</h3>
+              <h3 className="text-lg font-medium mb-2 text-surface-900">Unggah gambar</h3>
               <p className="text-surface-600 text-center mb-4">
-                Drag & drop an image here, or click the button below to select one
+                Tarik dan lepas gambar di sini, atau klik tombol di bawah untuk memilih satu
               </p>
               <button
                 onClick={() => fileInputRef.current?.click()}
@@ -296,7 +296,7 @@ const ImageUploadView: React.FC<ImageUploadViewProps> = ({
                 className="neu-button text-primary-600 font-medium inline-flex items-center"
               >
                 <Upload size={18} className="mr-2" />
-                Select Image
+                Pilih gambar
               </button>
             </>
           )}
@@ -312,15 +312,15 @@ const ImageUploadView: React.FC<ImageUploadViewProps> = ({
             <img 
               ref={imageRef}
               src={imageUrl} 
-              alt="Uploaded" 
+              alt="Unggah" 
               className="max-w-full max-h-full object-contain"
               onLoad={() => {
-                console.log("img.onLoad: Image has loaded.");
+                console.log("img.onLoad: Gambar telah dimuat.");
                 setIsImageLoaded(true);
               }}
               onError={() => {
-                console.error("img.onError: Failed to load image.");
-                setError("Failed to load the image. It might be corrupt or an unsupported format.");
+                console.error("img.onError: Gagal memuat gambar.");
+                setError("Gagal memuat gambar. Gambar mungkin rusak atau format tidak didukung.");
                 setIsImageLoaded(false);
               }}
             />
@@ -349,7 +349,7 @@ const ImageUploadView: React.FC<ImageUploadViewProps> = ({
               className="neu-button text-accent-600 flex-1 sm:flex-initial min-w-[120px] inline-flex items-center justify-center"
             >
               <X size={18} className="mr-2" />
-              Clear Image
+              Hapus gambar
             </button>
           </div>
         </>
@@ -363,7 +363,7 @@ const ImageUploadView: React.FC<ImageUploadViewProps> = ({
             onClick={clearImage}
             className="neu-button text-primary-600 font-medium"
           >
-            Close
+            Tutup
           </button>
         </div>
       )}

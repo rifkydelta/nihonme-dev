@@ -41,10 +41,10 @@ const ObjectDetailPage: React.FC = () => {
             className="inline-flex items-center text-primary-600 hover:text-primary-700 neu-button"
           >
             <ArrowLeft size={20} className="mr-2" />
-            Back to Detection
+            Kembali ke Deteksi
           </Link>
           <div className="mt-8 text-center">
-            <p className="text-surface-600">Object details not found.</p>
+            <p className="text-surface-600">Detail objek tidak ditemukan.</p>
           </div>
         </div>
       </div>
@@ -59,14 +59,14 @@ const ObjectDetailPage: React.FC = () => {
           className="inline-flex items-center text-primary-600 hover:text-primary-700 neu-button"
         >
           <ArrowLeft size={20} className="mr-2" />
-          Back to Detection
+          Kembali ke Deteksi
         </Link>
 
         <div className="mt-8 neu-card">
           {/* Translation Section */}
           <div className="flex items-center gap-3 mb-8">
             <h1 className="text-3xl font-bold text-surface-900">
-              {details.japanese} ({details.english})
+              {details.japanese} ({details.indonesian})
             </h1>
             <button
               onClick={() => speak(details.japanese)}
@@ -76,7 +76,7 @@ const ObjectDetailPage: React.FC = () => {
                   ? 'bg-primary-100 text-primary-600 shadow-inner' 
                   : 'bg-surface-100 hover:bg-surface-200 text-surface-600 hover:text-primary-600'
               }`}
-              aria-label="Play pronunciation"
+              aria-label="Putar pelafalan"
             >
               <Volume2 size={18} className={isPlaying ? 'animate-pulse' : ''} />
             </button>
@@ -90,22 +90,13 @@ const ObjectDetailPage: React.FC = () => {
               alt={details.japanese}
               className="w-full aspect-video object-cover"
             />
-            <a 
-              href={details.imageUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="absolute bottom-4 right-4 bg-black/50 text-white px-3 py-1.5 rounded-full text-sm backdrop-blur-sm flex items-center gap-1.5 hover:bg-black/60 transition-colors"
-            >
-              View Image
-              <ExternalLink size={14} />
-            </a>
           </div>
 
           <div className="grid md:grid-cols-2 gap-8">
             {/* Example Sentences Section */}
             <section>
               <h2 className="text-xl font-semibold text-surface-900 mb-4">
-                Example Sentences
+                Contoh Kalimat
               </h2>
               <div className="space-y-4">
                 {details.sentences.map((sentence, index) => (
@@ -119,7 +110,7 @@ const ObjectDetailPage: React.FC = () => {
                           {sentence.japanese}
                         </p>
                         <p className="text-primary-600 text-sm mb-1.5">{sentence.romaji}</p>
-                        <p className="text-surface-600 text-sm">{sentence.english}</p>
+                        <p className="text-surface-600 text-sm">{sentence.indonesian}</p>
                       </div>
                       <button
                         onClick={() => speak(sentence.japanese, index)}
@@ -129,7 +120,7 @@ const ObjectDetailPage: React.FC = () => {
                             ? 'bg-primary-100 text-primary-600 shadow-inner' 
                             : 'bg-surface-50 hover:bg-surface-200 text-surface-600 hover:text-primary-600'
                         }`}
-                        aria-label="Play sentence pronunciation"
+                        aria-label="Putar pelafalan kalimat"
                       >
                         <Volume2 
                           size={18} 
@@ -145,7 +136,7 @@ const ObjectDetailPage: React.FC = () => {
             {/* Additional Information Section */}
             <section>
               <h2 className="text-xl font-semibold text-surface-900 mb-4">
-                Additional Information
+                Informasi Tambahan
               </h2>
               <div className="bg-surface-100 rounded-xl p-6">
                 <p className="text-surface-600 leading-relaxed">

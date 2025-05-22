@@ -38,7 +38,7 @@ const WebcamView: React.FC<WebcamViewProps> = ({
 
   const startWebcam = async () => {
     if (!navigator.mediaDevices?.getUserMedia) {
-      setError('Your browser does not support webcam access');
+      setError('Browser Anda tidak mendukung akses webcam');
       return;
     }
     
@@ -61,7 +61,7 @@ const WebcamView: React.FC<WebcamViewProps> = ({
       }
     } catch (err) {
       console.error('Error accessing webcam:', err);
-      setError('Could not access camera. Please ensure you have granted camera permissions.');
+      setError('Tidak dapat mengakses kamera. Pastikan Anda telah memberikan izin untuk mengakses kamera.');
     }
   };
 
@@ -160,16 +160,16 @@ const WebcamView: React.FC<WebcamViewProps> = ({
           isMobile ? 'aspect-[3/4]' : ''
         }`}>
           <Camera size={48} className="text-surface-400 mb-4" />
-          <h3 className="text-lg font-medium mb-2 text-surface-900">Camera Access Required</h3>
+          <h3 className="text-lg font-medium mb-2 text-surface-900">Akses Kamera Diperlukan</h3>
           <p className="text-surface-600 text-center mb-4">
-            Click the button below to enable your camera for real-time object detection
+            Klik tombol di bawah untuk mengaktifkan kamera Anda untuk deteksi objek secara langsung
           </p>
           <button
             onClick={startWebcam}
             disabled={!modelLoaded}
             className="neu-button text-primary-600 font-medium"
           >
-            Enable Camera
+            Aktifkan Kamera
           </button>
         </div>
       )}
@@ -177,13 +177,13 @@ const WebcamView: React.FC<WebcamViewProps> = ({
       {error && (
         <div className="absolute inset-0 flex items-center justify-center flex-col p-6 z-10 bg-surface-50">
           <AlertCircle size={48} className="text-accent-500 mb-4" />
-          <h3 className="text-lg font-medium text-surface-800 mb-2">Camera Error</h3>
+          <h3 className="text-lg font-medium text-surface-800 mb-2">Error Kamera</h3>
           <p className="text-surface-600 text-center mb-4">{error}</p>
           <button
             onClick={() => window.location.reload()}
             className="neu-button text-primary-600 font-medium"
           >
-            Retry
+            Ulangi
           </button>
         </div>
       )}
@@ -224,10 +224,10 @@ const WebcamView: React.FC<WebcamViewProps> = ({
             {isDetecting ? (
               <span className="flex items-center text-primary-600">
                 <span className="inline-block w-2 h-2 bg-primary-500 rounded-full mr-2 animate-pulse"></span>
-                Detection active
+                Deteksi aktif
               </span>
             ) : (
-              <span className="text-surface-600">Detection paused</span>
+              <span className="text-surface-600">Deteksi berhenti</span>
             )}
           </div>
           
@@ -236,7 +236,7 @@ const WebcamView: React.FC<WebcamViewProps> = ({
               onClick={stopWebcam}
               className="neu-button flex-1 sm:flex-initial min-w-[120px] text-accent-600"
             >
-              Stop Camera
+              Hentikan Kamera
             </button>
           </div>
         </div>

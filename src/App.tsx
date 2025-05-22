@@ -156,8 +156,8 @@ function App() {
           {shouldShowFooter && (
             <footer className="py-6 px-6">
               <div className="container mx-auto text-center">
-                <p className="text-surface-600 font-medium">NihonMe - Japanese eyes</p>
-                <p className="text-surface-400 text-sm mt-2">Created by Arindra Rifky Saputra</p>
+                <p className="text-surface-600 font-medium">NihonMe - Melihat Benda Dalam Bahasa Jepang</p>
+                <p className="text-surface-400 text-sm mt-2">Dibuat oleh Arindra Rifky Saputra</p>
               </div>
             </footer>
           )}

@@ -87,7 +87,7 @@ const MobileResultsView: React.FC<MobileResultsViewProps> = ({
                   <span className="font-medium capitalize text-surface-800">
                     {result.class}
                     {objectDetailsMap[result.class] && 
-                      ` (${objectDetailsMap[result.class].english})`
+                      ` (${objectDetailsMap[result.class].indonesian})`
                     }
                   </span>
                 </div>

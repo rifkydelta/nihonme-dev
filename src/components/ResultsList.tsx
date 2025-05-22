@@ -61,11 +61,11 @@ const ResultsList: React.FC<ResultsListProps> = ({
   return (
     <div className="h-full flex flex-col bg-surface-50 rounded-2xl shadow-neu">
       <div className="p-4 border-b border-surface-200">
-        <h2 className="text-lg font-semibold mb-1 text-surface-900">Detection Results</h2>
+        <h2 className="text-lg font-semibold mb-1 text-surface-900">Hasil Deteksi</h2>
         <p className="text-sm text-surface-600">
           {results.length === 0 
-            ? 'No objects detected' 
-            : `${results.length} object${results.length !== 1 ? 's' : ''} found`}
+            ? 'Tidak ada objek yang terdeteksi' 
+            : `${results.length} objek${results.length !== 1 ? 's' : ''} ditemukan`}
         </p>
       </div>
       
@@ -74,7 +74,7 @@ const ResultsList: React.FC<ResultsListProps> = ({
           <div className="p-4 border-b border-surface-200 bg-surface-100">
             <h3 className="text-sm font-medium mb-2 flex items-center text-surface-800">
               <Filter size={16} className="mr-1" />
-              Filter by Class
+              Filter berdasarkan Kelompok
             </h3>
             
             <div className="flex flex-wrap gap-2">
@@ -86,7 +86,7 @@ const ResultsList: React.FC<ResultsListProps> = ({
                     : 'bg-surface-200 hover:bg-surface-300'
                 }`}
               >
-                All ({results.length})
+                Semua ({results.length})
               </button>
               
               {uniqueClasses.map(className => (
@@ -111,7 +111,7 @@ const ResultsList: React.FC<ResultsListProps> = ({
                 onClick={() => toggleSort('class')}
                 className="flex items-center flex-1"
               >
-                Class
+                Kelompok
                 {sortBy === 'class' && (
                   <ArrowUpDown size={14} className="ml-1" />
                 )}
@@ -120,7 +120,7 @@ const ResultsList: React.FC<ResultsListProps> = ({
                 onClick={() => toggleSort('confidence')}
                 className="flex items-center w-24 justify-end"
               >
-                Confidence
+                Kemiripan
                 {sortBy === 'confidence' && (
                   <ArrowUpDown size={14} className="ml-1" />
                 )}
@@ -143,7 +143,7 @@ const ResultsList: React.FC<ResultsListProps> = ({
                       <span className="font-medium capitalize text-surface-900">
                         {result.class}
                         {objectDetailsMap[result.class] && 
-                          ` (${objectDetailsMap[result.class].english})`
+                          ` (${objectDetailsMap[result.class].indonesian})`
                         }
                       </span>
                     </div>
@@ -165,7 +165,7 @@ const ResultsList: React.FC<ResultsListProps> = ({
           <div className="text-center">
             <Filter size={24} className="mx-auto mb-2 text-surface-400" />
             <p className="text-surface-600">
-              No objects detected yet. Try pointing your camera at different objects or upload an image.
+              Tidak ada objek yang terdeteksi. Cobalah arahkan kamera ke objek yang berbeda atau unggah gambar.
             </p>
           </div>
         </div>
