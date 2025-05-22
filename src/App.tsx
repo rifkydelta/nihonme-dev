@@ -91,8 +91,8 @@ function App() {
                   <div className="flex-1 flex items-center justify-center p-12">
                     <div className="text-center">
                       <div className="inline-block w-12 h-12 border-4 border-primary-500 border-t-transparent rounded-full animate-spin mb-4"></div>
-                      <p className="text-lg font-medium text-surface-800">Loading detection model...</p>
-                      <p className="text-surface-600">This may take a moment</p>
+                      <p className="text-lg font-medium text-surface-800">Memuat model deteksi...</p>
+                      <p className="text-surface-600">Mohon tunggu sebentar</p>
                     </div>
                   </div>
                 )}
@@ -101,13 +101,13 @@ function App() {
                   <div className="flex-1 flex items-center justify-center p-12">
                     <div className="text-center">
                       <AlertCircle size={48} className="mx-auto mb-4 text-accent-500" />
-                      <h3 className="text-lg font-medium text-surface-800 mb-2">Model Loading Error</h3>
+                      <h3 className="text-lg font-medium text-surface-800 mb-2">Error Memuat Model</h3>
                       <p className="text-surface-600 mb-6">{modelError}</p>
                       <button 
                         onClick={() => window.location.reload()}
                         className="neu-button text-primary-600 font-medium"
                       >
-                        Retry
+                        Ulangi
                       </button>
                     </div>
                   </div>
