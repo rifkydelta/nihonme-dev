@@ -79,9 +79,9 @@ const Header: React.FC = () => {
             Artikel
           </Link>
           <Link
-            to="/tentang-kami"
+            to="/tentang"
             className={`text-sm font-medium transition-colors ${
-              isActive('/tentang-kami') ? 'text-primary-600' : 'text-surface-600 hover:text-primary-600'
+              isActive('/tentang') ? 'text-primary-600' : 'text-surface-600 hover:text-primary-600'
             }`}
           >
             Tentang NihonMe
@@ -142,9 +142,9 @@ const Header: React.FC = () => {
               Artikel
             </Link>
             <Link
-              to="/tentang-kami"
+              to="/tentang"
               className={`text-lg font-medium transition-colors ${
-                isActive('/tentang-kami') ? 'text-primary-600' : 'text-surface-600 hover:text-primary-600'
+                isActive('/tentang') ? 'text-primary-600' : 'text-surface-600 hover:text-primary-600'
               }`}
               onClick={() => setIsMenuOpen(false)}
             >
