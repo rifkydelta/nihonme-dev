@@ -473,7 +473,7 @@ export const objectDetailsMap: Record<string, ObjectDetails> = {
   'うし': {
     japanese: 'うし',
     romaji: 'ushi',
-    indonesian: 'sapi/ternak',
+    indonesian: 'sapi',
     imageUrl: '/nihonme/img/20.png',
     sentences: [
       {
@@ -1553,7 +1553,7 @@ export const objectDetailsMap: Record<string, ObjectDetails> = {
   'マウス': {
     japanese: 'マウス',
     romaji: 'mausu',
-    indonesian: 'mouse (komputer)',
+    indonesian: 'mouse',
     imageUrl: '/nihonme/img/65.png',
     sentences: [
       {
@@ -1601,7 +1601,7 @@ export const objectDetailsMap: Record<string, ObjectDetails> = {
   'キーボード': {
     japanese: 'キーボード',
     romaji: 'kiiboodo',
-    indonesian: 'keyboard (komputer)',
+    indonesian: 'keyboard',
     imageUrl: '/nihonme/img/67.png',
     sentences: [
       {
@@ -1721,7 +1721,7 @@ export const objectDetailsMap: Record<string, ObjectDetails> = {
   'ながし': {
     japanese: 'ながし',
     romaji: 'nagashi',
-    indonesian: 'bak cuci piring (dapur)',
+    indonesian: 'bak cuci piring',
     imageUrl: '/nihonme/img/72.png',
     sentences: [
       {

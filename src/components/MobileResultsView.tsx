@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { ObjectDetection } from '../types';
 import { getConfidenceColor } from '../utils/detectionUtils';
 import { ChevronUp, ChevronDown } from 'lucide-react';
@@ -25,7 +25,7 @@ const MobileResultsView: React.FC<MobileResultsViewProps> = ({
   if (results.length === 0) return null;
 
   const handleObjectClick = (objectClass: string) => {
-    navigate(`/object/${objectClass}`);
+    navigate(`/benda/${objectClass}`);
     setIsExpanded(false);
   };
 
@@ -70,10 +70,14 @@ const MobileResultsView: React.FC<MobileResultsViewProps> = ({
           {results
               .filter(result => filteredClass === null || result.class === filteredClass)
               .map((result, index) => (
-            <button
+            <Link
               key={index}
-              onClick={() => handleObjectClick(result.class)}
-              className="w-full text-left p-4 hover:bg-white/5 transition-colors"
+              to={`/benda/${result.class}`}
+              state={{ from: 'detection' }}
+              className="group bg-white/50 rounded-xl overflow-hidden transition-all duration-300
+                       hover:shadow-[0_8px_30px_rgba(0,0,0,0.12)] hover:-translate-y-1
+                       active:shadow-[inset_0_2px_4px_rgba(0,0,0,0.1)] active:translate-y-0
+                       border border-white/30"
             >
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
@@ -101,7 +105,7 @@ const MobileResultsView: React.FC<MobileResultsViewProps> = ({
                   {Math.round(result.score * 100)}%
                 </div>
               </div>
-            </button>
+            </Link>
           ))}
         </div>
       </div>

@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useLocation } from 'react-router-dom';
 import { ArrowLeft, Volume2, ExternalLink } from 'lucide-react';
 import { getObjectDetails } from '../utils/objectDetails';
 
 const ObjectDetailPage: React.FC = () => {
-  const { label } = useParams<{ label: string }>();
-  const details = label ? getObjectDetails(label) : null;
+  const { id } = useParams<{ id: string }>();
+  const location = useLocation();
+  const details = id ? getObjectDetails(id) : null;
   const [isPlaying, setIsPlaying] = useState(false);
   const [activeAudioIndex, setActiveAudioIndex] = useState<number | null>(null);
+
+  // Determine if user came from detection page
+  const isFromDetection = location.state?.from === 'detection';
 
   const speak = (text: string, index?: number) => {
     if ('speechSynthesis' in window) {
@@ -37,11 +41,11 @@ const ObjectDetailPage: React.FC = () => {
       <div className="min-h-screen bg-surface-50 p-4">
         <div className="container mx-auto">
           <Link 
-            to="/" 
+            to={isFromDetection ? "/deteksi-benda" : "/"}
             className="inline-flex items-center text-primary-600 hover:text-primary-700 neu-button"
           >
             <ArrowLeft size={20} className="mr-2" />
-            Kembali ke Deteksi
+            {isFromDetection ? "Kembali ke Deteksi" : "Kembali ke Beranda"}
           </Link>
           <div className="mt-8 text-center">
             <p className="text-surface-600">Detail objek tidak ditemukan.</p>
@@ -55,11 +59,11 @@ const ObjectDetailPage: React.FC = () => {
     <div className="min-h-screen bg-surface-50 p-4 pb-20">
       <div className="container mx-auto max-w-3xl">
         <Link 
-          to="/" 
+          to={isFromDetection ? "/deteksi-benda" : "/"}
           className="inline-flex items-center text-primary-600 hover:text-primary-700 neu-button"
         >
           <ArrowLeft size={20} className="mr-2" />
-          Kembali ke Deteksi
+          {isFromDetection ? "Kembali ke Deteksi" : "Kembali ke Beranda"}
         </Link>
 
         <div className="mt-8 neu-card">

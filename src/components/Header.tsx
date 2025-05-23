@@ -1,7 +1,18 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 
 const Header: React.FC = () => {
+  const location = useLocation();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const isActive = (path: string) => {
+    return location.pathname === path;
+  };
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   return (
     <header className="py-4 px-6 shadow-md bg-surface-50">
       <div className="container mx-auto flex items-center justify-between">
@@ -17,6 +28,130 @@ const Header: React.FC = () => {
             <path fillRule="evenodd" clipRule="evenodd" d="M136.805 60.3125C124.654 60.3125 114.805 50.4628 114.805 38.3125C114.805 26.1622 124.654 16.3125 136.805 16.3125C148.955 16.3125 158.805 26.1622 158.805 38.3125C158.805 50.4628 148.955 60.3125 136.805 60.3125ZM139.805 50.3125C146.984 50.3125 152.805 44.4922 152.805 37.3125C152.805 30.1328 146.984 24.3125 139.805 24.3125C138.601 24.3125 137.436 24.476 136.33 24.782C138.948 25.7951 140.805 28.337 140.805 31.3125C140.805 35.1785 137.671 38.3125 133.805 38.3125C130.829 38.3125 128.287 36.456 127.274 33.8381C126.968 34.944 126.805 36.1092 126.805 37.3125C126.805 44.4922 132.625 50.3125 139.805 50.3125Z" fill="#070F2B"/>
           </svg>
         </Link>
+
+        {/* Hamburger Menu Button - Visible on mobile and tablet */}
+        <button
+          className="lg:hidden p-2 rounded-md hover:bg-surface-100"
+          onClick={toggleMenu}
+          aria-label="Toggle menu"
+        >
+          <svg
+            className="w-6 h-6 text-surface-600"
+            fill="none"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            {isMenuOpen ? (
+              <path d="M6 18L18 6M6 6l12 12" />
+            ) : (
+              <path d="M4 6h16M4 12h16M4 18h16" />
+            )}
+          </svg>
+        </button>
+
+        {/* Desktop Navigation */}
+        <nav className="hidden lg:flex items-center gap-6">
+          <Link
+            to="/"
+            className={`text-sm font-medium transition-colors ${
+              isActive('/') ? 'text-primary-600' : 'text-surface-600 hover:text-primary-600'
+            }`}
+          >
+            Beranda
+          </Link>
+          <Link
+            to="/deteksi-benda"
+            className={`text-sm font-medium transition-colors ${
+              isActive('/deteksi-benda') ? 'text-primary-600' : 'text-surface-600 hover:text-primary-600'
+            }`}
+          >
+            Deteksi Benda
+          </Link>
+          <Link
+            to="/artikel"
+            className={`text-sm font-medium transition-colors ${
+              isActive('/artikel') ? 'text-primary-600' : 'text-surface-600 hover:text-primary-600'
+            }`}
+          >
+            Artikel
+          </Link>
+          <Link
+            to="/tentang-kami"
+            className={`text-sm font-medium transition-colors ${
+              isActive('/tentang-kami') ? 'text-primary-600' : 'text-surface-600 hover:text-primary-600'
+            }`}
+          >
+            Tentang Kami
+          </Link>
+        </nav>
+
+        {/* Mobile Navigation Menu */}
+        <div
+          className={`lg:hidden fixed inset-0 bg-surface-50 z-50 transform transition-transform duration-300 ease-in-out ${
+            isMenuOpen ? 'translate-x-0' : 'translate-x-full'
+          }`}
+        >
+          {/* Close Button */}
+          <button
+            className="absolute top-4 right-4 p-2 rounded-md hover:bg-surface-100"
+            onClick={toggleMenu}
+            aria-label="Close menu"
+          >
+            <svg
+              className="w-6 h-6 text-surface-600"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+
+          <div className="flex flex-col items-center justify-center h-full space-y-8">
+            <Link
+              to="/"
+              className={`text-lg font-medium transition-colors ${
+                isActive('/') ? 'text-primary-600' : 'text-surface-600 hover:text-primary-600'
+              }`}
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Beranda
+            </Link>
+            <Link
+              to="/deteksi-benda"
+              className={`text-lg font-medium transition-colors ${
+                isActive('/deteksi-benda') ? 'text-primary-600' : 'text-surface-600 hover:text-primary-600'
+              }`}
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Deteksi Benda
+            </Link>
+            <Link
+              to="/artikel"
+              className={`text-lg font-medium transition-colors ${
+                isActive('/artikel') ? 'text-primary-600' : 'text-surface-600 hover:text-primary-600'
+              }`}
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Artikel
+            </Link>
+            <Link
+              to="/tentang-kami"
+              className={`text-lg font-medium transition-colors ${
+                isActive('/tentang-kami') ? 'text-primary-600' : 'text-surface-600 hover:text-primary-600'
+              }`}
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Tentang Kami
+            </Link>
+          </div>
+        </div>
       </div>
     </header>
   );

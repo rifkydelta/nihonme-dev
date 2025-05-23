@@ -4,6 +4,7 @@ import { getConfidenceColor } from '../utils/detectionUtils';
 import { ObjectDetection } from '../types';
 import { Filter, ArrowUpDown } from 'lucide-react';
 import { objectDetailsMap } from '../utils/objectData';
+import { Link } from 'react-router-dom';
 
 interface ResultsListProps {
   results: ObjectDetection[];
@@ -55,7 +56,7 @@ const ResultsList: React.FC<ResultsListProps> = ({
   }, [results]);
 
   const handleObjectClick = (objectClass: string) => {
-    navigate(`/object/${objectClass}`);
+    navigate(`/benda/${objectClass}`);
   };
   
   return (
@@ -132,10 +133,14 @@ const ResultsList: React.FC<ResultsListProps> = ({
             {sortedResults
               .filter(result => filteredClass === null || result.class === filteredClass)
               .map((result, index) => (
-                <button
+                <Link
                   key={index}
-                  onClick={() => handleObjectClick(result.class)}
-                  className="w-full text-left p-3 border-b border-surface-200 last:border-0 hover:bg-surface-100 transition-colors"
+                  to={`/benda/${result.class}`}
+                  state={{ from: 'detection' }}
+                  className="group bg-white/50 rounded-xl overflow-hidden transition-all duration-300
+                           hover:shadow-[0_8px_30px_rgba(0,0,0,0.12)] hover:-translate-y-1
+                           active:shadow-[inset_0_2px_4px_rgba(0,0,0,0.1)] active:translate-y-0
+                           border border-white/30"
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center">
@@ -154,7 +159,7 @@ const ResultsList: React.FC<ResultsListProps> = ({
                   <div className="mt-1 text-xs text-surface-600">
                     Position: x:{Math.round(result.bbox[0])}, y:{Math.round(result.bbox[1])}
                   </div>
-                </button>
+                </Link>
               ))}
           </div>
         </>
