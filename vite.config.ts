@@ -14,6 +14,11 @@ export default defineConfig({
     outDir: 'dist',
     assetsDir: 'assets',
     sourcemap: true,
+    rollupOptions: {
+      output: {
+        manualChunks: undefined
+      }
+    }
   },
   optimizeDeps: {
     exclude: ['lucide-react']
