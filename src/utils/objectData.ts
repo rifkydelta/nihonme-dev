@@ -737,7 +737,7 @@ export const objectDetailsMap: Record<string, ObjectDetails> = {
   'スキー': {
     japanese: 'スキー',
     romaji: 'sukii',
-    indonesian: 'ski (peralatan)',
+    indonesian: 'ski',
     imageUrl: '/nihonme/img/31.png',
     sentences: [
       {
