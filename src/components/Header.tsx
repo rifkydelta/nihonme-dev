@@ -84,7 +84,7 @@ const Header: React.FC = () => {
               isActive('/tentang-kami') ? 'text-primary-600' : 'text-surface-600 hover:text-primary-600'
             }`}
           >
-            Tentang Kami
+            Tentang NihonMe
           </Link>
         </nav>
 
@@ -148,7 +148,7 @@ const Header: React.FC = () => {
               }`}
               onClick={() => setIsMenuOpen(false)}
             >
-              Tentang Kami
+              Tentang NihonMe
             </Link>
           </div>
         </div>

@@ -49,13 +49,11 @@ const AboutPage: React.FC = () => {
             </div>
             <div className="flex-1 space-y-4">
               <div>
-                <h3 className="text-xl font-semibold text-surface-800">Rifky Delta</h3>
-                <p className="text-surface-600">Pengembang Full Stack & AI Enthusiast</p>
+                <h3 className="text-xl font-semibold text-surface-800">Arindra Rifky Saputra</h3>
+                <p className="text-surface-600">Mahasiswa Program Studi Pendidikan Bahasa Jepang UNNES</p>
               </div>
               <p className="text-surface-600">
-                Seorang pengembang yang bersemangat dalam menggabungkan teknologi AI dengan pengembangan web modern. 
-                Memiliki pengalaman dalam pengembangan aplikasi web menggunakan React, TypeScript, dan integrasi 
-                machine learning untuk menciptakan solusi yang inovatif dan bermanfaat.
+              Seorang mahasiswa yang bersemangat dalam mengembangkan aplikasi web untuk pengenalan kosakata benda dalam bahasa Jepang, yang dirancang khusus untuk pembelajar pemula. Saya bertujuan untuk mengintegrasikan teknologi AI object detection guna menciptakan pengalaman belajar yang sangat visual dan interaktif. Melalui aplikasi ini, pengguna dapat dengan mudah mengarahkan kamera pada objek di sekitar mereka, dan AI akan membantu mengidentifikasi serta menyajikan kosakata bahasa Jepang yang relevan, sehingga proses belajar menjadi lebih menarik, kontekstual, dan efektif dalam meningkatkan keinginan belajar siswa.
               </p>
               <div className="flex gap-4">
                 <a 
