@@ -7,7 +7,8 @@ export default defineConfig({
   base: '/nihonme/',
   server: {
     port: 5173,
-    strictPort: true,
+    host: true,
+    open: true
   },
   build: {
     outDir: 'dist',

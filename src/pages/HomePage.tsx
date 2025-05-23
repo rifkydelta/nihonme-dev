@@ -133,13 +133,13 @@ const HomePage: React.FC = () => {
         <div className="backdrop-blur-lg bg-white/30 rounded-2xl p-6 shadow-lg border border-white/20 mt-12">
           <div className="flex justify-between items-center mb-6">
             <div className="flex items-center gap-4">
-              <h2 className="text-2xl font-bold text-surface-900">Belajar Bersama</h2>
+              <h2 className="hidden md:block text-2xl font-bold text-surface-900">Belajar Bersama</h2>
               <img 
                 src="https://wkwk-japanese.com/wp-content/uploads/2022/12/logo_wkwkjapanese.png" 
                 alt="WKWK Japanese Logo" 
                 className="h-8 w-auto"
               />
-              <span className="text-lg font-medium text-surface-900">WKWK JAPANESE</span>
+              <span className="hidden md:block text-lg font-medium text-surface-900">WKWK JAPANESE</span>
             </div>
             <Link
               to="/artikel"

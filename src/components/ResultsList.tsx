@@ -1,5 +1,4 @@
 import React, { useState, useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { getConfidenceColor } from '../utils/detectionUtils';
 import { ObjectDetection } from '../types';
 import { Filter, ArrowUpDown } from 'lucide-react';
@@ -17,7 +16,6 @@ const ResultsList: React.FC<ResultsListProps> = ({
   onFilterChange,
   filteredClass,
 }) => {
-  const navigate = useNavigate();
   const [sortBy, setSortBy] = useState<'confidence' | 'class'>('confidence');
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc');
   
@@ -55,9 +53,6 @@ const ResultsList: React.FC<ResultsListProps> = ({
     return counts;
   }, [results]);
 
-  const handleObjectClick = (objectClass: string) => {
-    navigate(`/benda/${objectClass}`);
-  };
   
   return (
     <div className="h-full flex flex-col bg-surface-50 rounded-2xl shadow-neu">
