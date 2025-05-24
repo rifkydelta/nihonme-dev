@@ -148,8 +148,8 @@ const WebcamView: React.FC<WebcamViewProps> = ({
     if (webcamActive && modelLoaded && !isDetecting) {
       setIsDetecting(true);
       detectFrame();
-      // Increase interval for mobile to reduce CPU usage
-      intervalRef.current = window.setInterval(detectFrame, isMobile ? 200 : 100);
+      // Set interval to 1/24 second (41.67ms) for smoother video
+      intervalRef.current = window.setInterval(detectFrame, isMobile ? 41.67 : 100);
     }
   }, [webcamActive, modelLoaded, isMobile]);
 

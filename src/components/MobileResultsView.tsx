@@ -79,7 +79,7 @@ const MobileResultsView: React.FC<MobileResultsViewProps> = ({
                        active:shadow-[inset_0_2px_4px_rgba(0,0,0,0.1)] active:translate-y-0
                        border border-white/30"
             >
-              <div className="flex items-center justify-between">
+              <div className="flex items-center justify-between ml-4">
                 <div className="flex items-center gap-3">
                   <div className={`w-2.5 h-2.5 rounded-full ${
                     result.score > 0.7 
@@ -101,7 +101,7 @@ const MobileResultsView: React.FC<MobileResultsViewProps> = ({
                     : result.score > 0.5 
                       ? 'bg-yellow-50 text-yellow-700' 
                       : 'bg-red-50 text-red-700'
-                }`}>
+                } mr-3`}>
                   {Math.round(result.score * 100)}%
                 </div>
               </div>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 const FloatingActionButton: React.FC = () => {
@@ -10,18 +10,37 @@ const FloatingActionButton: React.FC = () => {
     return null;
   }
 
+  // Show tooltip automatically after 2 seconds and hide after 3 seconds
+  useEffect(() => {
+    const showTimer = setTimeout(() => {
+      setShowTooltip(true);
+      
+      // Hide tooltip after 3 seconds
+      const hideTimer = setTimeout(() => {
+        setShowTooltip(false);
+      }, 3000);
+
+      return () => clearTimeout(hideTimer);
+    }, 2000);
+
+    return () => clearTimeout(showTimer);
+  }, [location.pathname]); // Reset timers when pathname changes
+
   return (
     <div className="fixed bottom-6 right-6 z-50">
       <div className="relative">
         {/* Tooltip */}
-        {showTooltip && (
-          <div className="absolute bottom-full right-0 mb-2 px-4 py-2 bg-surface-900 text-white rounded-lg shadow-lg
-                        transform transition-all duration-300 ease-in-out whitespace-nowrap">
-            <div className="text-sm">Deteksi Benda dengan AI</div>
-            {/* Tooltip arrow */}
-            <div className="absolute bottom-0 right-6 transform translate-y-1/2 rotate-45 w-2 h-2 bg-surface-900"></div>
-          </div>
-        )}
+        <div 
+          className={`absolute bottom-full right-0 mb-2 px-4 py-2 bg-surface-900 text-white rounded-lg shadow-lg
+                     transform transition-all duration-300 ease-in-out whitespace-nowrap
+                     ${showTooltip 
+                       ? 'opacity-100 translate-y-0' 
+                       : 'opacity-0 translate-y-2 pointer-events-none'}`}
+        >
+          <div className="text-sm">Deteksi Benda dengan AI</div>
+          {/* Tooltip arrow */}
+          <div className="absolute bottom-0 right-6 transform translate-y-1/2 rotate-45 w-2 h-2 bg-surface-900"></div>
+        </div>
         
         {/* Floating Button */}
         <Link

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { AlertCircle } from 'lucide-react';
+import { AlertCircle, Loader2 } from 'lucide-react';
 import DetectionControls from '../components/DetectionControls';
 import WebcamView from '../components/WebcamView';
 import ImageUploadView from '../components/ImageUploadView';
@@ -38,7 +38,7 @@ const AIDetectionPage: React.FC = () => {
         setModelError(null);
       } catch (error) {
         console.error('Failed to load model:', error);
-        setModelError('Failed to load detection model. Please check your connection and try again.');
+        setModelError('Gagal memuat model deteksi. Silakan periksa koneksi Anda dan coba lagi.');
       } finally {
         setModelLoading(false);
       }
@@ -84,8 +84,9 @@ const AIDetectionPage: React.FC = () => {
         )}
 
         {modelLoading ? (
-          <div className="flex items-center justify-center h-64 bg-white/50 rounded-xl">
-            <p className="text-surface-600">Loading detection model...</p>
+          <div className="flex flex-col items-center justify-center h-64 bg-white/50 rounded-xl gap-4">
+            <Loader2 className="w-8 h-8 text-primary-600 animate-spin" />
+            <p className="text-surface-600">Model AI sedang dimuat...</p>
           </div>
         ) : (
           <>

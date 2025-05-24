@@ -6,6 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>NihonMe - Deteksi Benda dengan AI</title>
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+    <script>
+      // Check for redirect URL in sessionStorage
+      (function() {
+        const redirect = sessionStorage.getItem('redirect');
+        if (redirect) {
+          sessionStorage.removeItem('redirect');
+          const path = new URL(redirect).pathname;
+          window.history.replaceState(null, '', path);
+        }
+      })();
+    </script>
   </head>
   <body class="bg-surface-50">
     <div id="root"></div>

@@ -135,7 +135,7 @@ const ResultsList: React.FC<ResultsListProps> = ({
                   className="group bg-white/50 rounded-xl overflow-hidden transition-all duration-300
                            hover:shadow-[0_8px_30px_rgba(0,0,0,0.12)] hover:-translate-y-1
                            active:shadow-[inset_0_2px_4px_rgba(0,0,0,0.1)] active:translate-y-0
-                           border border-white/30"
+                           border border-white/30 p-3"
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center">
@@ -147,11 +147,11 @@ const ResultsList: React.FC<ResultsListProps> = ({
                         }
                       </span>
                     </div>
-                    <div className={`font-medium ${getConfidenceColor(result.score)}`}>
+                    <div className={`font-medium ${getConfidenceColor(result.score)} mr-4`}>
                       {Math.round(result.score * 100)}%
                     </div>
                   </div>
-                  <div className="mt-1 text-xs text-surface-600">
+                  <div className="mt-1 text-xs text-surface-600 ml-4">
                     Position: x:{Math.round(result.bbox[0])}, y:{Math.round(result.bbox[1])}
                   </div>
                 </Link>
