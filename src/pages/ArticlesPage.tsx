@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { webCards } from '../utils/webCardsData';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const ArticlesPage: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -85,9 +86,11 @@ const ArticlesPage: React.FC = () => {
                      hover:shadow-[0_8px_30px_rgba(0,0,0,0.12)] hover:-translate-y-1
                      active:shadow-[inset_0_2px_4px_rgba(0,0,0,0.1)] active:translate-y-0
                      transition-all duration-300 text-surface-900 font-medium
-                     disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:shadow-none disabled:hover:translate-y-0"
+                     disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:shadow-none disabled:hover:translate-y-0
+                     flex items-center gap-2"
           >
-            Sebelumnya
+            <ChevronLeft className="w-5 h-5" />
+            <span className="hidden md:inline">Sebelumnya</span>
           </button>
           <span className="px-4 py-2 bg-white/50 rounded-xl border border-white/30 text-surface-900">
             Halaman {currentPage} dari {totalPages}
@@ -99,9 +102,11 @@ const ArticlesPage: React.FC = () => {
                      hover:shadow-[0_8px_30px_rgba(0,0,0,0.12)] hover:-translate-y-1
                      active:shadow-[inset_0_2px_4px_rgba(0,0,0,0.1)] active:translate-y-0
                      transition-all duration-300 text-surface-900 font-medium
-                     disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:shadow-none disabled:hover:translate-y-0"
+                     disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:shadow-none disabled:hover:translate-y-0
+                     flex items-center gap-2"
           >
-            Selanjutnya
+            <span className="hidden md:inline">Selanjutnya</span>
+            <ChevronRight className="w-5 h-5" />
           </button>
         </div>
       </div>

@@ -7,7 +7,6 @@ import ResultsList from '../components/ResultsList';
 import MobileResultsView from '../components/MobileResultsView';
 import { loadModel } from '../utils/modelLoader';
 import { ObjectDetection } from '../types';
-import { Link } from 'react-router-dom';
 
 const AIDetectionPage: React.FC = () => {
   const [mode, setMode] = useState<'webcam' | 'upload'>('webcam');
@@ -19,11 +18,22 @@ const AIDetectionPage: React.FC = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [isWebcamActive, setIsWebcamActive] = useState(false);
 
+  // Reset state when component mounts
+  useEffect(() => {
+    setMode('webcam');
+    setDetectionResults([]);
+    setFilteredClass(null);
+    setIsWebcamActive(false);
+    setModelLoading(true);
+    setModelError(null);
+  }, []);
+
   useEffect(() => {
     const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 768);
+      // Consider both mobile and tablet as mobile view (width <= 1024px)
+      setIsMobile(window.innerWidth <= 1024);
     };
-    
+
     checkMobile();
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
@@ -118,7 +128,7 @@ const AIDetectionPage: React.FC = () => {
         </div>
       )}
 
-      {isMobile && (
+      {isMobile && detectionResults.length > 0 && (
         <MobileResultsView
           results={detectionResults}
           onFilterChange={handleFilterChange}

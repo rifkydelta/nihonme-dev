@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout';
 import HomePage from './pages/HomePage';
@@ -9,17 +9,15 @@ import ObjectDetailPage from './components/ObjectDetailPage';
 
 const App: React.FC = () => {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <Layout>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/tentang" element={<AboutPage />} />
-          <Route path="/deteksi-benda" element={<AIDetectionPage />} />
-          <Route path="/artikel" element={<ArticlesPage />} />
-          <Route path="/benda/:id" element={<ObjectDetailPage />} />
-        </Routes>
-      </Layout>
-    </Suspense>
+    <Layout>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/tentang" element={<AboutPage />} />
+        <Route path="/deteksi-benda" element={<AIDetectionPage />} />
+        <Route path="/artikel" element={<ArticlesPage />} />
+        <Route path="/benda/:id" element={<ObjectDetailPage />} />
+      </Routes>
+    </Layout>
   );
 };
 

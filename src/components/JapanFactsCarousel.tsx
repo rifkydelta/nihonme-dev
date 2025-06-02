@@ -45,7 +45,7 @@ const JapanFactsCarousel: React.FC = () => {
           {/* Navigation Arrows - Hidden on mobile */}
           <button
             onClick={handlePrevious}
-            className="hidden sm:block absolute left-0 top-1/2 -translate-y-1/2 z-10 p-2 sm:p-3 rounded-full
+            className="hidden sm:block absolute left-3 top-1/2 -translate-y-1/2 z-10 p-2 sm:p-3 rounded-full
                      bg-white/50 hover:bg-white/80 transition-all duration-300
                      shadow-lg hover:shadow-xl border border-white/30
                      transform hover:scale-110 active:scale-95"
@@ -58,7 +58,7 @@ const JapanFactsCarousel: React.FC = () => {
           
           <button
             onClick={handleNext}
-            className="hidden sm:block absolute right-0 top-1/2 -translate-y-1/2 z-10 p-2 sm:p-3 rounded-full
+            className="hidden sm:block absolute right-3 top-1/2 -translate-y-1/2 z-10 p-2 sm:p-3 rounded-full
                      bg-white/50 hover:bg-white/80 transition-all duration-300
                      shadow-lg hover:shadow-xl border border-white/30
                      transform hover:scale-110 active:scale-95"

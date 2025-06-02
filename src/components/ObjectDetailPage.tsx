@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react'; // Added useEffect
 import { useParams, Link, useLocation } from 'react-router-dom';
 import { ArrowLeft, Volume2, ExternalLink } from 'lucide-react';
 import { getObjectDetails } from '../utils/objectDetails';
@@ -10,12 +10,17 @@ const ObjectDetailPage: React.FC = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [activeAudioIndex, setActiveAudioIndex] = useState<number | null>(null);
 
+  // Scroll to top when component mounts or when 'id' changes
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [id]); // Dependency array with 'id' ensures scroll on new object detail
+
   // Determine if user came from detection page
   const isFromDetection = location.state?.from === 'detection';
 
   const speak = (text: string, index?: number) => {
     if ('speechSynthesis' in window) {
-      window.speechSynthesis.cancel();
+      window.speechSynthesis.cancel(); // Stop any ongoing speech
 
       const utterance = new SpeechSynthesisUtterance(text);
       utterance.lang = 'ja-JP';
@@ -23,9 +28,10 @@ const ObjectDetailPage: React.FC = () => {
         setIsPlaying(false);
         setActiveAudioIndex(null);
       };
-      utterance.onerror = () => {
+      utterance.onerror = () => { // Handle speech synthesis errors
         setIsPlaying(false);
         setActiveAudioIndex(null);
+        console.error("SpeechSynthesisUtterance.onerror");
       };
       
       setIsPlaying(true);
@@ -33,6 +39,9 @@ const ObjectDetailPage: React.FC = () => {
         setActiveAudioIndex(index);
       }
       window.speechSynthesis.speak(utterance);
+    } else {
+      console.warn("Speech Synthesis not supported in this browser.");
+      // Optionally, provide feedback to the user that audio playback is not available
     }
   };
 
@@ -60,6 +69,8 @@ const ObjectDetailPage: React.FC = () => {
       <div className="container mx-auto max-w-3xl">
         <Link 
           to={isFromDetection ? "/deteksi-benda" : "/"}
+          // Consider adding state to the Link if HomePage needs to restore scroll based on 'from'
+          // state={{ from: 'objectDetailPage' }} 
           className="inline-flex items-center text-primary-600 hover:text-primary-700 neu-button"
         >
           <ArrowLeft size={20} className="mr-2" />
@@ -74,15 +85,15 @@ const ObjectDetailPage: React.FC = () => {
             </h1>
             <button
               onClick={() => speak(details.japanese)}
-              disabled={isPlaying}
+              disabled={isPlaying && activeAudioIndex === null} // Only disable if the main title is playing or any other speech
               className={`p-2 rounded-full transition-all ${
-                isPlaying 
+                isPlaying && activeAudioIndex === null
                   ? 'bg-primary-100 text-primary-600 shadow-inner' 
                   : 'bg-surface-100 hover:bg-surface-200 text-surface-600 hover:text-primary-600'
               }`}
               aria-label="Putar pelafalan"
             >
-              <Volume2 size={18} className={isPlaying ? 'animate-pulse' : ''} />
+              <Volume2 size={18} className={(isPlaying && activeAudioIndex === null) ? 'animate-pulse' : ''} />
             </button>
           </div>
           <p className="text-xl text-primary-600 font-medium mb-8">{details.romaji}</p>
@@ -118,7 +129,7 @@ const ObjectDetailPage: React.FC = () => {
                       </div>
                       <button
                         onClick={() => speak(sentence.japanese, index)}
-                        disabled={isPlaying}
+                        disabled={isPlaying && activeAudioIndex !== index} // Disable if other audio is playing
                         className={`p-2 rounded-full transition-all flex-shrink-0 ${
                           activeAudioIndex === index
                             ? 'bg-primary-100 text-primary-600 shadow-inner' 

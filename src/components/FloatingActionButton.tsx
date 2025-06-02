@@ -5,11 +5,6 @@ const FloatingActionButton: React.FC = () => {
   const [showTooltip, setShowTooltip] = useState(false);
   const location = useLocation();
 
-  // Don't show the button on the detection page
-  if (location.pathname === '/deteksi-benda') {
-    return null;
-  }
-
   // Show tooltip automatically after 2 seconds and hide after 3 seconds
   useEffect(() => {
     const showTimer = setTimeout(() => {
@@ -25,6 +20,11 @@ const FloatingActionButton: React.FC = () => {
 
     return () => clearTimeout(showTimer);
   }, [location.pathname]); // Reset timers when pathname changes
+
+  // Don't render anything on the detection page
+  if (location.pathname === '/deteksi-benda') {
+    return null;
+  }
 
   return (
     <div className="fixed bottom-6 right-6 z-50">

@@ -1,159 +1,161 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { Menu, X } from 'lucide-react';
+
+// Navigation items based on your original Header
+const navItems = [
+  { name: 'Beranda', href: '/' },
+  { name: 'Deteksi Benda', href: '/deteksi-benda' },
+  { name: 'Artikel', href: '/artikel' },
+  { name: 'Tentang NihonMe', href: '/tentang' },
+];
+
+// Approximate height of the header when not scrolled (py-5 + logo height)
+// py-5 is 1.25rem top + 1.25rem bottom = 2.5rem. Logo h-8 is 2rem. Total = 4.5rem = 72px
+const HEADER_UNSCROLLED_HEIGHT_PX = 72;
 
 const Header: React.FC = () => {
   const location = useLocation();
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   const isActive = (path: string) => {
     return location.pathname === path;
   };
 
+  // Effect for handling scroll events
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+      // Close menu on scroll if it's open
+      // if (isOpen && window.scrollY > 50) { 
+      //   setIsOpen(false);
+      // }
+      // The target example closes menu on any scroll if open, let's keep that.
+      if (isOpen) {
+        setIsOpen(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [isOpen]); // Dependency on isOpen to re-evaluate if menu should close
+
+  // Effect for preventing body scroll when mobile menu is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    // Cleanup function to reset overflow when component unmounts
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isOpen]);
+
   const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
+    setIsOpen(!isOpen);
   };
 
   return (
-    <header className="py-4 px-6 shadow-md bg-surface-50">
-      <div className="container mx-auto flex items-center justify-between">
-        <Link to="/" className="flex items-center gap-2">
-          <svg width="156" height="31" viewBox="0 0 312 62" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M66.0938 9.88281C66.4844 9.02344 66.6797 8.09896 66.6797 7.10938C66.6797 6.14583 66.4844 5.23438 66.0938 4.375C65.7292 3.48958 65.2214 2.73438 64.5703 2.10938C63.9193 1.45833 63.151 0.950521 62.2656 0.585938C61.4062 0.195312 60.4818 0 59.4922 0C58.5026 0 57.5651 0.195312 56.6797 0.585938C55.8203 0.950521 55.0651 1.45833 54.4141 2.10938C53.7891 2.73438 53.2812 3.48958 52.8906 4.375C52.526 5.23438 52.3438 6.14583 52.3438 7.10938C52.3438 8.09896 52.526 9.02344 52.8906 9.88281C53.2812 10.7422 53.7891 11.4974 54.4141 12.1484C55.0651 12.7734 55.8203 13.2812 56.6797 13.6719C57.5651 14.0365 58.5026 14.2188 59.4922 14.2188C60.4818 14.2188 61.4062 14.0365 62.2656 13.6719C63.151 13.2812 63.9193 12.7734 64.5703 12.1484C65.2214 11.4974 65.7292 10.7422 66.0938 9.88281Z" fill="#070F2B"/>
-            <path d="M54.1016 60.3125H64.8438V18.4766H54.1016V60.3125Z" fill="#070F2B"/>
-            <path d="M32.8125 60.3125H44.8047V4.29688H33.5938V41.2109L11.9922 4.29688H0V60.3125H11.2109V23.4375L32.8125 60.3125Z" fill="#070F2B"/>
-            <path d="M83.6719 60.3125H73.0078V1.83594H83.6719V20.3125C84.9479 19.349 86.263 18.6719 87.6172 18.2812C88.9714 17.8646 90.3516 17.6562 91.7578 17.6562C94.3359 17.6562 96.7578 18.151 99.0234 19.1406C101.289 20.1042 103.255 21.4453 104.922 23.1641C106.615 24.8568 107.943 26.849 108.906 29.1406C109.896 31.4062 110.391 33.8281 110.391 36.4062V60.3125H99.6484V36.4062H99.7266C99.7266 35.3125 99.5182 34.2839 99.1016 33.3203C98.6849 32.3307 98.112 31.4714 97.3828 30.7422C96.6536 30.013 95.8073 29.4401 94.8438 29.0234C93.8802 28.6068 92.8516 28.3984 91.7578 28.3984C90.638 28.3984 89.5833 28.6068 88.5938 29.0234C87.6042 29.4401 86.7448 30.013 86.0156 30.7422C85.2865 31.4714 84.7135 32.3307 84.2969 33.3203C83.8802 34.2839 83.6719 35.3125 83.6719 36.4062V60.3125Z" fill="#070F2B"/>
-            <path d="M164.336 60.3125H175V36.4062C175 35.3125 175.208 34.2839 175.625 33.3203C176.042 32.3307 176.615 31.4714 177.344 30.7422C178.073 30.013 178.932 29.4401 179.922 29.0234C180.911 28.6068 181.966 28.3984 183.086 28.3984C184.18 28.3984 185.208 28.6068 186.172 29.0234C187.135 29.4401 187.982 30.013 188.711 30.7422C189.44 31.4714 190.013 32.3307 190.43 33.3203C190.846 34.2839 191.055 35.3125 191.055 36.4062V60.3125H201.719V36.4062C201.719 33.8281 201.224 31.4062 200.234 29.1406C199.271 26.849 197.943 24.8568 196.25 23.1641C194.557 21.4453 192.578 20.1042 190.312 19.1406C188.047 18.151 185.638 17.6562 183.086 17.6562C180.716 17.6562 178.438 18.0859 176.25 18.9453C174.089 19.7786 172.148 20.9766 170.43 22.5391L166.914 18.4766H164.336V60.3125Z" fill="#070F2B"/>
-            <path d="M266.055 60.3125H254.883V20.3125C254.883 19.5312 254.727 18.8021 254.414 18.125C254.128 17.4479 253.724 16.862 253.203 16.3672C252.708 15.8464 252.122 15.4427 251.445 15.1562C250.768 14.8698 250.039 14.7266 249.258 14.7266C248.477 14.7266 247.747 14.8698 247.07 15.1562C246.393 15.4427 245.794 15.8464 245.273 16.3672C244.779 16.862 244.388 17.4479 244.102 18.125C243.815 18.8021 243.672 19.5312 243.672 20.3125V60.3125H232.461V20.3125C232.461 19.5312 232.318 18.8021 232.031 18.125C231.745 17.4479 231.341 16.862 230.82 16.3672C230.326 15.8464 229.74 15.4427 229.062 15.1562C228.385 14.8698 227.656 14.7266 226.875 14.7266C226.094 14.7266 225.365 14.8698 224.688 15.1562C224.01 15.4427 223.411 15.8464 222.891 16.3672C222.396 16.862 222.005 17.4479 221.719 18.125C221.432 18.8021 221.289 19.5312 221.289 20.3125V60.3125H210.078V20.3125C210.078 17.9948 210.508 15.8203 211.367 13.7891C212.253 11.7318 213.451 9.94792 214.961 8.4375C216.497 6.90104 218.281 5.70312 220.312 4.84375C222.37 3.95833 224.557 3.51562 226.875 3.51562C228.958 3.51562 230.964 3.89323 232.891 4.64844C234.818 5.3776 236.549 6.44531 238.086 7.85156C239.622 6.44531 241.341 5.3776 243.242 4.64844C245.169 3.89323 247.174 3.51562 249.258 3.51562C251.576 3.51562 253.75 3.95833 255.781 4.84375C257.839 5.70312 259.622 6.90104 261.133 8.4375C262.669 9.94792 263.867 11.7318 264.727 13.7891C265.612 15.8203 266.055 17.9948 266.055 20.3125V60.3125Z" fill="#1342F3"/>
-            <path fillRule="evenodd" clipRule="evenodd" d="M292.383 50.3516C291.966 50.2995 291.549 50.2083 291.133 50.0781L311.133 25.9766C310.143 24.5703 308.997 23.3073 307.695 22.1875C306.393 21.0417 304.987 20.0781 303.477 19.2969C301.992 18.5156 300.417 17.9167 298.75 17.5C297.083 17.0833 295.378 16.875 293.633 16.875C290.69 16.875 287.917 17.4089 285.312 18.4766C282.734 19.5443 280.469 21.0417 278.516 22.9688C276.589 24.8958 275.065 27.2266 273.945 29.9609C272.826 32.6953 272.266 35.7161 272.266 39.0234C272.266 42.2526 272.826 45.2214 273.945 47.9297C275.065 50.612 276.589 52.9297 278.516 54.8828C280.469 56.8359 282.734 58.3594 285.312 59.4531C287.917 60.5469 290.69 61.0938 293.633 61.0938C295.378 61.0938 297.07 60.8854 298.711 60.4688C300.378 60.0781 301.953 59.4922 303.438 58.7109C304.948 57.9297 306.341 56.9792 307.617 55.8594C308.919 54.7396 310.065 53.4766 311.055 52.0703L303.242 44.2188C302.826 45.1562 302.279 46.0156 301.602 46.7969C300.951 47.5521 300.195 48.2031 299.336 48.75C298.503 49.2708 297.604 49.6745 296.641 49.9609C295.677 50.2474 294.674 50.3906 293.633 50.3906C293.216 50.3906 292.799 50.3776 292.383 50.3516ZM295.117 27.7344C295.612 27.7865 296.107 27.9036 296.602 28.0859L284.18 44.5703C283.971 44.2057 283.802 43.7891 283.672 43.3203C283.542 42.8516 283.424 42.3698 283.32 41.875C283.242 41.3542 283.177 40.8464 283.125 40.3516C283.099 39.8568 283.086 39.4141 283.086 39.0234C283.086 37.2786 283.359 35.7161 283.906 34.3359C284.453 32.9297 285.195 31.7318 286.133 30.7422C287.096 29.7526 288.216 28.9974 289.492 28.4766C290.794 27.9297 292.174 27.6562 293.633 27.6562C294.154 27.6562 294.648 27.6823 295.117 27.7344Z" fill="#1342F3"/>
-            <path fillRule="evenodd" clipRule="evenodd" d="M136.805 60.3125C124.654 60.3125 114.805 50.4628 114.805 38.3125C114.805 26.1622 124.654 16.3125 136.805 16.3125C148.955 16.3125 158.805 26.1622 158.805 38.3125C158.805 50.4628 148.955 60.3125 136.805 60.3125ZM139.805 50.3125C146.984 50.3125 152.805 44.4922 152.805 37.3125C152.805 30.1328 146.984 24.3125 139.805 24.3125C138.601 24.3125 137.436 24.476 136.33 24.782C138.948 25.7951 140.805 28.337 140.805 31.3125C140.805 35.1785 137.671 38.3125 133.805 38.3125C130.829 38.3125 128.287 36.456 127.274 33.8381C126.968 34.944 126.805 36.1092 126.805 37.3125C126.805 44.4922 132.625 50.3125 139.805 50.3125Z" fill="#070F2B"/>
-          </svg>
-        </Link>
+    <>
+      {/* Overlay for mobile menu */}
+      <div
+        className={`fixed inset-0 bg-black/70 backdrop-blur-sm z-30 md:hidden transition-opacity duration-300 ${
+          isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
+        }`}
+        onClick={() => setIsOpen(false)}
+        aria-hidden="true"
+      />
 
-        {/* Hamburger Menu Button - Visible on mobile and tablet */}
-        <button
-          className="lg:hidden p-2 rounded-md hover:bg-surface-100"
-          onClick={toggleMenu}
-          aria-label="Toggle menu"
-        >
-          <svg
-            className="w-6 h-6 text-surface-600"
-            fill="none"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            {isMenuOpen ? (
-              <path d="M6 18L18 6M6 6l12 12" />
-            ) : (
-              <path d="M4 6h16M4 12h16M4 18h16" />
-            )}
-          </svg>
-        </button>
+      <header
+        className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
+          scrolled
+            ? 'bg-surface-50 py-3 shadow-lg backdrop-blur-lg'
+            : 'bg-transparent py-5'
+        }`}
+      >
+        <div className="container mx-auto flex items-center justify-between relative px-6"> {/* Added px-6 for consistency */}
+          {/* Logo */}
+          <Link to="/" className="flex items-center gap-2" onClick={() => isOpen && setIsOpen(false)}>
+            <img
+              src="/nihonme/img/icon/nihonme-icon.svg" // Ensure this path is correct
+              alt="NihonMe Logo"
+              className="h-8 w-auto"
+            />
+            {/* Optional: Add text logo part if desired, e.g., <span className="font-bold text-xl text-primary-600">NihonMe</span> */}
+          </Link>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden lg:flex items-center gap-6">
-          <Link
-            to="/"
-            className={`text-sm font-medium transition-colors ${
-              isActive('/') ? 'text-primary-600' : 'text-surface-600 hover:text-primary-600'
-            }`}
-          >
-            Beranda
-          </Link>
-          <Link
-            to="/deteksi-benda"
-            className={`text-sm font-medium transition-colors ${
-              isActive('/deteksi-benda') ? 'text-primary-600' : 'text-surface-600 hover:text-primary-600'
-            }`}
-          >
-            Deteksi Benda
-          </Link>
-          <Link
-            to="/artikel"
-            className={`text-sm font-medium transition-colors ${
-              isActive('/artikel') ? 'text-primary-600' : 'text-surface-600 hover:text-primary-600'
-            }`}
-          >
-            Artikel
-          </Link>
-          <Link
-            to="/tentang"
-            className={`text-sm font-medium transition-colors ${
-              isActive('/tentang') ? 'text-primary-600' : 'text-surface-600 hover:text-primary-600'
-            }`}
-          >
-            Tentang NihonMe
-          </Link>
-        </nav>
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex flex-1 justify-end items-center">
+            <ul className="flex items-center space-x-6 lg:space-x-8">
+              {navItems.map((item) => (
+                <li key={item.name}>
+                  <Link
+                    to={item.href}
+                    className={`font-medium text-sm lg:text-base transition-colors relative after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:w-0 after:bg-primary-600 hover:after:w-full after:transition-all after:duration-300 ${
+                      isActive(item.href)
+                        ? 'text-primary-600 after:w-full' // Active link has underline
+                        : 'text-gray-500 hover:text-primary-600' // Inactive link is gray
+                    }`}
+                  >
+                    {item.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
 
-        {/* Mobile Navigation Menu */}
-        <div
-          className={`lg:hidden fixed inset-0 bg-surface-50 z-50 transform transition-transform duration-300 ease-in-out ${
-            isMenuOpen ? 'translate-x-0' : 'translate-x-full'
-          }`}
-        >
-          {/* Close Button */}
+          {/* Mobile Menu Button */}
           <button
-            className="absolute top-4 right-4 p-2 rounded-md hover:bg-surface-100"
+            className="md:hidden text-primary-500 p-2 z-50 relative" // Changed text color for visibility
             onClick={toggleMenu}
-            aria-label="Close menu"
+            aria-label={isOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={isOpen}
+            aria-controls="mobile-menu"
           >
-            <svg
-              className="w-6 h-6 text-surface-600"
-              fill="none"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path d="M6 18L18 6M6 6l12 12" />
-            </svg>
+            {/* Conditional rendering for Menu/X icon with transition */}
+            <Menu size={28} className={`transition-opacity duration-300 ${isOpen ? 'opacity-0 absolute' : 'opacity-100'}`} />
+            <X size={28} className={`transition-opacity duration-300 ${isOpen ? 'opacity-100' : 'opacity-0 absolute'}`} />
           </button>
-
-          <div className="flex flex-col items-center justify-center h-full space-y-8">
-            <Link
-              to="/"
-              className={`text-lg font-medium transition-colors ${
-                isActive('/') ? 'text-primary-600' : 'text-surface-600 hover:text-primary-600'
-              }`}
-              onClick={() => setIsMenuOpen(false)}
+        </div>
+      </header>
+      
+      {/* Mobile Navigation Menu */}
+      <div
+        id="mobile-menu"
+        className={`md:hidden fixed inset-x-0 top-0 bg-surface-50 z-30 h-screen transform transition-transform duration-300 ease-in-out flex flex-col ${
+          isOpen ? 'translate-x-0' : 'translate-x-full'
+        }`}
+        style={{ paddingTop: `${HEADER_UNSCROLLED_HEIGHT_PX}px` }} // Add padding to push content below the fixed header space
+      >
+         {/* Optional: Explicit Close Button inside mobile menu, if desired on top of the toggle and overlay click */}
+         {/* <div className="flex justify-end p-4">
+            <button
+                onClick={toggleMenu}
+                aria-label="Close menu"
+                className="text-surface-700 hover:text-primary-600"
             >
-              Beranda
-            </Link>
+                <X size={28} />
+            </button>
+        </div> */}
+        <div className="flex flex-col items-center justify-center flex-grow space-y-8 pb-16"> {/* pb-16 to avoid overlap with bottom elements if any */}
+            {navItems.map((item) => (
             <Link
-              to="/deteksi-benda"
-              className={`text-lg font-medium transition-colors ${
-                isActive('/deteksi-benda') ? 'text-primary-600' : 'text-surface-600 hover:text-primary-600'
-              }`}
-              onClick={() => setIsMenuOpen(false)}
+                key={item.name}
+                to={item.href}
+                className={`text-xl font-medium transition-colors ${ // Increased font size for mobile
+                isActive(item.href) ? 'text-primary-600' : 'text-surface-700 hover:text-primary-600'
+                }`}
+                onClick={() => setIsOpen(false)}
             >
-              Deteksi Benda
+                {item.name}
             </Link>
-            <Link
-              to="/artikel"
-              className={`text-lg font-medium transition-colors ${
-                isActive('/artikel') ? 'text-primary-600' : 'text-surface-600 hover:text-primary-600'
-              }`}
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Artikel
-            </Link>
-            <Link
-              to="/tentang"
-              className={`text-lg font-medium transition-colors ${
-                isActive('/tentang') ? 'text-primary-600' : 'text-surface-600 hover:text-primary-600'
-              }`}
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Tentang NihonMe
-            </Link>
-          </div>
+            ))}
         </div>
       </div>
-    </header>
+    </>
   );
 };
 

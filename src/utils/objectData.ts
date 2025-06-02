@@ -18,7 +18,7 @@ export const objectDetailsMap: Record<string, ObjectDetails> = {
     japanese: 'ひと',
     romaji: 'hito',
     indonesian: 'orang',
-    imageUrl: '/nihonme/img/1.png',
+    imageUrl: '/nihonme/img/object/1.png',
     sentences: [
       {
         japanese: 'ひとはにほんごをべんきょうしています。',
@@ -42,7 +42,7 @@ export const objectDetailsMap: Record<string, ObjectDetails> = {
     japanese: 'じてんしゃ',
     romaji: 'jitensha',
     indonesian: 'sepeda',
-    imageUrl: '/nihonme/img/2.png',
+    imageUrl: '/nihonme/img/object/2.png',
     sentences: [
       {
         japanese: 'じてんしゃでがっこうへいきます。',
@@ -66,7 +66,7 @@ export const objectDetailsMap: Record<string, ObjectDetails> = {
     japanese: 'くるま',
     romaji: 'kuruma',
     indonesian: 'mobil',
-    imageUrl: '/nihonme/img/3.png',
+    imageUrl: '/nihonme/img/object/3.png',
     sentences: [
       {
         japanese: 'くるまでスーパーにいきます。',
@@ -90,7 +90,7 @@ export const objectDetailsMap: Record<string, ObjectDetails> = {
     japanese: 'オートバイ',
     romaji: 'ootobai',
     indonesian: 'sepeda motor',
-    imageUrl: '/nihonme/img/4.png',
+    imageUrl: '/nihonme/img/object/4.png',
     sentences: [
       {
         japanese: 'オートバイでツーリングします。',
@@ -114,7 +114,7 @@ export const objectDetailsMap: Record<string, ObjectDetails> = {
     japanese: 'ひこうき',
     romaji: 'hikouki',
     indonesian: 'pesawat terbang',
-    imageUrl: '/nihonme/img/5.png',
+    imageUrl: '/nihonme/img/object/5.png',
     sentences: [
       {
         japanese: 'ひこうきでとびます。',
@@ -138,7 +138,7 @@ export const objectDetailsMap: Record<string, ObjectDetails> = {
     japanese: 'バス',
     romaji: 'basu',
     indonesian: 'bus',
-    imageUrl: '/nihonme/img/6.png',
+    imageUrl: '/nihonme/img/object/6.png',
     sentences: [
       {
         japanese: 'バスでがっこうへいきます。',
@@ -162,7 +162,7 @@ export const objectDetailsMap: Record<string, ObjectDetails> = {
     japanese: 'でんしゃ',
     romaji: 'densha',
     indonesian: 'kereta listrik',
-    imageUrl: '/nihonme/img/7.png',
+    imageUrl: '/nihonme/img/object/7.png',
     sentences: [
       {
         japanese: 'でんしゃにのります。',
@@ -186,7 +186,7 @@ export const objectDetailsMap: Record<string, ObjectDetails> = {
     japanese: 'トラック',
     romaji: 'torakku',
     indonesian: 'truk',
-    imageUrl: '/nihonme/img/8.png',
+    imageUrl: '/nihonme/img/object/8.png',
     sentences: [
       {
         japanese: 'トラックがどうろをはしっています。',
@@ -210,7 +210,7 @@ export const objectDetailsMap: Record<string, ObjectDetails> = {
     japanese: 'ボート',
     romaji: 'booto',
     indonesian: 'perahu',
-    imageUrl: '/nihonme/img/9.png',
+    imageUrl: '/nihonme/img/object/9.png',
     sentences: [
       {
         japanese: 'ボートでうみをわたります。',
@@ -234,7 +234,7 @@ export const objectDetailsMap: Record<string, ObjectDetails> = {
     japanese: 'しんごうき',
     romaji: 'shingouki',
     indonesian: 'lampu lalu lintas',
-    imageUrl: '/nihonme/img/10.png',
+    imageUrl: '/nihonme/img/object/10.png',
     sentences: [
       {
         japanese: 'しんごうきはあかです。',
@@ -258,7 +258,7 @@ export const objectDetailsMap: Record<string, ObjectDetails> = {
     japanese: 'しょうかせん',
     romaji: 'shoukasen',
     indonesian: 'hidran kebakaran',
-    imageUrl: '/nihonme/img/11.png',
+    imageUrl: '/nihonme/img/object/11.png',
     sentences: [
       {
         japanese: 'しょうかせんはあかいです。',
@@ -282,7 +282,7 @@ export const objectDetailsMap: Record<string, ObjectDetails> = {
     japanese: 'ストップサイン',
     romaji: 'sutoppu sain',
     indonesian: 'rambu berhenti',
-    imageUrl: '/nihonme/img/12.png',
+    imageUrl: '/nihonme/img/object/12.png',
     sentences: [
       {
         japanese: 'ストップサインでとまります。',
@@ -306,7 +306,7 @@ export const objectDetailsMap: Record<string, ObjectDetails> = {
     japanese: 'パーキングメーター',
     romaji: 'paakingu meetaa',
     indonesian: 'meteran parkir',
-    imageUrl: '/nihonme/img/13.png',
+    imageUrl: '/nihonme/img/object/13.png',
     sentences: [
       {
         japanese: 'パーキングメーターにおかねをいれます。',
@@ -330,7 +330,7 @@ export const objectDetailsMap: Record<string, ObjectDetails> = {
     japanese: 'ベンチ',
     romaji: 'benchi',
     indonesian: 'bangku',
-    imageUrl: '/nihonme/img/14.png',
+    imageUrl: '/nihonme/img/object/14.png',
     sentences: [
       {
         japanese: 'こうえんのベンチにすわります。',
@@ -354,7 +354,7 @@ export const objectDetailsMap: Record<string, ObjectDetails> = {
     japanese: 'とり',
     romaji: 'tori',
     indonesian: 'burung',
-    imageUrl: '/nihonme/img/15.png',
+    imageUrl: '/nihonme/img/object/15.png',
     sentences: [
       {
         japanese: 'とりがそらをとんでいます。',
@@ -378,7 +378,7 @@ export const objectDetailsMap: Record<string, ObjectDetails> = {
     japanese: 'ねこ',
     romaji: 'neko',
     indonesian: 'kucing',
-    imageUrl: '/nihonme/img/16.png',
+    imageUrl: '/nihonme/img/object/16.png',
     sentences: [
       {
         japanese: 'ねこがすきです。',
@@ -402,7 +402,7 @@ export const objectDetailsMap: Record<string, ObjectDetails> = {
     japanese: 'いぬ',
     romaji: 'inu',
     indonesian: 'anjing',
-    imageUrl: '/nihonme/img/17.png',
+    imageUrl: '/nihonme/img/object/17.png',
     sentences: [
       {
         japanese: 'いぬとさんぽにいきます。',
@@ -426,7 +426,7 @@ export const objectDetailsMap: Record<string, ObjectDetails> = {
     japanese: 'うま',
     romaji: 'uma',
     indonesian: 'kuda',
-    imageUrl: '/nihonme/img/18.png',
+    imageUrl: '/nihonme/img/object/18.png',
     sentences: [
       {
         japanese: 'うまがはしっています。',
@@ -450,7 +450,7 @@ export const objectDetailsMap: Record<string, ObjectDetails> = {
     japanese: 'ひつじ',
     romaji: 'hitsuji',
     indonesian: 'domba',
-    imageUrl: '/nihonme/img/19.png',
+    imageUrl: '/nihonme/img/object/19.png',
     sentences: [
       {
         japanese: 'ひつじはしろくてふわふわです。',
@@ -474,7 +474,7 @@ export const objectDetailsMap: Record<string, ObjectDetails> = {
     japanese: 'うし',
     romaji: 'ushi',
     indonesian: 'sapi',
-    imageUrl: '/nihonme/img/20.png',
+    imageUrl: '/nihonme/img/object/20.png',
     sentences: [
       {
         japanese: 'うしがくさをたべています。',
@@ -498,7 +498,7 @@ export const objectDetailsMap: Record<string, ObjectDetails> = {
     japanese: 'ゾウ',
     romaji: 'zou',
     indonesian: 'gajah',
-    imageUrl: '/nihonme/img/21.png',
+    imageUrl: '/nihonme/img/object/21.png',
     sentences: [
       {
         japanese: 'どうぶつえんでゾウをみました。',
@@ -522,7 +522,7 @@ export const objectDetailsMap: Record<string, ObjectDetails> = {
     japanese: 'くま',
     romaji: 'kuma',
     indonesian: 'beruang',
-    imageUrl: '/nihonme/img/22.png',
+    imageUrl: '/nihonme/img/object/22.png',
     sentences: [
       {
         japanese: 'もりのなかにくまがいます。',
@@ -546,7 +546,7 @@ export const objectDetailsMap: Record<string, ObjectDetails> = {
     japanese: 'シマウマ',
     romaji: 'shimauma',
     indonesian: 'zebra',
-    imageUrl: '/nihonme/img/23.png',
+    imageUrl: '/nihonme/img/object/23.png',
     sentences: [
       {
         japanese: 'シマウマはくろとしろです。',
@@ -570,7 +570,7 @@ export const objectDetailsMap: Record<string, ObjectDetails> = {
     japanese: 'キリン',
     romaji: 'kirin',
     indonesian: 'jerapah',
-    imageUrl: '/nihonme/img/24.png',
+    imageUrl: '/nihonme/img/object/24.png',
     sentences: [
       {
         japanese: 'キリンはくびがながいです。',
@@ -594,7 +594,7 @@ export const objectDetailsMap: Record<string, ObjectDetails> = {
     japanese: 'リュックサック',
     romaji: 'ryukkusakku',
     indonesian: 'ransel',
-    imageUrl: '/nihonme/img/25.png',
+    imageUrl: '/nihonme/img/object/25.png',
     sentences: [
       {
         japanese: 'リュックサックにおかしをいれます。',
@@ -618,7 +618,7 @@ export const objectDetailsMap: Record<string, ObjectDetails> = {
     japanese: 'かさ',
     romaji: 'kasa',
     indonesian: 'payung',
-    imageUrl: '/nihonme/img/26.png',
+    imageUrl: '/nihonme/img/object/26.png',
     sentences: [
       {
         japanese: 'あめがふっているので、かさをさします。',
@@ -642,7 +642,7 @@ export const objectDetailsMap: Record<string, ObjectDetails> = {
     japanese: 'ハンドバッグ',
     romaji: 'handobaggu',
     indonesian: 'tas tangan',
-    imageUrl: '/nihonme/img/27.png',
+    imageUrl: '/nihonme/img/object/27.png',
     sentences: [
       {
         japanese: 'あのひとはあたらしいハンドバッグをかいました。',
@@ -666,7 +666,7 @@ export const objectDetailsMap: Record<string, ObjectDetails> = {
     japanese: 'ネクタイ',
     romaji: 'nekutai',
     indonesian: 'dasi',
-    imageUrl: '/nihonme/img/28.png',
+    imageUrl: '/nihonme/img/object/28.png',
     sentences: [
       {
         japanese: 'ちちはしごとにネクタイをします。',
@@ -690,7 +690,7 @@ export const objectDetailsMap: Record<string, ObjectDetails> = {
     japanese: 'スーツケース',
     romaji: 'suutsukeesu',
     indonesian: 'koper',
-    imageUrl: '/nihonme/img/29.png',
+    imageUrl: '/nihonme/img/object/29.png',
     sentences: [
       {
         japanese: 'りょこうのためにスーツケースをじゅんびします。',
@@ -714,7 +714,7 @@ export const objectDetailsMap: Record<string, ObjectDetails> = {
     japanese: 'フリスビー',
     romaji: 'furisubii',
     indonesian: 'frisbi',
-    imageUrl: '/nihonme/img/30.png',
+    imageUrl: '/nihonme/img/object/30.png',
     sentences: [
       {
         japanese: 'こうえんでフリスビーをしましょう。',
@@ -738,7 +738,7 @@ export const objectDetailsMap: Record<string, ObjectDetails> = {
     japanese: 'スキー',
     romaji: 'sukii',
     indonesian: 'ski',
-    imageUrl: '/nihonme/img/31.png',
+    imageUrl: '/nihonme/img/object/31.png',
     sentences: [
       {
         japanese: 'わたしはあたらしいスキーがほしいです。',
@@ -762,7 +762,7 @@ export const objectDetailsMap: Record<string, ObjectDetails> = {
     japanese: 'スノーボード',
     romaji: 'sunooboodo',
     indonesian: 'papan salju',
-    imageUrl: '/nihonme/img/32.png',
+    imageUrl: '/nihonme/img/object/32.png',
     sentences: [
       {
         japanese: 'あたらしいスノーボードをかいたいです。',
@@ -786,7 +786,7 @@ export const objectDetailsMap: Record<string, ObjectDetails> = {
     japanese: 'スポーツボール',
     romaji: 'supootsubooru',
     indonesian: 'bola olahraga',
-    imageUrl: '/nihonme/img/33.png',
+    imageUrl: '/nihonme/img/object/33.png',
     sentences: [
       {
         japanese: 'こどもたちはスポーツボールであそんでいます。',
@@ -810,7 +810,7 @@ export const objectDetailsMap: Record<string, ObjectDetails> = {
     japanese: 'たこ',
     romaji: 'tako',
     indonesian: 'layang-layang',
-    imageUrl: '/nihonme/img/34.png',
+    imageUrl: '/nihonme/img/object/34.png',
     sentences: [
       {
         japanese: 'おしょうがつにたこをあげます。',
@@ -834,7 +834,7 @@ export const objectDetailsMap: Record<string, ObjectDetails> = {
     japanese: 'やきゅうバット',
     romaji: 'yakyuu batto',
     indonesian: 'tongkat bisbol',
-    imageUrl: '/nihonme/img/35.png',
+    imageUrl: '/nihonme/img/object/35.png',
     sentences: [
       {
         japanese: 'あのひとはやきゅうバットをもっています。',
@@ -858,7 +858,7 @@ export const objectDetailsMap: Record<string, ObjectDetails> = {
     japanese: 'やきゅうグローブ',
     romaji: 'yakyuu guroobu',
     indonesian: 'sarung tangan bisbol',
-    imageUrl: '/nihonme/img/36.png',
+    imageUrl: '/nihonme/img/object/36.png',
     sentences: [
       {
         japanese: 'あたらしいやきゅうグローブをかいました。',
@@ -882,7 +882,7 @@ export const objectDetailsMap: Record<string, ObjectDetails> = {
     japanese: 'スケートボード',
     romaji: 'sukeetoboodo',
     indonesian: 'papan luncur',
-    imageUrl: '/nihonme/img/37.png',
+    imageUrl: '/nihonme/img/object/37.png',
     sentences: [
       {
         japanese: 'こうえんでスケートボードをします。',
@@ -906,7 +906,7 @@ export const objectDetailsMap: Record<string, ObjectDetails> = {
     japanese: 'サーフボード',
     romaji: 'saafuboodo',
     indonesian: 'papan selancar',
-    imageUrl: '/nihonme/img/38.png',
+    imageUrl: '/nihonme/img/object/38.png',
     sentences: [
       {
         japanese: 'なみにのるためにサーフボードをつかいます。',
@@ -930,7 +930,7 @@ export const objectDetailsMap: Record<string, ObjectDetails> = {
     japanese: 'テニスラケット',
     romaji: 'tenisu raketto',
     indonesian: 'raket tenis',
-    imageUrl: '/nihonme/img/39.png',
+    imageUrl: '/nihonme/img/object/39.png',
     sentences: [
       {
         japanese: 'テニスをするとき、テニスラケットがいります。',
@@ -954,7 +954,7 @@ export const objectDetailsMap: Record<string, ObjectDetails> = {
     japanese: 'ボトル',
     romaji: 'botoru',
     indonesian: 'botol',
-    imageUrl: '/nihonme/img/40.png',
+    imageUrl: '/nihonme/img/object/40.png',
     sentences: [
       {
         japanese: 'みずがボトルにはいっています。',
@@ -978,7 +978,7 @@ export const objectDetailsMap: Record<string, ObjectDetails> = {
     japanese: 'ワイングラス',
     romaji: 'wain gurasu',
     indonesian: 'gelas anggur',
-    imageUrl: '/nihonme/img/41.png',
+    imageUrl: '/nihonme/img/object/41.png',
     sentences: [
       {
         japanese: 'ワイングラスでワインをのみます。',
@@ -1002,7 +1002,7 @@ export const objectDetailsMap: Record<string, ObjectDetails> = {
     japanese: 'カップ',
     romaji: 'kappu',
     indonesian: 'cangkir',
-    imageUrl: '/nihonme/img/42.png',
+    imageUrl: '/nihonme/img/object/42.png',
     sentences: [
       {
         japanese: 'コーヒーをカップにいれます。',
@@ -1026,7 +1026,7 @@ export const objectDetailsMap: Record<string, ObjectDetails> = {
     japanese: 'フォーク',
     romaji: 'fooku',
     indonesian: 'garpu',
-    imageUrl: '/nihonme/img/43.png',
+    imageUrl: '/nihonme/img/object/43.png',
     sentences: [
       {
         japanese: 'フォークでスパゲッティをたべます。',
@@ -1050,7 +1050,7 @@ export const objectDetailsMap: Record<string, ObjectDetails> = {
     japanese: 'ナイフ',
     romaji: 'naifu',
     indonesian: 'pisau',
-    imageUrl: '/nihonme/img/44.png',
+    imageUrl: '/nihonme/img/object/44.png',
     sentences: [
       {
         japanese: 'ナイフでパンをきります。',
@@ -1074,7 +1074,7 @@ export const objectDetailsMap: Record<string, ObjectDetails> = {
     japanese: 'スプーン',
     romaji: 'supuun',
     indonesian: 'sendok',
-    imageUrl: '/nihonme/img/45.png',
+    imageUrl: '/nihonme/img/object/45.png',
     sentences: [
       {
         japanese: 'スプーンでスープをのみます。',
@@ -1098,7 +1098,7 @@ export const objectDetailsMap: Record<string, ObjectDetails> = {
     japanese: 'ボウル',
     romaji: 'booru',
     indonesian: 'mangkuk',
-    imageUrl: '/nihonme/img/46.png',
+    imageUrl: '/nihonme/img/object/46.png',
     sentences: [
       {
         japanese: 'サラダをボウルにいれました。',
@@ -1122,7 +1122,7 @@ export const objectDetailsMap: Record<string, ObjectDetails> = {
     japanese: 'バナナ',
     romaji: 'banana',
     indonesian: 'pisang',
-    imageUrl: '/nihonme/img/47.png',
+    imageUrl: '/nihonme/img/object/47.png',
     sentences: [
       {
         japanese: 'バナナはきいろいです。',
@@ -1146,7 +1146,7 @@ export const objectDetailsMap: Record<string, ObjectDetails> = {
     japanese: 'りんご',
     romaji: 'ringo',
     indonesian: 'apel',
-    imageUrl: '/nihonme/img/48.png',
+    imageUrl: '/nihonme/img/object/48.png',
     sentences: [
       {
         japanese: 'りんごはあかくておいしいです。',
@@ -1170,7 +1170,7 @@ export const objectDetailsMap: Record<string, ObjectDetails> = {
     japanese: 'サンドイッチ',
     romaji: 'sandouicchi',
     indonesian: 'roti lapis',
-    imageUrl: '/nihonme/img/49.png',
+    imageUrl: '/nihonme/img/object/49.png',
     sentences: [
       {
         japanese: 'ひるごはんにサンドイッチをたべます。',
@@ -1194,7 +1194,7 @@ export const objectDetailsMap: Record<string, ObjectDetails> = {
     japanese: 'オレンジ',
     romaji: 'orenji',
     indonesian: 'jeruk',
-    imageUrl: '/nihonme/img/50.png',
+    imageUrl: '/nihonme/img/object/50.png',
     sentences: [
       {
         japanese: 'オレンジはビタミンシーがおおいです。',
@@ -1218,7 +1218,7 @@ export const objectDetailsMap: Record<string, ObjectDetails> = {
     japanese: 'ブロッコリー',
     romaji: 'burokkorii',
     indonesian: 'brokoli',
-    imageUrl: '/nihonme/img/51.png',
+    imageUrl: '/nihonme/img/object/51.png',
     sentences: [
       {
         japanese: 'ブロッコリーはみどりいろのやさいです。',
@@ -1242,7 +1242,7 @@ export const objectDetailsMap: Record<string, ObjectDetails> = {
     japanese: 'にんじん',
     romaji: 'ninjin',
     indonesian: 'wortel',
-    imageUrl: '/nihonme/img/52.png',
+    imageUrl: '/nihonme/img/object/52.png',
     sentences: [
       {
         japanese: 'にんじんはオレンジいろです。',
@@ -1266,7 +1266,7 @@ export const objectDetailsMap: Record<string, ObjectDetails> = {
     japanese: 'ホットドッグ',
     romaji: 'hottodoggu',
     indonesian: 'hot dog',
-    imageUrl: '/nihonme/img/53.png',
+    imageUrl: '/nihonme/img/object/53.png',
     sentences: [
       {
         japanese: 'ホットドッグにケチャップをかけます。',
@@ -1290,7 +1290,7 @@ export const objectDetailsMap: Record<string, ObjectDetails> = {
     japanese: 'ピザ',
     romaji: 'piza',
     indonesian: 'pizza',
-    imageUrl: '/nihonme/img/54.png',
+    imageUrl: '/nihonme/img/object/54.png',
     sentences: [
       {
         japanese: 'ともだちとピザをたべます。',
@@ -1314,7 +1314,7 @@ export const objectDetailsMap: Record<string, ObjectDetails> = {
     japanese: 'ドーナツ',
     romaji: 'doonatsu',
     indonesian: 'donat',
-    imageUrl: '/nihonme/img/55.png',
+    imageUrl: '/nihonme/img/object/55.png',
     sentences: [
       {
         japanese: 'あまいドーナツがすきです。',
@@ -1338,7 +1338,7 @@ export const objectDetailsMap: Record<string, ObjectDetails> = {
     japanese: 'ケーキ',
     romaji: 'keeki',
     indonesian: 'kue',
-    imageUrl: '/nihonme/img/56.png',
+    imageUrl: '/nihonme/img/object/56.png',
     sentences: [
       {
         japanese: 'たんじょうび にケーキをたべます。',
@@ -1362,7 +1362,7 @@ export const objectDetailsMap: Record<string, ObjectDetails> = {
     japanese: 'いす',
     romaji: 'isu',
     indonesian: 'kursi',
-    imageUrl: '/nihonme/img/57.png',
+    imageUrl: '/nihonme/img/object/57.png',
     sentences: [
       {
         japanese: 'へやにいすがあります。',
@@ -1386,7 +1386,7 @@ export const objectDetailsMap: Record<string, ObjectDetails> = {
     japanese: 'ソファー',
     romaji: 'sofaa',
     indonesian: 'sofa',
-    imageUrl: '/nihonme/img/58.png',
+    imageUrl: '/nihonme/img/object/58.png',
     sentences: [
       {
         japanese: 'リビングにソファーがあります。',
@@ -1410,7 +1410,7 @@ export const objectDetailsMap: Record<string, ObjectDetails> = {
     japanese: 'うえきばち',
     romaji: 'uekibachi',
     indonesian: 'tanaman pot',
-    imageUrl: '/nihonme/img/59.png',
+    imageUrl: '/nihonme/img/object/59.png',
     sentences: [
       {
         japanese: 'このうえきばちにはきれいなはながあります。',
@@ -1434,7 +1434,7 @@ export const objectDetailsMap: Record<string, ObjectDetails> = {
     japanese: 'ベッド',
     romaji: 'beddo',
     indonesian: 'tempat tidur',
-    imageUrl: '/nihonme/img/60.png',
+    imageUrl: '/nihonme/img/object/60.png',
     sentences: [
       {
         japanese: 'わたしはベッドでねます。',
@@ -1458,7 +1458,7 @@ export const objectDetailsMap: Record<string, ObjectDetails> = {
     japanese: 'しょくたく',
     romaji: 'shokutaku',
     indonesian: 'meja makan',
-    imageUrl: '/nihonme/img/61.png',
+    imageUrl: '/nihonme/img/object/61.png',
     sentences: [
       {
         japanese: 'しょくたくのうえにりょうりがあります。',
@@ -1482,7 +1482,7 @@ export const objectDetailsMap: Record<string, ObjectDetails> = {
     japanese: 'トイレ',
     romaji: 'toire',
     indonesian: 'toilet',
-    imageUrl: '/nihonme/img/62.png',
+    imageUrl: '/nihonme/img/object/62.png',
     sentences: [
       {
         japanese: 'トイレはどこですか。',
@@ -1506,7 +1506,7 @@ export const objectDetailsMap: Record<string, ObjectDetails> = {
     japanese: 'テレビ',
     romaji: 'terebi',
     indonesian: 'TV',
-    imageUrl: '/nihonme/img/63.png',
+    imageUrl: '/nihonme/img/object/63.png',
     sentences: [
       {
         japanese: 'リビングでテレビをみます。',
@@ -1530,7 +1530,7 @@ export const objectDetailsMap: Record<string, ObjectDetails> = {
     japanese: 'ノートパソコン',
     romaji: 'nooto pasokon',
     indonesian: 'komputer laptop',
-    imageUrl: '/nihonme/img/64.png',
+    imageUrl: '/nihonme/img/object/64.png',
     sentences: [
       {
         japanese: 'ノートパソコンでしごとをします。',
@@ -1554,7 +1554,7 @@ export const objectDetailsMap: Record<string, ObjectDetails> = {
     japanese: 'マウス',
     romaji: 'mausu',
     indonesian: 'mouse',
-    imageUrl: '/nihonme/img/65.png',
+    imageUrl: '/nihonme/img/object/65.png',
     sentences: [
       {
         japanese: 'マウスでクリックします。',
@@ -1578,7 +1578,7 @@ export const objectDetailsMap: Record<string, ObjectDetails> = {
     japanese: 'リモコン',
     romaji: 'rimokon',
     indonesian: 'remote control',
-    imageUrl: '/nihonme/img/66.png',
+    imageUrl: '/nihonme/img/object/66.png',
     sentences: [
       {
         japanese: 'テレビのリモコンはどこですか。',
@@ -1602,7 +1602,7 @@ export const objectDetailsMap: Record<string, ObjectDetails> = {
     japanese: 'キーボード',
     romaji: 'kiiboodo',
     indonesian: 'keyboard',
-    imageUrl: '/nihonme/img/67.png',
+    imageUrl: '/nihonme/img/object/67.png',
     sentences: [
       {
         japanese: 'キーボードでタイプします。',
@@ -1626,7 +1626,7 @@ export const objectDetailsMap: Record<string, ObjectDetails> = {
     japanese: 'けいたいでんわ',
     romaji: 'keitai denwa',
     indonesian: 'telepon seluler',
-    imageUrl: '/nihonme/img/68.png',
+    imageUrl: '/nihonme/img/object/68.png',
     sentences: [
       {
         japanese: 'けいたいでんわでともだちにはなします。',
@@ -1650,7 +1650,7 @@ export const objectDetailsMap: Record<string, ObjectDetails> = {
     japanese: 'でんしレンジ',
     romaji: 'denshi renji',
     indonesian: 'oven microwave',
-    imageUrl: '/nihonme/img/69.png',
+    imageUrl: '/nihonme/img/object/69.png',
     sentences: [
       {
         japanese: 'たべものをでんしレンジであたためます。',
@@ -1674,7 +1674,7 @@ export const objectDetailsMap: Record<string, ObjectDetails> = {
     japanese: 'オーブン',
     romaji: 'oobun',
     indonesian: 'oven',
-    imageUrl: '/nihonme/img/70.png',
+    imageUrl: '/nihonme/img/object/70.png',
     sentences: [
       {
         japanese: 'オーブンでケーキをやきます。',
@@ -1698,7 +1698,7 @@ export const objectDetailsMap: Record<string, ObjectDetails> = {
     japanese: 'トースター',
     romaji: 'toosutaa',
     indonesian: 'pemanggang roti',
-    imageUrl: '/nihonme/img/71.png',
+    imageUrl: '/nihonme/img/object/71.png',
     sentences: [
       {
         japanese: 'トースターでパンをやきます。',
@@ -1722,7 +1722,7 @@ export const objectDetailsMap: Record<string, ObjectDetails> = {
     japanese: 'ながし',
     romaji: 'nagashi',
     indonesian: 'bak cuci piring',
-    imageUrl: '/nihonme/img/72.png',
+    imageUrl: '/nihonme/img/object/72.png',
     sentences: [
       {
         japanese: 'しょっきをながしであらいます。',
@@ -1746,7 +1746,7 @@ export const objectDetailsMap: Record<string, ObjectDetails> = {
     japanese: 'れいぞうこ',
     romaji: 'reizouko',
     indonesian: 'kulkas',
-    imageUrl: '/nihonme/img/73.png',
+    imageUrl: '/nihonme/img/object/73.png',
     sentences: [
       {
         japanese: 'たべものをれいぞうこにいれます。',
@@ -1770,7 +1770,7 @@ export const objectDetailsMap: Record<string, ObjectDetails> = {
     japanese: 'ほん',
     romaji: 'hon',
     indonesian: 'buku',
-    imageUrl: '/nihonme/img/74.png',
+    imageUrl: '/nihonme/img/object/74.png',
     sentences: [
       {
         japanese: 'わたしはほんをよむのがすきです。',
@@ -1794,7 +1794,7 @@ export const objectDetailsMap: Record<string, ObjectDetails> = {
     japanese: 'とけい',
     romaji: 'tokei',
     indonesian: 'jam',
-    imageUrl: '/nihonme/img/75.png',
+    imageUrl: '/nihonme/img/object/75.png',
     sentences: [
       {
         japanese: 'へやにかべかけのとけいがあります。',
@@ -1818,7 +1818,7 @@ export const objectDetailsMap: Record<string, ObjectDetails> = {
     japanese: 'かびん',
     romaji: 'kabin',
     indonesian: 'vas',
-    imageUrl: '/nihonme/img/76.png',
+    imageUrl: '/nihonme/img/object/76.png',
     sentences: [
       {
         japanese: 'かびんにはなをいけます。',
@@ -1842,7 +1842,7 @@ export const objectDetailsMap: Record<string, ObjectDetails> = {
     japanese: 'はさみ',
     romaji: 'hasami',
     indonesian: 'gunting',
-    imageUrl: '/nihonme/img/77.png',
+    imageUrl: '/nihonme/img/object/77.png',
     sentences: [
       {
         japanese: 'かみをはさみできります。',
@@ -1866,7 +1866,7 @@ export const objectDetailsMap: Record<string, ObjectDetails> = {
     japanese: 'テディベア',
     romaji: 'tedi bea',
     indonesian: 'boneka beruang',
-    imageUrl: '/nihonme/img/78.png',
+    imageUrl: '/nihonme/img/object/78.png',
     sentences: [
       {
         japanese: 'わたしはちいさいとき、テディベアをもっていました。',
@@ -1890,7 +1890,7 @@ export const objectDetailsMap: Record<string, ObjectDetails> = {
     japanese: 'ヘアドライヤー',
     romaji: 'hea doraiyaa',
     indonesian: 'pengering rambut',
-    imageUrl: '/nihonme/img/79.png',
+    imageUrl: '/nihonme/img/object/79.png',
     sentences: [
       {
         japanese: 'おふろのあと、ヘアドライヤーをつかいます。',
@@ -1914,7 +1914,7 @@ export const objectDetailsMap: Record<string, ObjectDetails> = {
     japanese: 'はブラシ',
     romaji: 'ha burashi',
     indonesian: 'sikat gigi',
-    imageUrl: '/nihonme/img/80.png',
+    imageUrl: '/nihonme/img/object/80.png',
     sentences: [
       {
         japanese: 'まいにち、はブラシではをみがきます。',
