@@ -170,7 +170,7 @@ const HomePage: React.FC = () => {
 
       {/* 🔧 Search Bar dengan posisi sticky dan padding atas tetap */}
       <div className="w-full mb-12 pt-4 sticky top-14 z-50">
-        <div className="backdrop-blur-lg bg-white/80 rounded-2xl p-6 shadow-lg border border-white/20">
+        <div className="backdrop-blur-lg bg-white/90 rounded-2xl p-6 shadow-lg border border-white/20">
           <div className="flex items-center gap-6">
             <div className="flex items-center gap-2">
               <h2 className="text-2xl font-bold text-surface-900">List Benda</h2>

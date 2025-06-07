@@ -106,28 +106,6 @@ const JapanFactsCarousel: React.FC = () => {
               />
             ))}
           </div>
-
-          {/* Mobile Navigation - Only visible on mobile */}
-          <div className="sm:hidden flex justify-between mt-4">
-            <button
-              onClick={handlePrevious}
-              className="px-4 py-2 bg-white/50 rounded-xl border border-white/30
-                       hover:shadow-[0_8px_30px_rgba(0,0,0,0.12)] hover:-translate-y-1
-                       active:shadow-[inset_0_2px_4px_rgba(0,0,0,0.1)] active:translate-y-0
-                       transition-all duration-300 text-surface-900 font-medium"
-            >
-              Sebelumnya
-            </button>
-            <button
-              onClick={handleNext}
-              className="px-4 py-2 bg-white/50 rounded-xl border border-white/30
-                       hover:shadow-[0_8px_30px_rgba(0,0,0,0.12)] hover:-translate-y-1
-                       active:shadow-[inset_0_2px_4px_rgba(0,0,0,0.1)] active:translate-y-0
-                       transition-all duration-300 text-surface-900 font-medium"
-            >
-              Selanjutnya
-            </button>
-          </div>
         </div>
       </div>
     </div>

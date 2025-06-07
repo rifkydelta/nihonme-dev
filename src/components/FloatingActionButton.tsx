@@ -23,9 +23,9 @@ const FloatingActionButton: React.FC = () => {
 
   // Don't render anything on the detection page
   if (location.pathname === '/deteksi-benda' || 
-      location.pathname === '/quiz/hiragana' || 
-      location.pathname === '/quiz/katakana' || 
-      location.pathname === '/quiz/vocabulary') {
+      location.pathname === '/kuis/hiragana' || 
+      location.pathname === '/kuis/katakana' || 
+      location.pathname === '/kuis/kosakata') {
     return null;
   }
 

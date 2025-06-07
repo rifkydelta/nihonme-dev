@@ -1,12 +1,12 @@
-import { QuizQuestion } from '../components/quiz/types';
+import { KuisQuestion } from '../components/kuis/types';
 
-interface QuizData {
+interface KuisData {
   type: 'hiragana' | 'katakana';
   japanese: string;
   romaji: string;
 }
 
-const hiraganaData: QuizData[] = [
+const hiraganaData: KuisData[] = [
   // Basic Kana (Gojūon)
   { type: 'hiragana', japanese: 'あ', romaji: 'a' },
   { type: 'hiragana', japanese: 'い', romaji: 'i' },
@@ -123,7 +123,7 @@ const hiraganaData: QuizData[] = [
   { type: 'hiragana', japanese: 'ぴょ', romaji: 'pyo' },
 ];
 
-const katakanaData: QuizData[] = [
+const katakanaData: KuisData[] = [
   // Basic Kana (Gojūon)
   { type: 'katakana', japanese: 'ア', romaji: 'a' },
   { type: 'katakana', japanese: 'イ', romaji: 'i' },
@@ -241,16 +241,16 @@ const katakanaData: QuizData[] = [
 ];
 
 // Fungsi untuk membuat pertanyaan kuis dari data
-const createQuizQuestions = (data: QuizData[]): QuizQuestion[] => {
+const createKuisQuestions = (data: KuisData[]): KuisQuestion[] => {
   return data.map(item => {
-    // Dapatkan 3 romaji acak lainnya untuk opsi
+    // Get 3 other random items for options
     const otherItems = data.filter(i => i.romaji !== item.romaji);
     const shuffledOthers = otherItems.sort(() => 0.5 - Math.random()).slice(0, 3);
     const options = [...shuffledOthers.map(i => i.romaji), item.romaji]
       .sort(() => 0.5 - Math.random());
 
     return {
-      question: `${item.japanese} - bagaimana cara membacanya?`,
+      question: `Huruf <span class="inline-block mx-2 text-4xl font-extrabold bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent whitespace-nowrap">${item.japanese}</span> dibaca apa?`,
       options,
       correctAnswer: item.romaji
     };
@@ -258,5 +258,5 @@ const createQuizQuestions = (data: QuizData[]): QuizQuestion[] => {
 };
 
 // Buat pertanyaan kuis dari data
-export const hiraganaQuestions: QuizQuestion[] = createQuizQuestions(hiraganaData);
-export const katakanaQuestions: QuizQuestion[] = createQuizQuestions(katakanaData); 
+export const hiraganaQuestions: KuisQuestion[] = createKuisQuestions(hiraganaData);
+export const katakanaQuestions: KuisQuestion[] = createKuisQuestions(katakanaData); 

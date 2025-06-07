@@ -8,7 +8,7 @@ const AboutPage: React.FC = () => {
         <div className="neu-card p-8">
           <h1 className="text-3xl font-bold text-surface-900 mb-6">Tentang NihonMe</h1>
           <p className="text-surface-600 leading-relaxed">
-            NihonMe adalah aplikasi pembelajaran bahasa Jepang yang menggunakan teknologi AI untuk membantu pengguna mempelajari kosakata bahasa Jepang melalui deteksi objek. Aplikasi ini dirancang untuk membuat pembelajaran bahasa Jepang lebih interaktif dan menyenangkan.
+            NihonMe adalah aplikasi pembelajaran bahasa Jepang yang menggunakan teknologi AI untuk membantu pengguna mempelajari kosakata bahasa Jepang melalui deteksi benda. Aplikasi ini dirancang untuk membuat pembelajaran bahasa Jepang lebih interaktif dan menyenangkan.
           </p>
         </div>
 
