@@ -17,8 +17,8 @@ const App: React.FC = () => {
         <Route path="/deteksi-benda" element={<AIDetectionPage />} />
         <Route path="/artikel" element={<ArticlesPage />} />
         <Route path="/benda/:id" element={<ObjectDetailPage />} />
-        <Route path="/quiz" element={<QuizPage />} />
-        <Route path="/quiz/:type" element={<QuizPage />} />
+        <Route path="/kuis" element={<QuizPage />} />
+        <Route path="/kuis/:type" element={<QuizPage />} />
       </Routes>
     </Layout>
   );
