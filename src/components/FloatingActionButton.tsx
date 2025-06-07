@@ -22,7 +22,10 @@ const FloatingActionButton: React.FC = () => {
   }, [location.pathname]); // Reset timers when pathname changes
 
   // Don't render anything on the detection page
-  if (location.pathname === '/deteksi-benda') {
+  if (location.pathname === '/deteksi-benda' || 
+      location.pathname === '/quiz/hiragana' || 
+      location.pathname === '/quiz/katakana' || 
+      location.pathname === '/quiz/vocabulary') {
     return null;
   }
 

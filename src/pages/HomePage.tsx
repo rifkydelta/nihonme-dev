@@ -128,18 +128,64 @@ const HomePage: React.FC = () => {
     <main className="container mx-auto px-4 py-8">
       <JapanFactsCarousel />
 
-      {/* 🔧 Search Bar dengan posisi normal (tidak sticky) dan padding atas tetap */}
-      <div className="w-full mb-12 pt-4"> {/* Dihapus: sticky top-0 z-50, transisi, padding dinamis isScrolled */}
+      {/* Quiz Button Section */}
+      <div className="mb-12">
         <div className="backdrop-blur-lg bg-white/30 rounded-2xl p-6 shadow-lg border border-white/20">
-          <div className="relative">
-            <input
-              type="text"
-              placeholder="Cari kosakata bahasa Jepang..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full px-4 py-3 pl-12 rounded-xl border border-surface-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-            />
-            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-surface-400" size={20} />
+          <h2 className="text-2xl font-bold text-surface-900 mb-4">Uji Kemampuanmu</h2>
+          <p className="text-surface-600 mb-6">Latih kemampuan bahasa Jepangmu dengan berbagai jenis kuis</p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <Link
+              to="/quiz/hiragana"
+              className="group bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl p-6 text-white hover:shadow-[0_8px_30px_rgba(0,0,0,0.12)] hover:-translate-y-1 active:translate-y-0 transition-all duration-300"
+            >
+              <div className="flex items-center gap-3 mb-2">
+                <span className="text-2xl">あ</span>
+                <h3 className="text-lg font-semibold">Kuis Hiragana</h3>
+              </div>
+              <p className="text-blue-100 text-sm">Latih kemampuan membaca Hiragana</p>
+            </Link>
+            <Link
+              to="/quiz/katakana"
+              className="group bg-gradient-to-r from-green-500 to-green-600 rounded-xl p-6 text-white hover:shadow-[0_8px_30px_rgba(0,0,0,0.12)] hover:-translate-y-1 active:translate-y-0 transition-all duration-300"
+            >
+              <div className="flex items-center gap-3 mb-2">
+                <span className="text-2xl">ア</span>
+                <h3 className="text-lg font-semibold">Kuis Katakana</h3>
+              </div>
+              <p className="text-green-100 text-sm">Latih kemampuan membaca Katakana</p>
+            </Link>
+            <Link
+              to="/quiz/vocabulary"
+              className="group bg-gradient-to-r from-purple-500 to-purple-600 rounded-xl p-6 text-white hover:shadow-[0_8px_30px_rgba(0,0,0,0.12)] hover:-translate-y-1 active:translate-y-0 transition-all duration-300"
+            >
+              <div className="flex items-center gap-3 mb-2">
+                <span className="text-2xl">📚</span>
+                <h3 className="text-lg font-semibold">Kuis Kosakata</h3>
+              </div>
+              <p className="text-purple-100 text-sm">Uji pengetahuan kosakata bahasa Jepang</p>
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      {/* 🔧 Search Bar dengan posisi sticky dan padding atas tetap */}
+      <div className="w-full mb-12 pt-4 sticky top-14 z-50">
+        <div className="backdrop-blur-lg bg-white/80 rounded-2xl p-6 shadow-lg border border-white/20">
+          <div className="flex items-center gap-6">
+            <div className="flex items-center gap-2">
+              <h2 className="text-2xl font-bold text-surface-900">List Benda</h2>
+              <span className="hidden md:inline text-surface-500">({filteredObjects.length} benda)</span>
+            </div>
+            <div className="relative flex-1">
+              <input
+                type="text"
+                placeholder="Cari benda..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full px-4 py-3 pl-12 rounded-xl border border-surface-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+              />
+              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-surface-400" size={20} />
+            </div>
           </div>
         </div>
       </div>

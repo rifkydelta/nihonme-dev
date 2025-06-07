@@ -6,6 +6,7 @@ import AboutPage from './pages/AboutPage';
 import AIDetectionPage from './pages/AIDetectionPage';
 import ArticlesPage from './pages/ArticlesPage';
 import ObjectDetailPage from './components/ObjectDetailPage';
+import QuizPage from './components/quiz/QuizPage';
 
 const App: React.FC = () => {
   return (
@@ -16,6 +17,8 @@ const App: React.FC = () => {
         <Route path="/deteksi-benda" element={<AIDetectionPage />} />
         <Route path="/artikel" element={<ArticlesPage />} />
         <Route path="/benda/:id" element={<ObjectDetailPage />} />
+        <Route path="/quiz" element={<QuizPage />} />
+        <Route path="/quiz/:type" element={<QuizPage />} />
       </Routes>
     </Layout>
   );

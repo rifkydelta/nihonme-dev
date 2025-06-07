@@ -6,8 +6,9 @@ import { Menu, X } from 'lucide-react';
 const navItems = [
   { name: 'Beranda', href: '/' },
   { name: 'Deteksi Benda', href: '/deteksi-benda' },
+  { name: 'Quiz', href: '/quiz' },
   { name: 'Artikel', href: '/artikel' },
-  { name: 'Tentang NihonMe', href: '/tentang' },
+  { name: 'Tentang', href: '/tentang' },
 ];
 
 // Approximate height of the header when not scrolled (py-5 + logo height)
