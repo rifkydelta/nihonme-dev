@@ -65,54 +65,65 @@ npm run dev
 ## 🏗️ Struktur Proyek
 ```
 nihonme/
-├── src/
-│   ├── components/           # Komponen React yang dapat digunakan kembali
-│   │   ├── kuis/            # Komponen terkait kuis
+├── src/                    # Source code aplikasi
+│   ├── components/         # Komponen React yang dapat digunakan kembali
+│   │   ├── kuis/          # Komponen terkait kuis
 │   │   ├── DetectionControls.tsx    # Kontrol deteksi objek
 │   │   ├── FloatingActionButton.tsx # Tombol aksi mengambang
-│   │   ├── Header.tsx       # Komponen header aplikasi
+│   │   ├── Header.tsx     # Komponen header aplikasi
 │   │   ├── ImageUploadView.tsx      # Tampilan upload gambar
 │   │   ├── JapanFactsCarousel.tsx   # Carousel fakta Jepang
-│   │   ├── Layout.tsx       # Layout utama aplikasi
+│   │   ├── Layout.tsx     # Layout utama aplikasi
 │   │   ├── MobileResultsView.tsx    # Tampilan hasil mobile
 │   │   ├── ObjectDetailPage.tsx     # Halaman detail objek
-│   │   ├── ResultsList.tsx  # Daftar hasil deteksi
-│   │   └── WebcamView.tsx   # Tampilan webcam
+│   │   ├── ResultsList.tsx          # Daftar hasil deteksi
+│   │   └── WebcamView.tsx # Tampilan webcam
 │   │
-│   ├── pages/               # Halaman-halaman aplikasi
-│   │   ├── AboutPage.tsx    # Halaman tentang
+│   ├── pages/             # Halaman-halaman aplikasi
+│   │   ├── AboutPage.tsx  # Halaman tentang
 │   │   ├── AIDetectionPage.tsx      # Halaman deteksi AI
-│   │   ├── ArticlesPage.tsx # Halaman artikel
-│   │   └── HomePage.tsx     # Halaman beranda
+│   │   ├── ArticlesPage.tsx         # Halaman artikel
+│   │   └── HomePage.tsx   # Halaman beranda
 │   │
-│   ├── utils/               # Fungsi utilitas dan data
+│   ├── utils/             # Fungsi utilitas dan data
 │   │   ├── detectionUtils.ts        # Utilitas deteksi objek
 │   │   ├── japanFactsData.ts        # Data fakta Jepang
-│   │   ├── kuisData.ts     # Data kuis
-│   │   ├── labelMapping.ts # Pemetaan label deteksi
-│   │   ├── modelLoader.ts  # Loader model TensorFlow
-│   │   ├── objectData.ts   # Data objek dan terjemahan
+│   │   ├── kuisData.ts    # Data kuis
+│   │   ├── labelMapping.ts          # Pemetaan label deteksi
+│   │   ├── modelLoader.ts # Loader model TensorFlow
+│   │   ├── objectData.ts  # Data objek dan terjemahan
 │   │   ├── objectDetails.ts         # Detail objek
-│   │   └── webCardsData.ts # Data artikel web
+│   │   └── webCardsData.ts          # Data artikel web
 │   │
-│   ├── App.tsx             # Komponen utama aplikasi
-│   ├── main.tsx            # Entry point aplikasi
-│   ├── types.ts            # Definisi tipe TypeScript
-│   ├── vite-env.d.ts       # Definisi tipe Vite
-│   └── index.css           # Style global
+│   ├── App.tsx            # Komponen utama aplikasi
+│   ├── main.tsx           # Entry point aplikasi
+│   ├── types.ts           # Definisi tipe TypeScript
+│   ├── vite-env.d.ts      # Definisi tipe Vite
+│   └── index.css          # Style global
 │
-├── public/                 # Aset publik
-│   ├── img/               # Gambar statis
-│   └── README.md          # Dokumentasi publik
+├── public/                # Aset publik
+│   ├── img/              # Gambar statis
+│   └── README.md         # Dokumentasi publik
 │
-├── dist/                  # Output build production
+├── .github/              # Konfigurasi GitHub
+│   └── workflows/        # GitHub Actions workflows
 │
-└── [config files]         # File konfigurasi
-    ├── vite.config.ts     # Konfigurasi Vite
-    ├── tailwind.config.js # Konfigurasi Tailwind
-    ├── tsconfig.json      # Konfigurasi TypeScript
-    ├── eslint.config.js   # Konfigurasi ESLint
-    └── postcss.config.js  # Konfigurasi PostCSS
+├── dist/                 # Output build production
+│
+├── index.html            # Entry point HTML
+│
+├── [config files]        # File konfigurasi
+│   ├── vite.config.ts    # Konfigurasi Vite
+│   ├── tailwind.config.js # Konfigurasi Tailwind
+│   ├── tsconfig.json     # Konfigurasi TypeScript utama
+│   ├── tsconfig.app.json # Konfigurasi TypeScript aplikasi
+│   ├── tsconfig.node.json # Konfigurasi TypeScript Node
+│   ├── eslint.config.js  # Konfigurasi ESLint
+│   └── postcss.config.js # Konfigurasi PostCSS
+│
+├── package.json          # Dependencies dan scripts
+├── package-lock.json     # Lock file dependencies
+└── README.md             # Dokumentasi proyek
 ```
 
 ## 🔧 File Konfigurasi
