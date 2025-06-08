@@ -1,57 +1,45 @@
 # NihonMe
-## 🌐 Live Demo
+## 🌐 Demo Langsung
 
-Check out the live demo of this application at [NihonMe Demo App](https://rifkydelta.github.io/nihonme/)! 
+Lihat demo langsung aplikasi ini di [NihonMe Demo App](https://rifkydelta.github.io/nihonme/)!
 
-## 📱 About
-A modern web application built with React and TensorFlow.js that performs real-time object detection using the COCO-SSD model. The application features a clean, responsive UI built with Tailwind CSS and provides an intuitive interface for object detection tasks.
+## 📱 Tentang
+NihonMe adalah aplikasi pembelajaran bahasa Jepang modern yang menggunakan teknologi AI untuk membantu pengguna mempelajari kosakata bahasa Jepang melalui deteksi benda. Aplikasi ini dirancang untuk membuat pembelajaran bahasa Jepang lebih interaktif dan menyenangkan.
 
-## 🚀 Features
-- 🔍 Real-time object detection using TensorFlow.js and COCO-SSD model
-- 🎨 Modern, responsive UI built with React and Tailwind CSS
-- 📝 TypeScript support for better development experience
-- ⚡ Fast development and build times with Vite
-- ✅ ESLint configuration for code quality
-- 🛣️ React Router for navigation
+## 🚀 Fitur
+- 🎯 Kuis Hiragana dan Katakana untuk latihan membaca
+- 📚 Artikel pembelajaran bahasa Jepang
+- 🎓 Fakta-fakta menarik tentang Jepang
+- 🔊 Fitur text-to-speech untuk pelafalan bahasa Jepang
+- 📱 Tampilan responsif untuk perangkat mobile dan desktop
+- 🔍 Deteksi benda dan terjemahan ke bahasa Jepang
 
-## 🛠️ Tech Stack
+## 📚 Tujuan Pendidikan
 
-- ⚛️ Frontend Framework: React 18
-- 📘 Language: TypeScript
-- 🛠️ Build Tool: Vite
-- 🎨 Styling: Tailwind CSS
-- 🤖 AI/ML: TensorFlow.js, COCO-SSD model
-- 🖼️ Icons: Lucide React
-- 🛣️ Routing: React Router DOM
+Perangkat lunak dan dokumentasinya disediakan untuk tujuan pendidikan saja. Tujuan utama dari proyek ini adalah untuk mendemonstrasikan dan mengajarkan konsep-konsep terkait:
 
+- 📚 Pembelajaran bahasa Jepang
+- 🎯 Latihan membaca Hiragana dan Katakana
+- 🔍 Pembelajaran kosakata benda dalam bahasa Jepang
+- 🎓 Pengetahuan tentang budaya Jepang
 
+### Ketentuan Penggunaan:
 
-## 📚 Educational Purpose Only
+- ✅ Penggunaan pendidikan (kelas, workshop, tutorial)
+- ✅ Pembelajaran dan eksperimen pribadi
+- ✅ Penelitian akademis
+- ✅ Proyek non-komersial
 
-This software and its documentation are provided for educational purposes only. The primary goal of this project is to demonstrate and teach concepts related to:
+### Pembatasan:
 
-- 🔍 Object Detection using TensorFlow.js
-- ⚛️ React application development
-- 🎨 Modern web development practices
-- 🤖 Machine Learning integration in web applications
+- ⚠️ Tidak untuk penggunaan komersial
+- ⚠️ Tidak untuk redistribusi untuk keuntungan
+- ⚠️ Tidak untuk modifikasi untuk tujuan komersial
+- ⚠️ Tidak ada jaminan yang disediakan
 
-### Usage Terms:
+### Atribusi:
 
-- ✅ Educational use (classrooms, workshops, tutorials)
-- ✅ Personal learning and experimentation
-- ✅ Academic research
-- ✅ Non-commercial projects
+Saat menggunakan proyek ini untuk tujuan pendidikan, harap sertakan:
 
-### Restrictions:
-
-- ⚠️ No commercial use
-- ⚠️ No redistribution for profit
-- ⚠️ No modification for commercial purposes
-- ⚠️ No warranty provided
-
-### Attribution:
-
-When using this project for educational purposes, please include:
-
-- 🔗 A link to the original repository
-- 👥 Attribution to the original authors 
+- 🔗 Link ke repositori asli
+- 👥 Atribusi kepada penulis asli 
