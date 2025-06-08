@@ -161,23 +161,7 @@ Jika Anda ingin mendeploy aplikasi ini sendiri, berikut adalah hal-hal yang perl
    - Pastikan semua path asset di `public/img/` menggunakan path relatif yang benar
    - Contoh: `/your-repo-name/img/icon/nihonme-icon.svg`
 
-3. **Environment Variables**
-   - Buat file `.env` di root proyek
-   - Salin isi dari `.env.example`
-   - Sesuaikan nilai variabel:
-   ```env
-   # App Info
-   VITE_APP_TITLE=NihonMe
-
-   # Deployment to Github Pages
-   VITE_DEPLOY_REPO_URL=https://github.com/your-username/your-repo.git
-   VITE_DEPLOY_BRANCH=main
-   VITE_DEPLOY_DIST_DIR=dist
-   ```
-   - Jangan lupa untuk menambahkan `.env` ke `.gitignore`
-   - File `.env.example` berfungsi sebagai template untuk pengembang lain
-
-4. **Build Configuration**
+3. **Build Configuration**
    - Jalankan build dengan perintah:
    ```bash
    npm run build
@@ -185,16 +169,16 @@ Jika Anda ingin mendeploy aplikasi ini sendiri, berikut adalah hal-hal yang perl
    - Output akan berada di folder `dist/`
    - Pastikan semua asset ter-copy dengan benar
 
-5. **Deployment Options**
+4. **Deployment Options**
 
    a. **GitHub Pages**
    ```bash
    npm run deploy
    ```
    Perintah ini menggunakan package `gh-pages` dengan konfigurasi:
-   - `-d`: Direktori yang akan di-deploy (dari .env `VITE_DEPLOY_DIST_DIR`)
-   - `-b`: Branch tujuan (dari .env `VITE_DEPLOY_BRANCH`)
-   - `-r`: URL repository (dari .env `VITE_DEPLOY_REPO_URL`)
+   - `-d`: Direktori yang akan di-deploy (default: `dist`)
+   - `-b`: Branch tujuan (default: `main`)
+   - `-r`: URL repository (default: `https://github.com/rifkydelta/nihonme.git`)
 
    b. **Vercel**
    ```bash
@@ -215,57 +199,6 @@ Jika Anda ingin mendeploy aplikasi ini sendiri, berikut adalah hal-hal yang perl
    - Login ke Netlify: `netlify login`
    - Inisialisasi project: `netlify init`
    - Environment variables bisa diatur di dashboard Netlify
-
-6. **Deployment Platform**
-   - **GitHub Pages**:
-     - Aktifkan GitHub Pages di repository settings
-     - Pilih branch `gh-pages` atau folder `docs`
-     - Pastikan workflow GitHub Actions sudah dikonfigurasi dengan benar
-   
-   - **Vercel**:
-     - Import repository ke Vercel
-     - Konfigurasi build command: `npm run build`
-     - Output directory: `dist`
-     - Environment variables bisa diatur di dashboard Vercel
-
-   - **Netlify**:
-     - Import repository ke Netlify
-     - Build command: `npm run build`
-     - Publish directory: `dist`
-     - Environment variables bisa diatur di dashboard Netlify
-
-7. **CORS Configuration**
-   - Jika menggunakan API eksternal, pastikan CORS sudah dikonfigurasi dengan benar
-   - Tambahkan domain Anda ke whitelist CORS di server API
-
-8. **Service Worker**
-   - Jika menggunakan PWA, pastikan `service-worker.js` sudah dikonfigurasi dengan benar
-   - Update `manifest.json` dengan informasi aplikasi Anda
-
-9. **Analytics & Monitoring**
-   - Jika menggunakan Google Analytics atau tools monitoring lainnya:
-     - Update tracking ID
-     - Konfigurasi domain yang diizinkan
-     - Sesuaikan event tracking
-
-### Troubleshooting Deployment
-
-1. **404 pada Refresh**
-   - Pastikan server dikonfigurasi untuk redirect ke `index.html`
-   - Untuk GitHub Pages, tambahkan file `404.html` yang redirect ke `index.html`
-
-2. **Asset Not Found**
-   - Periksa path asset di `vite.config.ts`
-   - Pastikan semua path menggunakan base URL yang benar
-
-3. **CORS Issues**
-   - Periksa konfigurasi CORS di server
-   - Pastikan domain deployment sudah di-whitelist
-
-4. **Build Errors**
-   - Periksa log build untuk error
-   - Pastikan semua dependency terinstall dengan benar
-   - Coba hapus `node_modules` dan `package-lock.json`, lalu install ulang
 
 ## 🏗️ Build untuk Production
 
