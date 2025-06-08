@@ -1529,26 +1529,26 @@ export const objectDetailsMap: Record<string, ObjectDetails> = {
   'ノートパソコン': {
     japanese: 'ノートパソコン',
     romaji: 'nooto pasokon',
-    indonesian: 'komputer laptop',
+    indonesian: 'laptop',
     imageUrl: '/nihonme/img/object/64.webp',
     sentences: [
       {
         japanese: 'ノートパソコンでしごとをします。',
         romaji: 'Nooto pasokon de shigoto o shimasu.',
-        indonesian: 'Saya bekerja dengan komputer laptop saya.',
+        indonesian: 'Saya bekerja dengan laptop saya.',
       },
       {
         japanese: 'このノートパソコンはかるくてべんりです。',
         romaji: 'Kono nooto pasokon wa karukute benri desu.',
-        indonesian: 'Komputer laptop ini ringan dan praktis.',
+        indonesian: 'Laptop ini ringan dan praktis.',
       },
       {
         japanese: 'カフェでノートパソコンをつかっています。',
         romaji: 'Kafe de nooto pasokon o tsukatteimasu.',
-        indonesian: 'Saya sedang menggunakan komputer laptop saya di kafe.',
+        indonesian: 'Saya sedang menggunakan laptop saya di kafe.',
       },
     ],
-    description: 'ノートパソコン (nooto pasokon) berarti \'komputer laptop\', secara harfiah \'komputer pribadi buku catatan\'. Sering disingkat menjadi ノートPC (nooto pii shii).',
+    description: 'ノートパソコン (nooto pasokon) berarti \'laptop\', secara harfiah \'komputer pribadi buku catatan\'. Sering disingkat menjadi ノートPC (nooto pii shii).',
   },
   'マウス': {
     japanese: 'マウス',
