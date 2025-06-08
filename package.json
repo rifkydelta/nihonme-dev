@@ -9,7 +9,6 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "predeploy": "npm run build",
-    // ganti dengan repository milik kalian
     "deploy": "gh-pages -d dist -b main -r https://github.com/rifkydelta/nihonme.git",
     "deploy:vercel": "vercel --prod",
     "deploy:netlify": "netlify deploy --prod"
