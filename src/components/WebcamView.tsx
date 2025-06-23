@@ -154,7 +154,7 @@ const WebcamView: React.FC<WebcamViewProps> = ({
   }, [webcamActive, modelLoaded, isMobile]);
 
   return (
-    <div className="relative flex-1 flex flex-col bg-black rounded-2xl overflow-hidden">
+    <div id="webcamView" className="relative flex-1 flex flex-col bg-black rounded-2xl overflow-hidden">
       {!webcamActive && !error && (
         <div className={`absolute inset-0 flex items-center justify-center flex-col p-6 z-10 bg-surface-50 ${
           isMobile ? 'aspect-[3/4]' : ''
@@ -165,6 +165,7 @@ const WebcamView: React.FC<WebcamViewProps> = ({
             Klik tombol di bawah untuk mengaktifkan kamera Anda untuk deteksi objek secara langsung
           </p>
           <button
+            id="startCameraBtn"
             onClick={startWebcam}
             disabled={!modelLoaded}
             className="neu-button text-primary-600 font-medium"

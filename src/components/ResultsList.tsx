@@ -55,7 +55,7 @@ const ResultsList: React.FC<ResultsListProps> = ({
 
   
   return (
-    <div className="h-full flex flex-col bg-surface-50 rounded-2xl shadow-neu">
+    <div id="detectedItems" className="h-full flex flex-col bg-surface-50 rounded-2xl shadow-neu">
       <div className="p-4 border-b border-surface-200">
         <h2 className="text-lg font-semibold mb-1 text-surface-900">Hasil Deteksi</h2>
         <p className="text-sm text-surface-600">

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { AlertCircle, Loader2 } from 'lucide-react';
+import Joyride, { Step, CallBackProps } from 'react-joyride';
+import { AlertCircle, Loader2, HelpCircle } from 'lucide-react';
 import DetectionControls from '../components/DetectionControls';
 import WebcamView from '../components/WebcamView';
 import ImageUploadView from '../components/ImageUploadView';
@@ -17,6 +18,59 @@ const AIDetectionPage: React.FC = () => {
   const [filteredClass, setFilteredClass] = useState<string | null>(null);
   const [isMobile, setIsMobile] = useState(false);
   const [isWebcamActive, setIsWebcamActive] = useState(false);
+  const [runTour, setRunTour] = useState(false);
+
+  const tourSteps: Step[] = [
+    {
+      target: '#startCameraBtn',
+      content: 'Klik di sini untuk mengaktifkan kamera.',
+      disableBeacon: true,
+    },
+    {
+      target: '#webcamView',
+      content: 'Tunjukkan benda ke kamera agar sistem mendeteksinya.',
+    },
+    {
+      target: '#detectedItems',
+      content: 'Klik hasil deteksi untuk melihat kosakata dan penjelasan dalam bahasa Jepang.',
+    },
+    {
+      target: '#uploadImageBtn',
+      content: 'Kalau punya gambar dari galeri, klik di sini untuk deteksi lewat gambar.',
+    },
+    {
+      target: '#detectedItems',
+      content: 'Klik hasil deteksi gambar untuk melihat detail kosakata, sama seperti saat pakai kamera.',
+    },
+  ];
+
+  useEffect(() => {
+    const onboardingLastSeen = localStorage.getItem('onboardingLastSeen');
+    const today = new Date().toISOString().split('T')[0];
+
+    if (!onboardingLastSeen || onboardingLastSeen !== today) {
+      if (modelLoaded) {
+        setRunTour(true);
+      }
+    }
+  }, [modelLoaded]);
+
+  const handleJoyrideCallback = (data: CallBackProps) => {
+    const { status } = data;
+    const finishedStatuses: string[] = ['finished', 'skipped'];
+
+    if (finishedStatuses.includes(status)) {
+      setRunTour(false);
+      if (data.lifecycle === 'init') {
+        const today = new Date().toISOString().split('T')[0];
+        localStorage.setItem('onboardingLastSeen', today);
+      }
+    }
+  };
+
+  const startManualTour = () => {
+    setRunTour(true);
+  };
 
   // Reset state when component mounts
   useEffect(() => {
@@ -77,6 +131,44 @@ const AIDetectionPage: React.FC = () => {
 
   return (
     <main className="container mx-auto px-4 py-8 flex flex-col lg:flex-row gap-8">
+      <Joyride
+        steps={tourSteps}
+        run={runTour}
+        continuous
+        showProgress
+        showSkipButton
+        callback={handleJoyrideCallback}
+        styles={{
+          options: {
+            arrowColor: 'rgba(255, 255, 255, 0.9)',
+            backgroundColor: 'rgba(255, 255, 255, 0.9)',
+            primaryColor: '#4F46E5',
+            textColor: '#1F2937',
+            zIndex: 1000,
+          },
+          tooltip: {
+            borderRadius: '12px',
+            padding: '1rem 1.5rem',
+          },
+          buttonNext: {
+            backgroundColor: '#4F46E5',
+            borderRadius: '8px',
+          },
+          buttonBack: {
+            color: '#6B7280',
+          },
+          buttonClose: {
+            color: '#9CA3AF',
+          },
+        }}
+        locale={{
+          back: 'Kembali',
+          close: 'Tutup',
+          last: 'Selesai',
+          next: 'Lanjut',
+          skip: 'Lewati',
+        }}
+      />
       <div className={`${isMobile ? 'w-full' : 'lg:w-2/3'} flex flex-col gap-6`}>
         <div className="flex justify-between items-center">
           <DetectionControls 
@@ -84,6 +176,13 @@ const AIDetectionPage: React.FC = () => {
             onModeChange={handleModeChange} 
             modelLoaded={modelLoaded}
           />
+          <button
+            onClick={startManualTour}
+            className="ml-4 p-2 rounded-full bg-surface-100 text-surface-700 shadow-neu hover:bg-surface-200 transition-all"
+            title="Mulai Ulang Tutorial"
+          >
+            <HelpCircle size={20} />
+          </button>
         </div>
 
         {modelError && (

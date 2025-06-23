@@ -30,7 +30,7 @@ const MobileResultsView: React.FC<MobileResultsViewProps> = ({
   };
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 p-4">
+    <div id="detectedItems" className="fixed bottom-0 left-0 right-0 z-50 p-4">
       <div 
         className={`glass-panel overflow-hidden transition-all duration-300 ease-in-out ${
           isExpanded ? 'max-h-[70vh]' : 'max-h-[120px]'

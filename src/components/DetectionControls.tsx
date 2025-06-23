@@ -28,6 +28,7 @@ const DetectionControls: React.FC<DetectionControlsProps> = ({
       </button>
       
       <button
+        id="uploadImageBtn"
         onClick={() => onModeChange('upload')}
         disabled={!modelLoaded}
         className={`flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl transition-all ${
